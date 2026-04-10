@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> MIK.UZ Sound Produccer DJ </title>
+  
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Хедер -->
+  <header class="navbar">
+    <div class="nav-container">
+      <nav class="nav-links">
+        <a href="#video">Video</a>
+        <a href="#music">Music</a>
+        
+        <!-- Логотип -->
+        <div class="logo">
+          <a href="index.html" class="logo-link">
+            <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="60" height="56">
+          </a>
+        </div>
+        
+        <a href="#about">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="burger" id="burger">☰</div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       SOCIAL SIDEBAR — Glassmorphism (оновлено)
+       Замінює старий <aside class="social-icons">
+       ═══════════════════════════════════════════════ -->
+  <aside class="social-sidebar">
+
+    <a href="https://www.instagram.com/mikuz.dj/" title="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    </a>
+
+    <a href="https://www.facebook.com/yuriy.mykhaylovych" title="Facebook" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+
+    <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" title="YouTube" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+    </a>
+
+    <a href="https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf" title="Spotify" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+    </a>
+
+    <a href="https://soundcloud.com/yuriymykhaylovych" title="SoundCloud" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.051 0-.09.04-.099.098l-.157 1.324.157 1.284c.008.057.048.097.099.097.05 0 .09-.04.099-.097l.178-1.284-.178-1.324c-.009-.057-.05-.098-.1-.098m1.792-1.268c-.059 0-.108.049-.117.106l-.232 2.48.232 2.43c.009.057.058.105.117.105.058 0 .106-.048.116-.105l.255-2.43-.255-2.48c-.01-.057-.058-.106-.116-.106m.899-.551c-.059 0-.106.049-.116.106l-.213 3.03.213 2.957c.01.057.057.106.116.106.059 0 .108-.049.117-.106l.237-2.957-.237-3.03c-.009-.057-.058-.106-.117-.106m.891-.46c-.066 0-.115.05-.124.106l-.196 3.49.196 3.406c.009.057.058.106.124.106.066 0 .116-.049.124-.106l.22-3.406-.22-3.49c-.008-.057-.058-.106-.124-.106m.9.116c-.066 0-.116.049-.125.106l-.18 3.374.18 3.35c.009.057.059.106.125.106.066 0 .116-.049.124-.106l.199-3.35-.199-3.374c-.008-.057-.058-.106-.124-.106m.899.067c-.066 0-.115.049-.124.106l-.165 3.282.165 3.233c.009.056.058.105.124.105.067 0 .116-.049.125-.105l.184-3.233-.184-3.282c-.009-.057-.058-.106-.125-.106m.9-.035c-.067 0-.116.049-.125.106l-.149 3.24.149 3.178c.009.057.058.106.125.106.066 0 .116-.049.124-.106l.166-3.178-.166-3.24c-.008-.057-.058-.106-.124-.106m2.667-2.962c-.063 0-.114.05-.122.112l-.149 5.822.149 5.754c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.169-5.754-.169-5.822c-.008-.062-.058-.112-.121-.112m.899-.364c-.063 0-.114.05-.122.113l-.131 6.185.131 6.127c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.15-6.127-.15-6.185c-.008-.063-.058-.113-.121-.113m.899-.163c-.063 0-.114.05-.122.113l-.113 6.348.113 6.293c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.131-6.293-.131-6.348c-.008-.063-.058-.113-.121-.113m.899-.065c-.063 0-.114.05-.122.113l-.095 6.413.095 6.389c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-6.389-.113-6.413c-.008-.063-.058-.113-.121-.113m2.667-.299c-.063 0-.114.049-.122.113l-.071 6.712.071 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.09-7.041-.09-6.712c-.008-.064-.058-.113-.121-.113m.899-.054c-.063 0-.114.05-.122.113l-.054 6.766.054 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.013-.071-6.766c-.008-.063-.058-.113-.121-.113m.899-.039c-.063 0-.114.05-.122.113l-.036 6.805.036 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.043-.054-6.805c-.008-.063-.058-.113-.121-.113m.899-.025c-.063 0-.114.05-.122.113l-.018 6.83.018 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.056-.036-6.83c-.008-.063-.058-.113-.121-.113m.899-.011c-.063 0-.114.05-.122.113l-.001 6.841.001 7.066c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.018-7.066-.018-6.841c-.008-.063-.058-.113-.121-.113m2.667-.001c-.063 0-.114.05-.122.113l.017 6.84-.017 7.067c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.067-.036-6.84c-.008-.063-.058-.113-.121-.113m.899.011c-.063 0-.114.05-.122.113l.036 6.83-.036 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.056-.054-6.83c-.008-.063-.058-.113-.121-.113m.899.025c-.063 0-.114.05-.122.113l.054 6.805-.054 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.043-.071-6.805c-.008-.063-.058-.113-.121-.113m.899.039c-.063 0-.114.05-.122.113l.071 6.766-.071 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.09-7.013-.09-6.766c-.008-.063-.058-.113-.121-.113m.899.054c-.063 0-.114.049-.122.113l.09 6.712-.09 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-7.041-.113-6.712c-.008-.064-.058-.113-.121-.113"/>
+      </svg>
+    </a>
+
+  </aside>
+
+  <!-- Hero -->
+  <main class="hero">
+    <div class="hero-graphic">
+      <img src="images/img_here.png" alt="Soundwave Graphic">
+    </div>
+
+    <!-- CANVAS TITLE замість <h1> -->
+    <div class="hero-title-canvas">
+      <canvas id="mikuzCanvas"></canvas>
+    </div>
+  </main>
+
+  <!-- SCROLL ANIMATION SECTION - M LOGO REVEALS ABOUT -->
+  <section class="scroll-reveal-section">
+    <div class="scroll-container">
+      <!-- Великий логотип M -->
+      <div class="big-logo" id="bigLogo">
+        <svg width="100%" height="100%" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect y="0.0467529" width="10.5724" height="47.9532" fill="#DCDCDC" />
+          <rect x="43.4224" y="0.0467529" width="10.5724" height="47.9532" fill="#DCDCDC" />
+          <path d="M1.30621 5.19736L10.5107 0.0775125L32.9085 40.3445L23.5987 45.3569L1.30621 5.19736Z" fill="#DCDCDC" />
+          <rect x="43.3462" width="10.5724" height="45.9939" transform="rotate(29.08 43.3462 0)" fill="#DCDCDC" />
+          <path d="M26.997 38.938L30.2065 45.357H23.6572L26.997 38.938Z" fill="#DCDCDC" />
+        </svg>
+      </div>
+
+      <!-- About контент який з'являється -->
+      <div class="about-reveal" id="aboutReveal">
+        <h2 class="reveal-title">ABOUT</h2>
+        <div class="reveal-content">
+          <p class="reveal-text">
+            MIK.UZ — Ukrainian trance/progressive house producer.
+
+Beatport hits: "Emotions", "Thunder", "Shot Up".
+Streaming: Available on Spotify, Apple Music & Beatport.
+New releases: Fuzion Four Records (2026).
+          </p>
+          <a href="#about" class="reveal-btn">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube секція -->
+  <section class="youtube-section" id="video">
+    <h2 class="youtube-heading">Video</h2>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/exd2_Jay9vI" title="YouTube Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/yjic_9YxiXk" title="YouTube Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/Ou2RQN08Q40" title="YouTube Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/NaEXbvgFqTo" title="YouTube Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/v79YoqK_3n0" title="YouTube Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="youtube-player">
+      <iframe src="https://www.youtube.com/embed/uJcU7mXIXsM" title="MIK.UZ Live виступ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about-section" id="about">
+    <h2 class="section-heading">About</h2>
+    <div class="about-container">
+      <div class="about-image">
+        <img src="images/yura.webp" alt="Mik.UZ and collaborator">
+      </div>
+      <div class="about-text">
+        <h3 class="about-title">Mik.UZ</h3>
+        <p class="about-description">
+          DJ and producer from Ukraine. 15 years in trance and progressive house music.<br>
+          Founder of MoreFun Records — Sub Label of Coffein Music Group. Key tracks:<br>
+          Mik.UZ - From Before<br>
+          Mik.UZ - Emotions (Extended Mix)<br>
+          Mik.UZ - Two To One (Extended Mix)<br>
+          Mik.UZ - Trust (Extended Mix)<br>
+          Mik.UZ - Expeditious<br>
+          Mik.UZ - Split (Extended Mix)<br>
+          Mik.UZ - Energetic Girl (Extended Mix)<br>
+          Mik.UZ - Energetic Girl (Streyk Remix)<br><span style="display: block; height: 8px;"></span>
+          Co-producer of Loud Dynamics — electronic trance house collective with official Beatport profile and charting releases.<br>
+          Hosted KINGS OF TRANCE on international radio Trance Energy Radio. Weekly live broadcasts featuring DJ sets, promoting own releases and international artists.<br>
+          Resident at clubs Picasso (2009–2020), Split Club, ZUZU Club. Festival performances in Lviv (Aquarium Shklo, Olesky Castle).
+        </p>
+       <!-- <a href="#more" class="learn-more-btn">Learn More</a>-->
+      </div>
+    </div>
+  </section>
+
+  <!-- Music секція -->
+  <section class="music-section" id="music">
+    <h2 class="music-heading">Music</h2>
+    <div class="music-player-block">
+      <div class="spotify-player">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/artist/2YS0wxCssIFQbIT9cFxlLf?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2mGwSCKmvI7sLflESW8Wzk?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SoundCloud секція -->
+  <section class="soundcloud-section">
+    <h2 class="soundcloud-heading">Sound Cloud</h2>
+    <div class="soundcloud-player-block">
+      <div class="soundcloud-player">
+        <h3>Mik.UZ - Even in the Silence (Original Mix)</h3>
+        <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mik-uz-even-in-the&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      </div>
+      <div class="soundcloud-player">
+        <h3>Mik.UZ - Thunder (Radio Edit)</h3>
+        <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mikuz-thunder-edite&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      </div>
+      <div class="soundcloud-player">
+        <h3>MIK.UZ - Energetic Girl (Streyk Remix)</h3>
+        <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mikuz-energetic-girl-streyk-remix&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      </div>
+      <div class="soundcloud-player">
+        <h3>Loud Dynamics - Coffee Time (Preview)</h3>
+        <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https://soundcloud.com/more_fun_records/preview-loud-dynamics-coffee-time&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="service-section" id="service">
+  <h2 class="service-heading">Productions Services</h2>
+  <div class="service-hero">
+    <div class="service-overlay"></div>
+    <div class="animated-text-container">
+
+      <div class="animated-text-line first-line">
+        <span class="moving-text"> Original Track Production · Ghost Production · Sound Design · Mixing & Mastering · Vocal Production · Arrangement </span>
+      </div>
+
+      <div class="animated-text-line second-line">
+        <span class="moving-text"> Uplifting Trance · Melodic Techno · Progressive House · Cinematic Sound · AI Music Development · Custom DJ Edits </span>
+      </div>
+
+    </div>
+  </div>
+  <div class="service-tickets-section">
+    <a href="contact.html" class="tickets-btn">Contact me</a>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="footer-modern">
+    <div class="footer-social-buttons">
+      <a href="https://www.instagram.com/mikuz.dj/" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.facebook.com/yuriy.mykhaylovych" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
+        <span>YouTube</span>
+      </a>
+      <a href="https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        <span>Spotify</span>
+      </a>
+      <a href="https://soundcloud.com/yuriymykhaylovych" class="social-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.051 0-.09.04-.099.098l-.157 1.324.157 1.284c.008.057.048.097.099.097.05 0 .09-.04.099-.097l.178-1.284-.178-1.324c-.009-.057-.05-.098-.1-.098m1.792-1.268c-.059 0-.108.049-.117.106l-.232 2.48.232 2.43c.009.057.058.105.117.105.058 0 .106-.048.116-.105l.255-2.43-.255-2.48c-.01-.057-.058-.106-.116-.106m.899-.551c-.059 0-.106.049-.116.106l-.213 3.03.213 2.957c.01.057.057.106.116.106.059 0 .108-.049.117-.106l.237-2.957-.237-3.03c-.009-.057-.058-.106-.117-.106m.891-.46c-.066 0-.115.05-.124.106l-.196 3.49.196 3.406c.009.057.058.106.124.106.066 0 .116-.049.124-.106l.22-3.406-.22-3.49c-.008-.057-.058-.106-.124-.106m.9.116c-.066 0-.116.049-.125.106l-.18 3.374.18 3.35c.009.057.059.106.125.106.066 0 .116-.049.124-.106l.199-3.35-.199-3.374c-.008-.057-.058-.106-.124-.106m.899.067c-.066 0-.115.049-.124.106l-.165 3.282.165 3.233c.009.056.058.105.124.105.067 0 .116-.049.125-.105l.184-3.233-.184-3.282c-.009-.057-.058-.106-.125-.106m.9-.035c-.067 0-.116.049-.125.106l-.149 3.24.149 3.178c.009.057.058.106.125.106.066 0 .116-.049.124-.106l.166-3.178-.166-3.24c-.008-.057-.058-.106-.124-.106" fill="currentColor"/></svg>
+        <span>SoundCloud</span>
+      </a>
+    </div>
+
+    <div class="footer-content-modern">
+      <div class="footer-contacts">
+        <div class="contact-block">
+          <h4>Bookings</h4>
+          <a href="mailto:yuriimykhailovychy@gmail.com">yuriimykhailovychy@gmail.com</a>
+        </div>
+        <div class="contact-block">
+          <h4>Demos</h4>
+          <a href="mailto:demo_mik.uz.dj@gmail.com">demo_mik.uz.dj@gmail.com</a>
+        </div>
+        <div class="contact-block">
+          <h4>General Manager</h4>
+          <a href="mailto:uandw@gmail.com">uandw@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-nav-modern">
+        <div class="nav-column">
+          <a href="#about">About</a>
+          <a href="#music">Music</a>
+        </div>
+        <div class="nav-column">
+          <a href="contact.html">Contact</a>
+          <a href="#service">Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright-modern">
+      © 2026 Mik.UZ All rights reserved.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="marquee.js"></script>
+</body>
+</html>
