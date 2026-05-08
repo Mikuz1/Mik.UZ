@@ -1,5 +1,5 @@
 :root {
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --primary: #ffffff;
   --gray-15: #999999;
 }
@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  padding: 10px 0;
+  padding: 8px 0;
   transition: color 0.3s;
 }
 
@@ -68,7 +68,13 @@ h1, h2, h3, h4, h5, h6 {
   bottom: -2px;
   width: 100%;
   height: 2px;
-  background-color: #ffffff;
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -94,14 +100,126 @@ h1, h2, h3, h4, h5, h6 {
   text-decoration: none;
 }
 
+.nav-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .burger {
   display: none;
-  font-size: 28px;
-  color: var(--primary);
-  cursor: pointer;
+  width: 32px;
+  height: 24px;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.burger-label {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: #DCDCDC;
+  border-radius: 1px;
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.97);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 0px;
+}
+
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.overlay-logo {
+  display: flex;
+  align-items: center;
+}
+
+.overlay-logo img,
+.mobile-logo img {
+  width: 43px;
+  height: 40px;
+}
+
+.mobile-logo {
+  display: none;
+  align-items: center;
+}
+
+.overlay-close {
+  color: #DCDCDC;
+  font-size: 32px;
+  cursor: pointer;
+  user-select: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay-links {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  text-align: center;
+  margin-top: 80px;
+}
+
+.overlay-links label {
+  cursor: pointer;
+}
+
+.overlay-links a {
+  color: #DCDCDC;
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.overlay-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #DCDCDC;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.overlay-links a:hover::after {
+  transform: scaleX(1);
 }
 
 .hero {
@@ -114,17 +232,172 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
 }
 
-.hero-graphic img {
-  width: 500px;
-  max-width: 90%;
-  margin-bottom: 24px;
-  animation: spin 20s linear infinite;
+/* ========== EQ VISUALIZER ========== */
+.eq-wrapper {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.eq-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 30% 30%, #1C1C1D 0%, #000000 60%, #1B1920 100%);
+  position: relative;
+  overflow: hidden;
 }
+
+.glass-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 20%, rgba(255,255,255,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+#eqCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.play-btn {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 25px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.4s;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 700;
+  position: absolute;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ============================================================
+   PLAY BUTTON — один блок, змійка по бордеру
+   
+   ============================================================ */
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes snakeBorder {
+  to { --angle: 360deg; }
+}
+
+.play-btn {
+  /* позиція */
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  /* вигляд */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 22px;
+  border-radius: 25px;
+  border: 1px solid rgba(0, 200, 255, 0.2);
+  background: rgba(0, 180, 220, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* текст */
+  color: #ececec;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  /* важливо — НЕ overflow:hidden щоб ::after не обрізався */
+  overflow: visible;
+  isolation: isolate;
+  transition: 0.8s,  0.8s;
+}
+
+.play-btn:hover {
+  background: rgba(0, 200, 255, 0.13);
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.18);
+  transform: translateX(-50%);
+}
+
+/* Змійка по бордеру */
+.play-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 27px;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent        0deg,
+    transparent      300deg,
+    rgba(120, 0, 180, 0.2)  315deg,
+    #A740FD 325deg,
+    rgba(210, 80,  255, 1)  332deg,
+    #FD62FE  336deg,
+    #521EFC  338deg,
+    rgba(240, 160, 255, 1)  340deg,
+    rgba(210, 80,  255, 1)  344deg,
+    rgba(180, 20, 240, 0.7) 350deg,
+    #521EFC 357deg,
+    transparent      360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: snakeBorder 2.6s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+
+.play-btn > * {
+  position: relative;
+  z-index: 1;
+}
+/* ============================================================ */
 
 .hero-title-canvas {
   margin: 64px 0;
@@ -277,24 +550,24 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
-.reveal-btn {
-  display: inline-block;
-  padding: 16px 48px;
-  background-color: #ffffff;
-  color: #000000;
-  font-weight: 600;
-  font-size: 18px;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-}
+  .reveal-btn {
+    display: inline-block;
+    padding: 16px 48px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  }
 
-.reveal-btn:hover {
-  background-color: #DCDCDC;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
-}
+  .reveal-btn:hover {
+    background-color: #DCDCDC;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
+  }
 
 /* ==========================================================================
    YouTube Section
@@ -376,16 +649,15 @@ h1, h2, h3, h4, h5, h6 {
 .about-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 80px;
+  justify-content: flex-start; /* ⬅️ Змінити з space-between */
+  gap: 56px;
   max-width: 1920px;
   margin: 0 auto;
   background: rgba(13, 13, 13, 0.8);
-  backdrop-filter: blur(20px);  
-  padding: 80px 80px;
+  backdrop-filter: blur(20px);
+  padding: 80px;
   border-radius: 12px;
 }
-
 .about-image {
   flex: 0 0 auto;
   display: flex;
@@ -395,7 +667,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-image img {
   width: 100%;
-  max-width: 880px;
+  max-width: 880px; /* ⬅️ Поверніть оригінальне значення */
   height: 631px;
   object-fit: cover;
   border-radius: 8px;
@@ -408,14 +680,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-text {
-  flex: 1;
-  max-width: 600px;
+  flex: 0 0 auto; /* ⬅️ Змінити з flex: 1 */
+  max-width: 480px;
+  min-width: 0;
   padding-left: 0;
 }
 
 .about-title {
   font-family: var(--font-family);
-  font-weight: 600;
+  font-weight: 480;
   font-size: 48px;
   line-height: 120%;
   color: var(--primary);
@@ -565,7 +838,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100vw;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url('images/v419_228.png');
+  background-image: url('images/DJ_studio.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -626,7 +899,13 @@ h1, h2, h3, h4, h5, h6 {
     0 0 25px rgba(220, 235, 255, 0.35),
     0 0 60px rgba(160, 200, 255, 0.12);
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
   /* Без animation — JS керує */
+}
+
+.moving-text .marquee-segment {
+  display: inline-block;
 }
 
 @media (max-width: 1200px) {
@@ -670,7 +949,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 59px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
   color: #000000;
-  font-family: 'Inter', sans-serif;
+  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 600;
   font-size: 16px;
   line-height: 140%;
@@ -748,7 +1027,7 @@ h1, h2, h3, h4, h5, h6 {
 .footer-modern {
   background-color: #000000;
   color: #ffffff;
-  font-family: 'SF UI Display', -apple-system, system-ui, BlinkMacSystemFont, var(--font-family, 'Inter', sans-serif);
+  font-family: 'SF UI Display', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   width: 100%;
   padding: 60px 80px 40px;
   box-sizing: border-box;
@@ -769,11 +1048,18 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10000;
 }
 
+/* ================================
+   ✔ Фіксовані кнопки
+   ================================ */
 .social-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  padding: 14px 28px;
+  width: 191px;
+  height: 48px;
+  padding: 0;
+
   background-color: #121212;
   color: #ffffff;
   text-decoration: none;
@@ -818,17 +1104,20 @@ h1, h2, h3, h4, h5, h6 {
   height: 20px;
   flex-shrink: 0;
   transition: transform 0.3s ease;
-  filter: brightness(0);
+  filter: brightness(0) invert(1);
 }
 
 .social-btn:hover img {
   transform: scale(1.1);
+  filter: brightness(0) invert(1);
 }
 
 .social-btn span {
   white-space: nowrap;
   letter-spacing: 0.3px;
 }
+
+/* ===================================================== */
 
 .footer-content-modern {
   display: flex;
@@ -899,6 +1188,8 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(179, 179, 179, 0.93);
 }
 
+
+
 /* ==========================================================================
    АДАПТИВНІСТЬ
    ========================================================================== */
@@ -906,7 +1197,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 1680px) {
   .about-container {
     padding: 70px 70px;
-    gap: 60px;
+    gap: 48px;
   }
   .about-image img {
     max-width: 750px;
@@ -915,19 +1206,19 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 1440px) {
   .about-container {
-    padding: 60px 60px;
-    gap: 50px;
+    padding: 60px;
+    gap: 40px;
   }
   .about-image img {
-    max-width: 623px;
-    height: 631px;
+    max-width: 560px;
+    height: auto;
   }
   .about-text {
-    max-width: 550px;
+    max-width: 520px;
   }
   .about-title {
     font-size: 40px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
   .section-heading {
     font-size: 60px;
@@ -938,25 +1229,27 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 1280px) {
   .about-container {
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    padding: 50px 40px;
-    gap: 40px;
+    padding: 48px 40px;
+    gap: 32px;
   }
   .about-image img {
-    max-width: 550px;
+    max-width: 100%;
+    width: 100%;
     height: auto;
   }
   .about-text {
-    max-width: 100%;
+    max-width: 700px;
     padding: 0;
   }
   .about-title {
     font-size: 36px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   .about-description {
     font-size: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
   .section-heading {
     font-size: 52px;
@@ -1006,7 +1299,18 @@ h1, h2, h3, h4, h5, h6 {
     padding: 12px 40px;
   }
   .social-sidebar {
-    display: none;
+    display: flex;
+    left: 12px;
+    padding: 8px;
+    gap: 16px;
+  }
+  .social-sidebar a {
+    width: 16px;
+    height: 16px;
+  }
+  .social-sidebar a svg {
+    width: 16px;
+    height: 16px;
   }
   .hero-graphic img {
     width: 350px;
@@ -1023,33 +1327,36 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 40px;
   }
   .about-section {
-    padding: 40px;
-    margin-top: 40px;
+    padding: 16px;
+    margin-top: 16px;
   }
   .about-container {
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 28px;
     text-align: center;
+    padding: 40px 24px;
   }
   .about-image img {
     width: 100%;
-    max-width: 400px;
-    height: 400px;
+    max-width: 100%;
+    height: auto;
     object-fit: cover;
   }
   .about-text {
     max-width: 100%;
-    padding: 0 20px;
+    padding: 0;
   }
   .about-title {
-    font-size: 36px;
-    padding-bottom: 24px;
+    font-size: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 0;
   }
   .about-description {
-    font-size: 18px;
-    line-height: 135%;
-    padding-bottom: 32px;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    padding-bottom: 0;
   }
   .learn-more-btn {
     padding: 12px 24px;
@@ -1088,24 +1395,53 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 20px;
   }
   .navbar {
-    padding: 12px 20px;
+    padding: 0 0px;
+    height: 70px;
   }
   .nav-links {
     display: none;
-    flex-direction: column;
-    gap: 24px;
-    background-color: #111;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 20px;
-    border-radius: 8px;
   }
-  .nav-links.active {
+  .mobile-logo {
+    display: flex;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .burger-label {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  #nav-toggle:checked ~ .nav-overlay {
     display: flex;
   }
-  .burger {
-    display: block;
+  .overlay-header {
+    display: flex;
+  }
+  .overlay-logo {
+    display: flex;
+  }
+  .overlay-close {
+    display: flex;
+  }
+  .overlay-links {
+    gap: 40px;
+  }
+  .overlay-links a {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    color: #DCDCDC;
+  }
+  .nav-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+     padding-top: 16px;
   }
   .hero-graphic img {
     width: 250px;
@@ -1123,16 +1459,20 @@ h1, h2, h3, h4, h5, h6 {
   }
   .about-container {
     flex-direction: column;
+    align-items: center;
     text-align: center;
+    padding: 32px 16px;
+    gap: 24px;
   }
   .about-image img {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
   .about-text {
     max-width: 100%;
+    padding: 0;
   }
   .section-heading {
     font-size: 48px;
@@ -1188,6 +1528,26 @@ h1, h2, h3, h4, h5, h6 {
   .reveal-content {
     padding: 40px 20px;
   }
+  .about-reveal {
+    width: calc(100% - 24px);
+    max-width: none;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px 16px;
+    border-radius: 18px;
+  }
+  .reveal-content {
+    padding: 16px 16px;
+  }
+  .reveal-text {
+    max-width: 100%;
+    margin: 0 auto 32px;
+  }
+  .reveal-btn {
+    width: 100%;
+    padding: 14px 18px;
+    box-sizing: border-box;
+  }
   .big-logo svg {
     width: 200px;
     height: 200px;
@@ -1198,7 +1558,8 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 120px;
   }
   .social-btn {
-    padding: 12px 24px;
+    width: 150px;
+    height: 42px;
     font-size: 14px;
     gap: 8px;
   }
@@ -1248,8 +1609,13 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
   body {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .social-sidebar {
+    left: 8px;
+    padding: 8px;
+    gap: 16px;
   }
   .hero-graphic img {
     width: 180px;
@@ -1258,29 +1624,52 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 28px;
     line-height: 120%;
   }
+  .youtube-section {
+    padding: 16px 0;
+  }
+  .youtube-player {
+    width: calc(100% + 24px);
+    margin: 0 -12px;
+    padding-bottom: 56.25%;
+  }
   .youtube-player iframe {
-    height: 350px;
+    height: 100%;
   }
   .about-section {
     padding: 40px 0;
   }
   .about-container {
-    padding: 30px 16px;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding: 24px 16px;
     gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .about-image,
+  .about-text {
+    width: 100%;
+  }
+  .about-image {
+    display: block;
   }
   .section-heading {
     font-size: 32px;
     line-height: 120%;
     margin-bottom: 40px;
-    padding: 0 12px;
+    padding: 0;
   }
   .about-image img {
     width: 100%;
+    max-width: 100%;
     height: auto;
     margin: 0 auto;
   }
   .about-text {
-    margin: 0 20px;
+    margin: 0;
+    width: 100%;
   }
   .about-title {
     font-size: 28px;
@@ -1296,15 +1685,19 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
   }
   .music-section {
-    padding: 40px;
+    padding: 40px 0;
     margin-top: 40px;
   }
   .music-player-block {
-    padding: 40px;
-  }
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 8px;
+  border-radius: 12px;
+}
   .spotify-player {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 24px;
   }
   .spotify-player iframe {
     height: 220px;
@@ -1318,15 +1711,21 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 120%;
     margin-bottom: 32px;
     padding: 0 16px;
+    width: calc(100% - 32px);
+    max-width: none;
   }
   .soundcloud-section {
-    padding: 16px;
+    padding: 16px 0;
     margin-top: 20px;
   }
   .soundcloud-player-block {
+    width: calc(100% + 24px);
+    max-width: none;
+    margin: 0 -12px;
     padding: 16px;
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 16px;
   }
   .soundcloud-player h3 {
     font-size: 14px;
@@ -1345,13 +1744,23 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 80px;
   }
   .footer-social-buttons {
-    gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
   }
   .social-btn {
-    padding: 10px 18px;
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    max-width: 220px;
+    padding: 0;
     font-size: 12px;
     border-radius: 10px;
     gap: 6px;
+    justify-content: center;
   }
   .social-btn img {
     width: 16px;
@@ -1432,5 +1841,31 @@ h1, h2, h3, h4, h5, h6 {
   }
   .service-tickets-section {
     padding: 24px 10px;
+  }
+}
+
+/* SVG іконки в social-btn — завжди білі */
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .social-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  .social-btn {
+    color: #ffffff;
   }
 }
