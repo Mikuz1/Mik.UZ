@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mikuz.netlify.app/sitemap.xml
