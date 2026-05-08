@@ -1,5 +1,6 @@
 // Scroll Animation
 document.addEventListener('DOMContentLoaded', function () {
+  if (!document.getElementById('bigLogo')) return;
   const bigLogo = document.getElementById('bigLogo');
   const aboutReveal = document.getElementById('aboutReveal');
   const scrollSection = document.querySelector('.scroll-reveal-section');
@@ -130,11 +131,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       });
     }
   });
-});
-
-// Бургер
-document.getElementById('burger').addEventListener('click', () => {
-  document.querySelector('.nav-links').classList.toggle('active');
 });
 
 // ========== MIK.UZ CANVAS TITLE ==========
@@ -342,18 +338,7 @@ document.getElementById('burger').addEventListener('click', () => {
 (function () {
 
   const CONFIG = {
-    baseSpeed: 3.6,
-    minSpeed: 1.5,
-    maxSpeed: 9.0,
-
-    burstInterval: 12000,
-    burstDuration: 600,
-    fastDuration: 800,
-    slowDuration: 1400,
-
-    wobbleAmplitude: 22,
-    wobbleDecay: 0.68,
-    wobbleCount: 5,
+    baseSpeed: 1.4,
   };
 
   const line1 = document.querySelector('.first-line .moving-text');
@@ -363,125 +348,124 @@ document.getElementById('burger').addEventListener('click', () => {
   line1.style.animation = 'none';
   line2.style.animation = 'none';
 
+  function wrap(value, min, max) {
+    const range = max - min;
+    return ((((value - min) % range) + range) % range) + min;
+  }
+
+  function buildCopies(el, original) {
+    el.textContent = '';
+
+    // Build enough repeated segments so the loop stays seamless on wide screens.
+    const minCopies = 6;
+    const viewportWidth = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0, 1920);
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < minCopies; i++) {
+      const span = document.createElement('span');
+      span.className = 'marquee-segment';
+      span.textContent = original + '\u00A0\u00A0•\u00A0\u00A0';
+      fragment.appendChild(span);
+    }
+
+    el.appendChild(fragment);
+
+    const firstSegment = el.firstElementChild;
+    const segmentWidth = firstSegment ? firstSegment.getBoundingClientRect().width : 0;
+
+    if (!segmentWidth) {
+      return minCopies;
+    }
+
+    const requiredCopies = Math.max(minCopies, Math.ceil((viewportWidth * 2.5) / segmentWidth));
+
+    if (requiredCopies > minCopies) {
+      const extraFragment = document.createDocumentFragment();
+      for (let i = minCopies; i < requiredCopies; i++) {
+        const span = document.createElement('span');
+        span.className = 'marquee-segment';
+        span.textContent = original + '\u00A0\u00A0•\u00A0\u00A0';
+        extraFragment.appendChild(span);
+      }
+      el.appendChild(extraFragment);
+    }
+
+    return requiredCopies;
+  }
+
   function setupTrack(el, direction) {
     const original = el.textContent.trim();
-    el.textContent = '';
-    const copies = 4;
-    for (let i = 0; i < copies; i++) {
-      const span = document.createElement('span');
-      span.textContent = original + '\u00A0\u00A0•\u00A0\u00A0';
-      el.appendChild(span);
-    }
-    const singleWidth = el.scrollWidth / copies;
+    buildCopies(el, original);
+
+    const firstSegment = el.firstElementChild;
+    const singleWidth = firstSegment
+      ? firstSegment.getBoundingClientRect().width
+      : el.scrollWidth;
+
     return {
       el,
+      original,
       direction,
-      pos: direction === 1 ? -singleWidth : 0,
       singleWidth,
-      speed: CONFIG.baseSpeed,
+      offset: 0,
     };
   }
 
   const track1 = setupTrack(line1, 1);
   const track2 = setupTrack(line2, -1);
 
-  function easeInOut(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  function refreshTrack(track) {
+    const progress = track.singleWidth
+      ? (track.offset % track.singleWidth) / track.singleWidth
+      : 0;
+
+    buildCopies(track.el, track.original);
+
+    const firstSegment = track.el.firstElementChild;
+    const nextWidth = firstSegment
+      ? firstSegment.getBoundingClientRect().width
+      : track.singleWidth;
+
+    track.singleWidth = nextWidth || track.singleWidth;
+    track.offset = progress * track.singleWidth;
   }
-
-  function easeOutElastic(t) {
-    if (t === 0 || t === 1) return t;
-    const p = 0.4;
-    return Math.pow(2, -10 * t) * Math.sin((t - p / 4) * (2 * Math.PI) / p) + 1;
-  }
-
-  let phase = 'normal';
-  let phaseStart = 0;
-  let fromSpeed = CONFIG.baseSpeed;
-  let targetSpeed = CONFIG.baseSpeed;
-
-  let wobbleActive = false;
-  let wobbleStart = 0;
-  const wobbleDuration = 1400;
-
-  function getWobbleOffset(elapsed) {
-    if (!wobbleActive) return 0;
-    const t = Math.min(elapsed / wobbleDuration, 1);
-    if (t >= 1) { wobbleActive = false; return 0; }
-    const decay = Math.pow(CONFIG.wobbleDecay, t * CONFIG.wobbleCount * 2);
-    const wave = Math.sin(t * CONFIG.wobbleCount * Math.PI * 2);
-    return CONFIG.wobbleAmplitude * decay * wave;
-  }
-
-  function scheduleBurst() {
-    setTimeout(() => {
-      phase = 'accelerating';
-      phaseStart = performance.now();
-      fromSpeed = CONFIG.baseSpeed;
-      targetSpeed = CONFIG.minSpeed + Math.random() * (CONFIG.maxSpeed - CONFIG.minSpeed);
-    }, CONFIG.burstInterval + Math.random() * 2000);
-  }
-
-  scheduleBurst();
 
   let lastTime = null;
+  let resizeRaf = null;
 
   function tick(now) {
     if (!lastTime) lastTime = now;
     const dt = Math.min(now - lastTime, 32);
     lastTime = now;
 
-    const elapsed = now - phaseStart;
-
-    if (phase === 'accelerating') {
-      const t = Math.min(elapsed / CONFIG.burstDuration, 1);
-      const s = fromSpeed + (targetSpeed - fromSpeed) * easeInOut(t);
-      track1.speed = s;
-      track2.speed = s;
-      if (t >= 1) { phase = 'fast'; phaseStart = now; }
-
-    } else if (phase === 'fast') {
-      if (elapsed > CONFIG.fastDuration) {
-        phase = 'decelerating';
-        phaseStart = now;
-        fromSpeed = track1.speed;
-        targetSpeed = CONFIG.baseSpeed;
-        wobbleActive = true;
-        wobbleStart = now;
-      }
-
-    } else if (phase === 'decelerating') {
-      const t = Math.min(elapsed / CONFIG.slowDuration, 1);
-      const easedT = t < 0.7
-        ? easeInOut(t / 0.7) * 0.7
-        : 0.7 + easeOutElastic((t - 0.7) / 0.3) * 0.3;
-      const s = fromSpeed + (targetSpeed - fromSpeed) * Math.min(easedT, 1);
-      track1.speed = Math.max(s, CONFIG.baseSpeed);
-      track2.speed = Math.max(s, CONFIG.baseSpeed);
-      if (t >= 1) {
-        phase = 'normal';
-        track1.speed = CONFIG.baseSpeed;
-        track2.speed = CONFIG.baseSpeed;
-        scheduleBurst();
-      }
-    }
-
-    const wobble = wobbleActive ? getWobbleOffset(now - wobbleStart) : 0;
-
     for (const track of [track1, track2]) {
-      track.pos += track.direction * track.speed * (dt / 16.67);
+      track.offset += CONFIG.baseSpeed * (dt / 16.67);
 
-      if (track.direction === 1 && track.pos >= 0) {
-        track.pos -= track.singleWidth;
-      } else if (track.direction === -1 && track.pos <= -track.singleWidth) {
-        track.pos += track.singleWidth;
-      }
+      const distance = track.singleWidth
+        ? track.offset % track.singleWidth
+        : 0;
 
-      const w = track.direction === 1 ? wobble : -wobble;
-      track.el.style.transform = `translateX(${track.pos + w}px)`;
+      const translateX = track.direction === 1
+        ? -track.singleWidth + distance
+        : -distance;
+
+      track.el.style.transform = `translate3d(${translateX}px, 0, 0)`;
     }
 
     requestAnimationFrame(tick);
+  }
+
+  function handleResize() {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(() => {
+      refreshTrack(track1);
+      refreshTrack(track2);
+    });
+  }
+
+  window.addEventListener('resize', handleResize);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(handleResize);
   }
 
   requestAnimationFrame(tick);
