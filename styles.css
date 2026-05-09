@@ -439,14 +439,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .social-sidebar {
   position: fixed;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 16px;
+  top: auto;
+  bottom: max(20px, calc((100vh - 100%) / 2));
+  transform: none;
   z-index: 50;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px 10px;
+  gap: 8px;
+  padding: 12px 8px;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -1323,20 +1324,6 @@ h1, h2, h3, h4, h5, h6 {
   .navbar {
     padding: 12px 40px;
   }
-  .social-sidebar {
-    display: flex;
-    left: 12px;
-    padding: 8px;
-    gap: 16px;
-  }
-  .social-sidebar a {
-    width: 16px;
-    height: 16px;
-  }
-  .social-sidebar a svg {
-    width: 16px;
-    height: 16px;
-  }
   .hero-graphic img {
     width: 350px;
   }
@@ -1440,6 +1427,22 @@ h1, h2, h3, h4, h5, h6 {
     top: 50%;
     transform: translateY(-50%);
   }
+.social-sidebar {
+  top: 83%;
+  bottom: auto;
+  transform: translateY(-50%);
+  left: 16px;
+}
+  }
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+  .social-sidebar a svg {
+    width: 16px;
+    height: 16px;
+  }
+  
   #nav-toggle:checked ~ .nav-overlay {
     display: flex;
   }
@@ -1610,7 +1613,7 @@ h1, h2, h3, h4, h5, h6 {
   .footer-copyright-modern {
     padding-top: 24px;
   }
-}
+
 
 @media (max-width: 600px) {
   .youtube-section {
@@ -1637,11 +1640,25 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 16px;
     padding-right: 16px;
   }
-  .social-sidebar {
-    left: 8px;
-    padding: 8px;
-    gap: 16px;
+.social-sidebar {
+  top: 70%;
+  bottom: auto;
+  transform: translateY(-50%);
+  left: 16px;
+   }
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
   }
+  
+   .social-sidebar {
+    left: 8px;
+    padding: 4px;
+    gap: 8px;
+  }
+  
+
+
   .hero-graphic img {
     width: 180px;
   }
@@ -1866,6 +1883,23 @@ h1, h2, h3, h4, h5, h6 {
   }
   .service-tickets-section {
     padding: 24px 10px;
+  }
+ 
+.social-sidebar {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  left: 16px;
+   }
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+  
+   .social-sidebar {
+    left: 8px;
+    padding: 4px;
+    gap: 8px;
   }
 }
 
