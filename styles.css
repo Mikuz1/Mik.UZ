@@ -24,6 +24,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+/* ==========================================================================
+   NAVBAR
+   ========================================================================== */
+
 .navbar {
   position: fixed;
   top: 0;
@@ -143,17 +147,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 0px;
 }
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding-top: 125px;
-  min-height: 100vh;
-  width: 100%;
-}
-
 .overlay-header {
   display: flex;
   justify-content: space-between;
@@ -214,50 +207,68 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   display: inline-block;
   padding: 4px 0;
-    transition: color 0.3s ease, background 0.3s ease;
-  }
+  transition: color 0.3s ease, background 0.3s ease;
+}
 
-  .overlay-links a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      #521EFC 0%,
-      #A740FD 35%,
-      #FD62FE 65%,
-      #521EFC 100%
-    );
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
+.overlay-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
 
-  .overlay-links a:hover,
-  .overlay-links a:focus-visible,
-  .overlay-links a:active {
-    background: linear-gradient(
-      90deg,
-      #521EFC 0%,
-      #A740FD 35%,
-      #FD62FE 65%,
-      #521EFC 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+.overlay-links a:hover,
+.overlay-links a:focus-visible,
+.overlay-links a:active {
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-  .overlay-links a:hover::after,
-  .overlay-links a:focus-visible::after,
-  .overlay-links a:active::after {
-    transform: scaleX(1);
-  }
+.overlay-links a:hover::after,
+.overlay-links a:focus-visible::after,
+.overlay-links a:active::after {
+  transform: scaleX(1);
+}
 
-/* ========== EQ VISUALIZER ========== */
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding-top: 125px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ==========================================================================
+   EQ VISUALIZER
+   ========================================================================== */
+
 .eq-wrapper {
   width: 100%;
   aspect-ratio: 1;
@@ -295,40 +306,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 }
 
-.play-btn {
-  position: absolute;
-  bottom: 8%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 20;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 25px;
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 12px;
-  cursor: pointer;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: all 0.4s;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 700;
-  position: absolute;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-/* ============================================================
-   PLAY BUTTON — один блок, змійка по бордеру
-   
-   ============================================================ */
+/* ==========================================================================
+   PLAY BUTTON
+   ========================================================================== */
 
 @property --angle {
   syntax: '<angle>';
@@ -341,14 +321,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .play-btn {
-  /* позиція */
   position: absolute;
   bottom: 8%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
 
-  /* вигляд */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -359,7 +337,6 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 
-  /* текст */
   color: #ececec;
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -368,10 +345,9 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   cursor: pointer;
 
-  /* важливо — НЕ overflow:hidden щоб ::after не обрізався */
   overflow: visible;
   isolation: isolate;
-  transition: 0.8s,  0.8s;
+  transition: background 0.8s, border-color 0.8s;
 }
 
 .play-btn:hover {
@@ -381,7 +357,6 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(-50%);
 }
 
-/* Змійка по бордеру */
 .play-btn::after {
   content: '';
   position: absolute;
@@ -416,13 +391,14 @@ h1, h2, h3, h4, h5, h6 {
   z-index: -1;
 }
 
-
-
 .play-btn > * {
   position: relative;
   z-index: 1;
 }
-/* ============================================================ */
+
+/* ==========================================================================
+   HERO TITLE CANVAS
+   ========================================================================== */
 
 .hero-title-canvas {
   margin: 64px 0;
@@ -436,6 +412,10 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 100%;
   display: block;
 }
+
+/* ==========================================================================
+   SOCIAL SIDEBAR
+   ========================================================================== */
 
 .social-sidebar {
   position: fixed;
@@ -576,27 +556,27 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
-  .reveal-btn {
-    display: inline-block;
-    padding: 16px 48px;
-    background-color: #ffffff;
-    color: #000000;
-    font-weight: 600;
-    font-size: 18px;
-    text-decoration: none;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-  }
+.reveal-btn {
+  display: inline-block;
+  padding: 16px 48px;
+  background-color: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
 
-  .reveal-btn:hover {
-    background-color: #DCDCDC;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
-  }
+.reveal-btn:hover {
+  background-color: #DCDCDC;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
+}
 
 /* ==========================================================================
-   YouTube Section
+   YOUTUBE SECTION
    ========================================================================== */
 
 .youtube-section {
@@ -654,7 +634,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   About
+   ABOUT SECTION
    ========================================================================== */
 
 .about-section {
@@ -675,7 +655,7 @@ h1, h2, h3, h4, h5, h6 {
 .about-container {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* ⬅️ Змінити з space-between */
+  justify-content: flex-start;
   gap: 56px;
   max-width: 1920px;
   margin: 0 auto;
@@ -684,6 +664,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 80px;
   border-radius: 12px;
 }
+
 .about-image {
   flex: 0 0 auto;
   display: flex;
@@ -693,7 +674,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-image img {
   width: 100%;
-  max-width: 880px; /* ⬅️ Поверніть оригінальне значення */
+  max-width: 880px;
   height: 631px;
   object-fit: cover;
   border-radius: 8px;
@@ -706,7 +687,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .about-text {
-  flex: 0 0 auto; /* ⬅️ Змінити з flex: 1 */
+  flex: 0 0 auto;
   max-width: 480px;
   min-width: 0;
   padding-left: 0;
@@ -752,7 +733,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Music
+   MUSIC SECTION
    ========================================================================== */
 
 .music-section {
@@ -778,6 +759,12 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 12px;
 }
 
+.spotify-player {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
 .spotify-player iframe {
   width: 100%;
   height: 352px;
@@ -785,14 +772,8 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.spotify-player {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-
 /* ==========================================================================
-   SoundCloud
+   SOUNDCLOUD SECTION
    ========================================================================== */
 
 .soundcloud-section {
@@ -839,7 +820,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Service Section — ОНОВЛЕНО
+   SERVICE SECTION
    ========================================================================== */
 
 .service-section {
@@ -909,7 +890,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
-/* Текст — JS керує transform, CSS тільки стиль */
 .moving-text {
   display: inline-block;
   white-space: nowrap;
@@ -927,36 +907,10 @@ h1, h2, h3, h4, h5, h6 {
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
-  /* Без animation — JS керує */
 }
 
 .moving-text .marquee-segment {
   display: inline-block;
-}
-
-@media (max-width: 1200px) {
-  .service-hero    { height: 700px; }
-  .service-heading { font-size: 64px; padding: 50px 60px; }
-  .moving-text     { font-size: 90px; }
-}
-
-@media (max-width: 768px) {
-  .service-hero       { height: 600px; }
-  .service-heading    { font-size: 48px; padding: 40px; }
-  .moving-text        { font-size: 60px; letter-spacing: 2px; }
-  .animated-text-line { margin-bottom: 60px; }
-}
-
-@media (max-width: 480px) {
-  .service-hero       { height: 500px; }
-  .service-heading    { font-size: 28px; padding: 32px 20px; }
-  .moving-text        { font-size: 40px; letter-spacing: 1px; }
-  .animated-text-line { margin-bottom: 40px; }
-}
-
-@media (max-width: 320px) {
-  .service-hero { height: 450px; }
-  .moving-text  { font-size: 28px; }
 }
 
 .service-tickets-section {
@@ -1000,7 +954,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: left 0.6s;
 }
 
-.tickets-btn:hover::before { left: 100%; }
+.tickets-btn:hover::before {
+  left: 100%;
+}
 
 .tickets-btn:hover {
   background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.95) 100%);
@@ -1011,39 +967,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .tickets-btn:active {
   transform: translateY(-2px) scale(1.02);
-}
-
-/* ==========================================================================
-   Service — Responsive
-   ========================================================================== */
-
-@media (max-width: 1200px) {
-  .service-hero            { height: 700px; }
-  .service-heading         { font-size: 64px; padding: 50px 60px; }
-  .moving-text             { font-size: 90px; }
-  .animated-text-container { gap: 50px; }
-}
-
-@media (max-width: 768px) {
-  .service-hero            { height: 600px; }
-  .service-heading         { font-size: 48px; padding: 40px; }
-  .moving-text             { font-size: 60px; letter-spacing: 2px; }
-  .animated-text-container { gap: 40px; }
-  .tickets-btn             { width: 300px; height: 50px; font-size: 14px; }
-}
-
-@media (max-width: 480px) {
-  .service-hero            { height: 500px; }
-  .service-heading         { font-size: 28px; padding: 32px 20px; }
-  .moving-text             { font-size: 40px; letter-spacing: 1px; }
-  .animated-text-container { gap: 28px; }
-  .tickets-btn             { width: 250px; height: 45px; font-size: 13px; }
-}
-
-@media (max-width: 320px) {
-  .service-hero  { height: 450px; }
-  .moving-text   { font-size: 28px; }
-  .tickets-btn   { width: 200px; height: 40px; font-size: 12px; }
 }
 
 /* ==========================================================================
@@ -1074,9 +997,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10000;
 }
 
-/* ================================
-   ✔ Фіксовані кнопки
-   ================================ */
 .social-btn {
   display: inline-flex;
   align-items: center;
@@ -1085,7 +1005,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 191px;
   height: 48px;
   padding: 0;
-
   background-color: #121212;
   color: #ffffff;
   text-decoration: none;
@@ -1143,7 +1062,13 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.3px;
 }
 
-/* ===================================================== */
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+  color: #ffffff;
+}
 
 .footer-content-modern {
   display: flex;
@@ -1214,10 +1139,8 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(179, 179, 179, 0.93);
 }
 
-
-
 /* ==========================================================================
-   АДАПТИВНІСТЬ
+   RESPONSIVE — 1680px
    ========================================================================== */
 
 @media (max-width: 1680px) {
@@ -1229,6 +1152,10 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 750px;
   }
 }
+
+/* ==========================================================================
+   RESPONSIVE — 1440px
+   ========================================================================== */
 
 @media (max-width: 1440px) {
   .about-container {
@@ -1251,6 +1178,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 50px;
   }
 }
+
+/* ==========================================================================
+   RESPONSIVE — 1280px
+   ========================================================================== */
 
 @media (max-width: 1280px) {
   .about-container {
@@ -1282,7 +1213,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE — 1200px
+   ========================================================================== */
+
 @media (max-width: 1200px) {
+  .service-hero    { height: 700px; }
+  .service-heading { font-size: 64px; padding: 50px 60px; }
+  .moving-text     { font-size: 90px; }
+
   .about-image img {
     max-width: 480px;
     height: auto;
@@ -1315,6 +1254,10 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 15px;
   }
 }
+
+/* ==========================================================================
+   RESPONSIVE — 1024px
+   ========================================================================== */
 
 @media (max-width: 1024px) {
   body {
@@ -1401,6 +1344,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE — 768px
+   ========================================================================== */
+
 @media (max-width: 768px) {
   body {
     padding-left: 20px;
@@ -1427,22 +1374,6 @@ h1, h2, h3, h4, h5, h6 {
     top: 50%;
     transform: translateY(-50%);
   }
-.social-sidebar {
-  top: 83%;
-  bottom: auto;
-  transform: translateY(-50%);
-  left: 16px;
-}
-  }
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-  .social-sidebar a svg {
-    width: 16px;
-    height: 16px;
-  }
-  
   #nav-toggle:checked ~ .nav-overlay {
     display: flex;
   }
@@ -1469,8 +1400,25 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
     display: flex;
     align-items: center;
-     padding-top: 16px;
+    padding-top: 16px;
   }
+
+  /* SOCIAL SIDEBAR — 768px (з першого коду) */
+  .social-sidebar {
+    top: 83%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
+  }
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+  .social-sidebar a svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .hero-graphic img {
     width: 250px;
   }
@@ -1550,6 +1498,11 @@ h1, h2, h3, h4, h5, h6 {
   .soundcloud-player iframe {
     height: 220px;
   }
+  .service-hero       { height: 600px; }
+  .service-heading    { font-size: 48px; padding: 40px; }
+  .moving-text        { font-size: 60px; letter-spacing: 2px; }
+  .animated-text-line { margin-bottom: 60px; }
+  .tickets-btn        { width: 300px; height: 50px; font-size: 14px; }
   .service-tickets-section {
     padding: 40px 20px;
   }
@@ -1563,9 +1516,6 @@ h1, h2, h3, h4, h5, h6 {
     transform: translate(-50%, -50%);
     padding: 16px 16px;
     border-radius: 18px;
-  }
-  .reveal-content {
-    padding: 16px 16px;
   }
   .reveal-text {
     max-width: 100%;
@@ -1595,6 +1545,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 18px;
     height: 18px;
   }
+  .social-btn svg {
+    width: 18px;
+    height: 18px;
+  }
   .footer-content-modern {
     flex-direction: column;
     gap: 40px;
@@ -1613,7 +1567,11 @@ h1, h2, h3, h4, h5, h6 {
   .footer-copyright-modern {
     padding-top: 24px;
   }
+}
 
+/* ==========================================================================
+   RESPONSIVE — 600px
+   ========================================================================== */
 
 @media (max-width: 600px) {
   .youtube-section {
@@ -1635,29 +1593,38 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE — 480px
+   ========================================================================== */
+
 @media (max-width: 480px) {
   body {
     padding-left: 16px;
     padding-right: 16px;
   }
-.social-sidebar {
-  top: 70%;
-  bottom: auto;
-  transform: translateY(-50%);
-  left: 16px;
-   }
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
+
+  /* SOCIAL SIDEBAR — 480px (з першого коду) */
+  .social-sidebar {
+    top: 70%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
   }
-  
-   .social-sidebar {
+  .social-sidebar {
     left: 8px;
     padding: 4px;
     gap: 8px;
   }
-  
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
 
+  .service-hero       { height: 500px; }
+  .service-heading    { font-size: 28px; padding: 32px 20px; }
+  .moving-text        { font-size: 40px; letter-spacing: 1px; }
+  .animated-text-line { margin-bottom: 40px; }
+  .tickets-btn        { width: 250px; height: 45px; font-size: 13px; }
 
   .hero-graphic img {
     width: 180px;
@@ -1731,12 +1698,12 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 40px;
   }
   .music-player-block {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 8px;
-  border-radius: 12px;
-}
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 8px;
+    border-radius: 12px;
+  }
   .spotify-player {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -1803,8 +1770,13 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     gap: 6px;
     justify-content: center;
+    color: #ffffff;
   }
   .social-btn img {
+    width: 16px;
+    height: 16px;
+  }
+  .social-btn svg {
     width: 16px;
     height: 16px;
   }
@@ -1838,6 +1810,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE — 360px
+   ========================================================================== */
+
 @media (max-width: 360px) {
   .tickets-btn {
     width: 200px;
@@ -1846,7 +1822,32 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* ==========================================================================
+   RESPONSIVE — 320px
+   ========================================================================== */
+
 @media (max-width: 320px) {
+  .service-hero { height: 450px; }
+  .moving-text  { font-size: 28px; }
+  .tickets-btn  { width: 200px; height: 40px; font-size: 12px; }
+
+  /* SOCIAL SIDEBAR — 320px (з першого коду) */
+  .social-sidebar {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
+  }
+  .social-sidebar {
+    left: 8px;
+    padding: 4px;
+    gap: 8px;
+  }
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+
   .music-section {
     padding: 40px;
     margin-top: 40px;
@@ -1883,48 +1884,5 @@ h1, h2, h3, h4, h5, h6 {
   }
   .service-tickets-section {
     padding: 24px 10px;
-  }
- 
-.social-sidebar {
-  top: 50%;
-  bottom: auto;
-  transform: translateY(-50%);
-  left: 16px;
-   }
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-  
-   .social-sidebar {
-    left: 8px;
-    padding: 4px;
-    gap: 8px;
-  }
-}
-
-/* SVG іконки в social-btn — завжди білі */
-.social-btn svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  fill: currentColor;
-  color: #ffffff;
-}
-
-@media (max-width: 768px) {
-  .social-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-}
-
-@media (max-width: 480px) {
-  .social-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-  .social-btn {
-    color: #ffffff;
   }
 }
