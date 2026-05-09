@@ -124,6 +124,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
+      const navToggle = document.getElementById('nav-toggle');
+      if (navToggle && this.closest('.nav-overlay')) {
+        navToggle.checked = false;
+      }
       const navH = document.querySelector('.navbar').offsetHeight;
       window.scrollTo({
         top: target.getBoundingClientRect().top + window.pageYOffset - navH,
