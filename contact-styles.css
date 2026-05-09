@@ -1,1283 +1,287 @@
-/* ====================================================================
-   CONTACT PAGE STYLES
-   ==================================================================== */
-
-/* Hero Section with Background Image */
-.contact-hero {
-  position: relative;
-  width: 100%;
-  height: 700px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  margin-top: 90px;
-  overflow: hidden;
-  padding-top: 20px;
-}
-
-.contact-hero-graphic {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.contact-hero-graphic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.contact-hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-.contact-title-canvas {
-  margin: 64px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-
-.contact-title-canvas canvas {
-  max-width: 100%;
-  display: block;
-}
-
-.contact-hero-title {
-  position: relative;
-  z-index: 2;
-  font-family: "Arial Black", Arial, sans-serif;
-  font-size: 140px;
-  font-weight: 900;
-  letter-spacing: 32px;
-  text-transform: uppercase;
-  margin: 0;
-  text-align: center;
-}
-
-/* Main Contact Section */
-.contact-main {
-  background-color: #000000;
-  padding: 120px 80px 80px;
-}
-
-.contact-container {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.contact-section-title {
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 40px;
-  letter-spacing: 0;
-}
-
-/* Content Layout */
-.contact-content-wrapper {
-  display: flex;
-  gap: 128px;
-  align-items: flex-start;
-}
-
-/* Contact Information */
-.contact-info-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  flex: 0 0 auto;
-  min-width: 280px;
-}
-
-.contact-info-block {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.contact-info-heading {
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  letter-spacing: 0;
-}
-
-.contact-info-subheading {
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #eeeeee;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.contact-info-text {
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #dcdcdc;
-  margin: 0;
-  line-height: 1.35;
-}
-
-/* Contact Form */
-.contact-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 448px;
-  width: 100%;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.form-label {
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #ffffff;
-  letter-spacing: 0;
-}
-
-/* Select Dropdown */
-.form-select-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-.form-select-native {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  inset: 0;
-}
-
-.form-select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  padding-right: 40px;
-  background-color: transparent;
-  border: 1px solid #474747;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-  background-image: none;
-}
-
-.custom-select-trigger {
-  width: 100%;
-  min-height: 50px;
-  padding: 14px 16px;
-  padding-right: 40px;
-  background-color: transparent;
-  border: 1px solid #474747;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.custom-select-trigger:hover {
-  background-color: #303030;
-  border-color: #303030;
-}
-
-.custom-select-trigger:focus-visible,
-.form-select-wrapper.is-open .custom-select-trigger {
-  background-color: #000000;
-  border-color: #6d6d6d;
-  outline: none;
-}
-
-.custom-select-value {
-  display: block;
-}
-
-.custom-select-menu {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  display: none;
-  flex-direction: column;
-  gap: 2px;
-  padding: 4px;
-  background-color: #000000;
-  border: 1px solid #474747;
-  border-radius: 12px;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
-  z-index: 20;
-}
-
-.form-select-wrapper.is-open .custom-select-menu {
-  display: flex;
-}
-
-.custom-select-option {
-  width: 100%;
-  padding: 12px 14px;
-  background-color: transparent;
-  border: none;
-  border-radius: 8px;
-  color: #ffffff;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.custom-select-option:hover,
-.custom-select-option:focus-visible,
-.custom-select-option.is-selected {
-  background-color: #282828;
-  outline: none;
-}
-
-.form-select:hover {
-  background-color: #303030;
-  color: #ffffff;
-  border-color: #303030;
-}
-
-.form-select:focus,
-.form-select:active {
-  background-color: #000000;
-  color: #ffffff;
-  border-color: #6d6d6d;
-}
-
-.form-select option {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 8px 16px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-}
-
-.form-select option:hover,
-.form-select option:checked {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-/* Dropdown Icon */
-.dropdown-icon {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  pointer-events: none;
-  z-index: 3;
-  filter: none;
-  opacity: 1;
-  transition: all 0.3s ease;
-}
-
-.form-select:hover + .dropdown-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-  opacity: 1;
-}
-
-.form-select:focus + .dropdown-icon,
-.form-select:active + .dropdown-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-  opacity: 1;
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.form-select-wrapper:hover .dropdown-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-  opacity: 1;
-}
-
-.form-select-wrapper.is-open .dropdown-icon {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
-  opacity: 1;
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.form-select-wrapper:focus-within {
-  position: relative;
-}
-
-.form-select::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-.form-select::-webkit-inner-spin-button,
-.form-select::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Text Inputs */
-.form-input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  background-color: transparent;
-  border: 1px solid #6d6d6d;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.form-input::placeholder {
-  color: rgba(179, 179, 179, 0.93);
-}
-
-.form-input:hover,
-.form-input:focus {
-  border-color: #8d8d8d;
-}
-
-/* Phone Input with Flag */
-.form-phone-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.phone-flag {
-  position: absolute;
-  left: 16px;
-  width: 22px;
-  height: 16px;
-  pointer-events: none;
-  z-index: 1;
-  display: block;
-  object-fit: cover;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.form-phone-input {
-  padding-left: 46px;
-}
-
-/* Textarea */
-.form-textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 14px 16px;
-  background-color: transparent;
-  border: 1px solid #474747;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  outline: none;
-  resize: vertical;
-  min-height: 117px;
-  transition: border-color 0.3s ease;
-}
-
-.form-textarea::placeholder {
-  color: rgba(179, 179, 179, 0.93);
-}
-
-.form-textarea:hover,
-.form-textarea:focus {
-  border-color: #6d6d6d;
-}
-
-/* Autofill fix */
-.form-input:-webkit-autofill,
-.form-input:-webkit-autofill:hover,
-.form-input:-webkit-autofill:focus,
-.form-select:-webkit-autofill,
-.form-select:-webkit-autofill:hover,
-.form-select:-webkit-autofill:focus,
-.form-textarea:-webkit-autofill,
-.form-textarea:-webkit-autofill:hover,
-.form-textarea:-webkit-autofill:focus {
-  -webkit-text-fill-color: #ffffff;
-  caret-color: #ffffff;
-  -webkit-box-shadow: 0 0 0 1000px transparent inset;
-  box-shadow: 0 0 0 1000px transparent inset;
-  transition: background-color 9999s ease-in-out 0s;
-}
-
-.form-input:-moz-autofill,
-.form-select:-moz-autofill,
-.form-textarea:-moz-autofill {
-  box-shadow: 0 0 0 1000px transparent inset;
-  -moz-text-fill-color: #ffffff;
-}
-
-/* Submit Button */
-.form-submit-btn {
-  align-self: center;
-  padding: 12px 48px;
-  background-color: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  letter-spacing: 0;
-}
-
-.form-submit-btn:hover {
-  background-color: #e0e0e0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-}
-
-.form-submit-btn:active {
-  transform: translateY(0);
-}
-
-.form-message {
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-}
-
-/* ==========================================================================
-   SOCIAL SIDEBAR
-   ========================================================================== */
-
-.social-sidebar {
-  position: fixed;
-  left: 16px;
-  top: auto;
-  bottom: max(20px, calc((100vh - 100%) / 2));
-  transform: none;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px 8px;
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: 24px;
-}
-
-.social-sidebar a {
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(240, 240, 240, 0.55);
-  text-decoration: none;
-  transition: color 0.3s, transform 0.3s;
-}
-
-.social-sidebar a:hover {
-  color: #ffffff;
-  transform: scale(1.2);
-}
-
-.social-sidebar a svg {
-  width: 18px;
-  height: 18px;
-}
-
-/* ==========================================================================
-   SOCIAL MEDIA SECTION
-   ========================================================================== */
-
-.contact-social-section {
-  background-color: #000000;
-  padding: 80px 80px 60px;
-}
-
-.contact-social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.social-media-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background-color: #121212;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  letter-spacing: 0;
-}
-
-.social-media-btn:hover {
-  background-color: #1f1f1f;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-.social-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  filter: brightness(0) invert(1);
-}
-
-/* ==========================================================================
-   FOOTER MODERN
-   ========================================================================== */
-
-.footer-social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  position: relative;
-  z-index: 10000;
-}
-
-.social-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 191px;
-  height: 48px;
-  padding: 0;
-  background-color: #121212;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
-  overflow: hidden;
-  pointer-events: auto;
-}
-
-.social-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.6s;
-}
-
-.social-btn:hover::before {
-  left: 100%;
-}
-
-.social-btn:hover {
-  background-color: #1f1f1f;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.15);
-}
-
-.social-btn:active {
-  transform: translateY(-1px);
-}
-
-.social-btn img {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-  filter: brightness(0) invert(1);
-}
-
-.social-btn svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  fill: currentColor;
-  color: #ffffff;
-}
-
-.social-btn:hover img {
-  transform: scale(1.1);
-}
-
-.social-btn span {
-  white-space: nowrap;
-  letter-spacing: 0.3px;
-}
-
-/* Footer Content */
-.footer-content-modern {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-  gap: 80px;
-}
-
-.footer-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  flex: 1;
-}
-
-.contact-block h4 {
-  font-size: 18px;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 8px;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.contact-block a {
-  color: #dcdcdc;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 400;
-  transition: color 0.3s ease;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.contact-block a:hover {
-  color: #ffffff;
-}
-
-.footer-nav-modern {
-  display: flex;
-  gap: 80px;
-}
-
-.nav-column {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.nav-column a {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-  transition: color 0.3s ease;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-.nav-column a:hover {
-  color: #dcdcdc;
-}
-
-.footer-copyright-modern {
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 18px;
-  font-weight: 400;
-  padding: 32px 80px;
-  color: rgba(179, 179, 179, 0.93);
-  background-color: #000000;
-  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  margin-top: 60px;
-}
-
-/* Active Contact link in nav */
-.nav-links a[href="contact.html"],
-.overlay-links a[href="contact.html"] {
-  background: linear-gradient(
-    90deg,
-    #521EFC 0%,
-    #A740FD 35%,
-    #FD62FE 65%,
-    #521EFC 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ====================================================================
-   RESPONSIVE DESIGN
-   ==================================================================== */
-
-/* --- 1200px --- */
-@media (max-width: 1200px) {
-  .contact-hero {
-    height: 600px;
-  }
-
-  .contact-hero-title {
-    font-size: 120px;
-    letter-spacing: 38px;
-  }
-
-  .contact-main {
-    padding: 100px 60px 60px;
-  }
-
-  .contact-content-wrapper {
-    gap: 80px;
-  }
-
-  .contact-social-section {
-    padding: 60px 60px 50px;
-  }
-
-  .footer-content-modern {
-    gap: 60px;
-  }
-
-  .footer-copyright-modern {
-    padding: 32px 60px;
-  }
-}
-
-/* --- 1024px --- */
-@media (max-width: 1024px) {
-  .contact-hero {
-    height: 500px;
-  }
-
-  .contact-hero-title {
-    font-size: 100px;
-    letter-spacing: 32px;
-  }
-
-  .contact-main {
-    padding: 80px 40px 50px;
-  }
-
-  .contact-content-wrapper {
-    flex-direction: column;
-    gap: 60px;
-  }
-
-  .contact-info-wrapper {
-    flex-direction: row;
-    gap: 60px;
-    min-width: auto;
-    width: 100%;
-  }
-
-  .contact-form {
-    max-width: 100%;
-  }
-
-  .contact-content-wrapper,
-  .contact-form,
-  .form-group,
-  .form-select-wrapper,
-  .form-phone-wrapper {
-    width: 100%;
-  }
-
-  .contact-social-section {
-    padding: 50px 40px 40px;
-  }
-
-  .footer-content-modern {
-    gap: 60px;
-    flex-direction: column;
-  }
-
-  .footer-nav-modern {
-    gap: 60px;
-  }
-
-  .footer-copyright-modern {
-    padding: 32px 40px;
-  }
-
-}
-
-/* SVG іконки в social-btn — завжди білі */
-.social-btn svg {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  fill: currentColor;
-  color: #ffffff;
-}
-
-/* --- 768px --- */
-@media (max-width: 768px) {
-  .contact-hero {
-    height: 400px;
-    margin-top: 70px;
-  }
-
-  .contact-hero-title {
-    font-size: 72px;
-    letter-spacing: 20px;
-  }
-
-  .contact-main {
-    padding: 60px 20px 40px;
-  }
-
-  .contact-section-title {
-    font-size: 36px;
-    margin-bottom: 32px;
-  }
-
-  .contact-content-wrapper {
-    gap: 50px;
-  }
-
-  .contact-info-wrapper {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .contact-container,
-  .contact-content-wrapper,
-  .contact-form,
-  .form-group,
-  .form-select-wrapper,
-  .form-phone-wrapper {
-    width: 100%;
-  }
-
-  .contact-social-section {
-    padding: 40px 20px 30px;
-  }
-
-  .contact-social-buttons {
-    gap: 12px;
-  }
-
-  .social-media-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-
-  .social-icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  .footer-social-buttons {
-    gap: 12px;
-  }
-
-  .social-btn {
-    width: 150px;
-    height: 42px;
-    font-size: 14px;
-    gap: 8px;
-  }
-
-  .social-btn img,
-  .social-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .footer-content-modern {
-    flex-direction: column;
-    padding: 0 20px;
-    gap: 40px;
-  }
-
-  .footer-contacts {
-    gap: 24px;
-  }
-
-  .footer-nav-modern {
-    gap: 40px;
-    justify-content: center;
-    margin-top: 0;
-  }
-
-  .nav-column {
-    text-align: center;
-  }
-
-  .footer-copyright-modern {
-    padding-top: 24px;
-  }
-
-  /* Nav */
-  .nav-container {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 16px;
-  }
-
-  .mobile-logo {
-    display: flex;
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .burger-label {
-    display: flex;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .overlay-header {
-    display: flex;
-  }
-
-  .overlay-logo {
-    display: flex;
-  }
-
-  .overlay-close {
-    display: flex;
-  }
-
-  .overlay-links {
-    gap: 40px;
-  }
-
-  .overlay-links a {
-    font-family: var(--font-family);
-    font-size: 16px;
-    font-weight: 500;
-    color: #DCDCDC;
-  }
-
-  /* Social Sidebar */
-  .social-sidebar {
-    top: 83%;
-    bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-
-  .social-sidebar a svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-/* --- 480px --- */
-@media (max-width: 480px) {
-  .contact-hero {
-    height: 320px;
-  }
-
-  .contact-hero-title {
-    font-size: 48px;
-    letter-spacing: 12px;
-    -webkit-text-stroke: 0.5px #b3b3b3;
-  }
-
-  .contact-main {
-    padding: 50px 20px 30px;
-  }
-
-  .contact-container,
-  .contact-content-wrapper,
-  .contact-form,
-  .form-group,
-  .form-select-wrapper,
-  .form-phone-wrapper {
-    width: 100%;
-  }
-
-  .contact-section-title {
-    font-size: 28px;
-    margin-bottom: 24px;
-  }
-
-  .contact-content-wrapper {
-    gap: 40px;
-  }
-
-  .contact-info-heading {
-    font-size: 20px;
-  }
-
-  .contact-info-subheading {
-    font-size: 16px;
-  }
-
-  .contact-info-text {
-    font-size: 14px;
-  }
-
-  .form-label {
-    font-size: 14px;
-  }
-
-  .form-input,
-  .form-select,
-  .form-textarea {
-    font-size: 13px;
-    padding: 12px 14px;
-  }
-
-  .form-phone-input {
-    padding-left: 46px;
-  }
-
-  .form-submit-btn {
-    padding: 10px 36px;
-    font-size: 14px;
-  }
-
-  .contact-social-buttons {
-    gap: 8px;
-  }
-
-  .social-media-btn {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
-
-  .social-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  .footer-social-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-    justify-items: center;
-    align-items: center;
-  }
-
-  .social-btn {
-    width: 100%;
-    min-width: 0;
-    height: 36px;
-    max-width: 220px;
-    padding: 0;
-    font-size: 12px;
-    border-radius: 10px;
-    gap: 6px;
-    justify-content: center;
-  }
-
-  .social-btn img,
-  .social-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .social-btn span {
-    font-size: 11px;
-  }
-
-  .footer-content-modern {
-    padding: 0 20px;
-    gap: 32px;
-  }
-
-  .footer-contacts {
-    gap: 20px;
-  }
-
-  .contact-block h4 {
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-
-  .contact-block a {
-    font-size: 12px;
-  }
-
-  .footer-nav-modern {
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-
-  .nav-column {
-    gap: 12px;
-  }
-
-  .nav-column a {
-    font-size: 12px;
-  }
-
-  .footer-copyright-modern {
-    font-size: 12px;
-    padding-top: 20px;
-  }
-
-  /* Social Sidebar */
-  .social-sidebar {
-    top: 70%;
-    bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-
-  .social-sidebar {
-    left: 8px;
-    padding: 4px;
-    gap: 8px;
-  }
-
-  .social-btn svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .social-btn {
-    color: #ffffff;
-  }
-}
-
-/* --- 393px --- */
-@media (max-width: 393px) {
-  .contact-main {
-    padding: 50px 16px 30px;
-  }
-
-  .contact-container,
-  .contact-content-wrapper,
-  .contact-form,
-  .form-group,
-  .form-select-wrapper,
-  .form-phone-wrapper {
-    width: 100%;
-  }
-
-  .contact-form {
-    max-width: none;
-  }
-}
-
-/* --- 360px --- */
-@media (max-width: 360px) {
-  .contact-hero {
-    height: 280px;
-  }
-
-  .contact-hero-title {
-    font-size: 36px;
-    letter-spacing: 8px;
-  }
-
-  .contact-section-title {
-    font-size: 24px;
-  }
-
-  .contact-info-heading {
-    font-size: 18px;
-  }
-
-  .social-media-btn {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-
-  .social-btn {
-    min-width: 0;
-    height: 30px;
-    padding: 0;
-    font-size: 11px;
-  }
-
-  /* Social Sidebar */
-  .social-sidebar {
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-
-  .social-sidebar {
-    left: 8px;
-    padding: 4px;
-    gap: 8px;
-  }
-}
-
-/* --- 320px --- */
-@media (max-width: 320px) {
-  .social-sidebar {
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-
-  .social-sidebar a {
-    width: 32px;
-    height: 32px;
-  }
-
-  .social-sidebar {
-    left: 8px;
-    padding: 4px;
-    gap: 8px;
-  }
-}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Mik.UZ</title>
+  <meta name="description" content=" Contact.Mik.UZ (MikUZ) — Ukrainian DJ and music producer. Trance, Progressive House, Melodic electronic music. Releases on Beatport, Spotify, Apple Music. Available for bookings worldwide.">
+  <meta name="keywords" content="Mik.UZ, MikUZ, mikuz, Mik UZ, DJ Mik UZ, trance DJ Ukraine, progressive house producer, melodic trance, Lviv DJ, Ukrainian DJ, Beatport trance, electronic music Ukraine, trance producer 2026">
+  
+  <!-- ===== Favicon ===== -->
+  <link rel="icon" type="image/x-icon" href="images/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="contact-styles.css">
+  <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+</head>
+<body class="contact-page">
+
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+
+  <!-- Хедер -->
+  <header class="navbar">
+    <div class="nav-container">
+      <nav class="nav-links">
+        <a href="index.html#video">Video</a>
+        <a href="index.html#music">Music</a>
+        <div class="logo">
+          <a href="index.html" class="logo-link">
+            <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="60" height="56">
+          </a>
+        </div>
+        <a href="index.html#about">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="mobile-logo">
+        <a href="index.html" class="logo-link">
+          <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="43" height="40">
+        </a>
+      </div>
+      <label for="nav-toggle" class="burger burger-label" aria-label="Open menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </header>
+
+  <div class="nav-overlay" role="dialog" aria-modal="true">
+    <div class="overlay-header">
+      <div class="overlay-logo">
+        <a href="index.html" class="logo-link">
+          <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="43" height="40">
+        </a>
+      </div>
+      <label for="nav-toggle" class="overlay-close" aria-label="Close menu">✕</label>
+    </div>
+    <div class="overlay-links">
+      <label for="nav-toggle"><a href="index.html#video">Video</a></label>
+      <label for="nav-toggle"><a href="index.html#music">Music</a></label>
+      <label for="nav-toggle"><a href="index.html#about">About</a></label>
+      <label for="nav-toggle"><a href="contact.html">Contact</a></label>
+    </div>
+  </div>
+
+  <!-- Social Sidebar -->
+  <aside class="social-sidebar" aria-label="Social media links">
+    
+    <a href="https://www.facebook.com/yuriy.mykhaylovych" title="Mik.UZ on Facebook" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      
+    </a>
+    <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" title="Mik.UZ on YouTube" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      
+    </a>
+    <a href="https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf" title="Mik.UZ on Spotify" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+        <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+      </svg>
+      
+    </a>
+    <a href="https://soundcloud.com/yuriymykhaylovych" title="Mik.UZ on SoundCloud" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+        <path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.051 0-.09.04-.099.098l-.157 1.324.157 1.284c.008.057.048.097.099.097.05 0 .09-.04.099-.097l.178-1.284-.178-1.324c-.009-.057-.05-.098-.1-.098m1.792-1.268c-.059 0-.108.049-.117.106l-.232 2.48.232 2.43c.009.057.058.105.117.105.058 0 .106-.048.116-.105l.255-2.43-.255-2.48c-.01-.057-.058-.106-.116-.106m.899-.551c-.059 0-.106.049-.116.106l-.213 3.03.213 2.957c.01.057.057.106.116.106.059 0 .108-.049.117-.106l.237-2.957-.237-3.03c-.009-.057-.058-.106-.117-.106m.891-.46c-.066 0-.115.05-.124.106l-.196 3.49.196 3.406c.009.057.058.106.124.106.066 0 .116-.049.124-.106l.22-3.406-.22-3.49c-.008-.057-.058-.106-.124-.106m.9.116c-.066 0-.116.049-.125.106l-.18 3.374.18 3.35c.009.057.059.106.125.106.066 0 .116-.049.124-.106l.199-3.35-.199-3.374c-.008-.057-.058-.106-.124-.106m.899.067c-.066 0-.115.049-.124.106l-.165 3.282.165 3.233c.009.056.058.105.124.105.067 0 .116-.049.125-.105l.184-3.233-.184-3.282c-.009-.057-.058-.106-.125-.106m.9-.035c-.067 0-.116.049-.125.106l-.149 3.24.149 3.178c.009.057.058.106.125.106.066 0 .116-.049.124-.106l.166-3.178-.166-3.24c-.008-.057-.058-.106-.124-.106m2.667-2.962c-.063 0-.114.05-.122.112l-.149 5.822.149 5.754c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.169-5.754-.169-5.822c-.008-.062-.058-.112-.121-.112m.899-.364c-.063 0-.114.05-.122.113l-.131 6.185.131 6.127c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.15-6.127-.15-6.185c-.008-.063-.058-.113-.121-.113m.899-.163c-.063 0-.114.05-.122.113l-.113 6.348.113 6.293c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.131-6.293-.131-6.348c-.008-.063-.058-.113-.121-.113m.899-.065c-.063 0-.114.05-.122.113l-.095 6.413.095 6.389c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-6.389-.113-6.413c-.008-.063-.058-.113-.121-.113m2.667-.299c-.063 0-.114.049-.122.113l-.071 6.712.071 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.09-7.041-.09-6.712c-.008-.064-.058-.113-.121-.113m.899-.054c-.063 0-.114.05-.122.113l-.054 6.766.054 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.013-.071-6.766c-.008-.063-.058-.113-.121-.113m.899-.039c-.063 0-.114.05-.122.113l-.036 6.805.036 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.043-.054-6.805c-.008-.063-.058-.113-.121-.113m.899-.025c-.063 0-.114.05-.122.113l-.018 6.83.018 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.056-.036-6.83c-.008-.063-.058-.113-.121-.113m.899-.011c-.063 0-.114.05-.122.113l-.001 6.841.001 7.066c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.018-7.066-.018-6.841c-.008-.063-.058-.113-.121-.113m2.667-.001c-.063 0-.114.05-.122.113l.017 6.84-.017 7.067c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.067-.036-6.84c-.008-.063-.058-.113-.121-.113m.899.011c-.063 0-.114.05-.122.113l.036 6.83-.036 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.056-.054-6.83c-.008-.063-.058-.113-.121-.113m.899.025c-.063 0-.114.05-.122.113l.054 6.805-.054 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.043-.071-6.805c-.008-.063-.058-.113-.121-.113m.899.039c-.063 0-.114.05-.122.113l.071 6.766-.071 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.09-7.013-.09-6.766c-.008-.063-.058-.113-.121-.113m.899.054c-.063 0-.114.049-.122.113l.09 6.712-.09 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-7.041-.113-6.712c-.008-.064-.058-.113-.121-.113"/>
+      </svg>
+    </a>
+    <a href="https://music.apple.com/ru/artist/mik-uz/688055656" title="Mik.UZ on Apple Music" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
+        <path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208A4.93 4.93 0 00.09 4.829c-.01.16-.013.32-.013.48v13.382c0 .16.003.32.013.48.058 1.132.38 2.167 1.01 3.07.633.91 1.474 1.52 2.508 1.872.577.2 1.178.298 1.787.327.293.013.587.02.88.02h13.233c.293 0 .587-.007.88-.02.61-.03 1.21-.127 1.787-.327 1.034-.353 1.875-.963 2.508-1.872.63-.903.952-1.938 1.01-3.07.01-.16.013-.32.013-.48V5.31c0-.16-.003-.32-.013-.48zm-8.56 10.23c0 .522-.14 1.003-.456 1.413-.428.558-.998.832-1.698.846-.58.012-1.073-.195-1.486-.57-.427-.387-.638-.877-.641-1.45-.003-.583.2-1.07.603-1.466.4-.393.888-.61 1.448-.65.375-.026.727.046 1.062.196.043.02.084.04.126.06V8.79l-5.078.97V16.1c0 .52-.148.996-.465 1.405-.425.548-.99.816-1.682.83-.58.013-1.073-.195-1.488-.567-.43-.387-.642-.877-.645-1.453-.003-.583.2-1.07.6-1.466.4-.393.89-.61 1.45-.65.374-.026.726.047 1.06.198.044.02.085.04.127.06v-8.95l7.16-1.368v7.215z"/>
+      </svg>
+    </a>
+  </aside>
+
+
+  <!-- CONTACT HERO SECTION -->
+  <section class="contact-hero">
+    <div class="contact-hero-graphic">
+      <img src="images/Web_Site_Mik_Uz_Contact_2.png" alt="Contact Hero">
+    </div>
+    <div class="contact-hero-overlay"></div>
+    <div class="contact-title-canvas">
+      <canvas id="contactCanvas"></canvas>
+    </div>
+  </section>
+
+  <!-- CONTACT MAIN SECTION -->
+  <main class="contact-main">
+    <div class="contact-container">
+      
+      <h2 class="contact-section-title">Get in touch</h2>
+
+      <div class="contact-content-wrapper">
+        
+        <!-- LEFT SIDE: CONTACT INFORMATION -->
+        <div class="contact-info-wrapper">
+          
+          <!-- Management -->
+          <div class="contact-info-block">
+            <h3 class="contact-info-heading">Management</h3>
+            <p class="contact-info-text">
+              Yurii<br>
+              Sadova.29<br>
+              Lviv<br>
+              Ukraine<br>
+              T: +38(097)147-21-51<br>
+              yuriimykhailovychy@gmail.com
+            </p>
+          </div>
+
+          <!-- Press & PR -->
+          <div class="contact-info-block">
+            <h3 class="contact-info-heading">Press & PR</h3>
+            <p class="contact-info-subheading">All enquiries, contact</p>
+            <p class="contact-info-text">uandwtrancelviv@gmail.com</p>
+          </div>
+
+        </div>
+
+        <!-- RIGHT SIDE: CONTACT FORM -->
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgernokl" method="POST">
+          
+          <!-- Role Dropdown -->
+          <div class="form-group">
+            <label for="role" class="form-label">I am a</label>
+            <div class="form-select-wrapper">
+              <select id="role" name="role" class="form-select form-select-native" required>
+                <option value="">Select an option</option>
+                <option value="booking-agent">Booking Agent</option>
+                <option value="promoter">Promoter</option>
+                <option value="fan">Fan</option>
+                <option value="media">Media</option>
+                <option value="other">Other</option>
+              </select>
+              <button type="button" class="custom-select-trigger" id="roleTrigger" aria-haspopup="listbox" aria-expanded="false">
+                <span class="custom-select-value">Select an option</span>
+              </button>
+              <img src="icons/dropdown-arrow.svg" alt="" class="dropdown-icon" aria-hidden="true">
+              <div class="custom-select-menu" id="roleMenu" role="listbox" aria-labelledby="roleTrigger">
+                <button type="button" class="custom-select-option is-placeholder is-selected" data-value="" role="option" aria-selected="true">Select an option</button>
+                <button type="button" class="custom-select-option" data-value="booking-agent" role="option" aria-selected="false">Booking Agent</button>
+                <button type="button" class="custom-select-option" data-value="promoter" role="option" aria-selected="false">Promoter</button>
+                <button type="button" class="custom-select-option" data-value="fan" role="option" aria-selected="false">Fan</button>
+                <button type="button" class="custom-select-option" data-value="media" role="option" aria-selected="false">Media</button>
+                <button type="button" class="custom-select-option" data-value="other" role="option" aria-selected="false">Other</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone" class="form-label">Phone</label>
+            <div class="form-phone-wrapper">
+              <img
+                src="https://flagcdn.com/w40/ua.png"
+                alt="Ukraine flag"
+                class="phone-flag"
+                id="phoneFlag"
+                width="22"
+                height="16"
+              >
+              <input type="tel" id="phone" name="phone" class="form-input form-phone-input" placeholder="+380975692579" inputmode="tel" autocomplete="tel">
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" name="message" class="form-textarea" placeholder="Your message here..."></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="form-submit-btn">Send</button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+
+ <!-- ===== FOOTER ===== -->
+  <footer class="footer-modern" aria-label="Footer">
+    <div class="footer-social-buttons">
+      <a href="https://www.instagram.com/mikuz.dj/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/></svg>
+        <span>Instagram</span>
+      </a>
+      <a href="https://www.facebook.com/yuriy.mykhaylovych" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on Facebook">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on YouTube">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
+        <span>YouTube</span>
+      </a>
+      <a href="https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on Spotify">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        <span>Spotify</span>
+      </a>
+      <a href="https://soundcloud.com/yuriymykhaylovych" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on SoundCloud">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c0-.057-.045-.1-.09-.1m-.899.828c-.051 0-.09.04-.099.098l-.157 1.324.157 1.284c.008.057.048.097.099.097.05 0 .09-.04.099-.097l.178-1.284-.178-1.324c-.009-.057-.05-.098-.1-.098m1.792-1.268c-.059 0-.108.049-.117.106l-.232 2.48.232 2.43c.009.057.058.105.117.105.058 0 .106-.048.116-.105l.255-2.43-.255-2.48c-.01-.057-.058-.106-.116-.106m.899-.551c-.059 0-.106.049-.116.106l-.213 3.03.213 2.957c.01.057.057.106.116.106.059 0 .108-.049.117-.106l.237-2.957-.237-3.03c-.009-.057-.058-.106-.117-.106m.891-.46c-.066 0-.115.05-.124.106l-.196 3.49.196 3.406c.009.057.058.106.124.106.066 0 .116-.049.124-.106l.22-3.406-.22-3.49c-.008-.057-.058-.106-.124-.106m.9.116c-.066 0-.116.049-.125.106l-.18 3.374.18 3.35c.009.057.059.106.125.106.066 0 .116-.049.124-.106l.199-3.35-.199-3.374c-.008-.057-.058-.106-.124-.106m.899.067c-.066 0-.115.049-.124.106l-.165 3.282.165 3.233c.009.056.058.105.124.105.067 0 .116-.049.125-.105l.184-3.233-.184-3.282c-.009-.057-.058-.106-.125-.106m.9-.035c-.067 0-.116.049-.125.106l-.149 3.24.149 3.178c.009.057.058.106.125.106.066 0 .116-.049.124-.106l.166-3.178-.166-3.24c-.008-.057-.058-.106-.124-.106m2.667-2.962c-.063 0-.114.05-.122.112l-.149 5.822.149 5.754c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.169-5.754-.169-5.822c-.008-.062-.058-.112-.121-.112m.899-.364c-.063 0-.114.05-.122.113l-.131 6.185.131 6.127c.008.063.059.112.122.112.063 0 .113-.049.121-.112l.15-6.127-.15-6.185c-.008-.063-.058-.113-.121-.113m.899-.163c-.063 0-.114.05-.122.113l-.113 6.348.113 6.293c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.131-6.293-.131-6.348c-.008-.063-.058-.113-.121-.113m.899-.065c-.063 0-.114.05-.122.113l-.095 6.413.095 6.389c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-6.389-.113-6.413c-.008-.063-.058-.113-.121-.113m2.667-.299c-.063 0-.114.049-.122.113l-.071 6.712.071 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.09-7.041-.09-6.712c-.008-.064-.058-.113-.121-.113m.899-.054c-.063 0-.114.05-.122.113l-.054 6.766.054 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.013-.071-6.766c-.008-.063-.058-.113-.121-.113m.899-.039c-.063 0-.114.05-.122.113l-.036 6.805.036 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.043-.054-6.805c-.008-.063-.058-.113-.121-.113m.899-.025c-.063 0-.114.05-.122.113l-.018 6.83.018 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.056-.036-6.83c-.008-.063-.058-.113-.121-.113m.899-.011c-.063 0-.114.05-.122.113l-.001 6.841.001 7.066c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.018-7.066-.018-6.841c-.008-.063-.058-.113-.121-.113m2.667-.001c-.063 0-.114.05-.122.113l.017 6.84-.017 7.067c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.036-7.067-.036-6.84c-.008-.063-.058-.113-.121-.113m.899.011c-.063 0-.114.05-.122.113l.036 6.83-.036 7.056c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.054-7.056-.054-6.83c-.008-.063-.058-.113-.121-.113m.899.025c-.063 0-.114.05-.122.113l.054 6.805-.054 7.043c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.071-7.043-.071-6.805c-.008-.063-.058-.113-.121-.113m.899.039c-.063 0-.114.05-.122.113l.071 6.766-.071 7.013c.008.064.059.113.122.113.063 0 .113-.049.121-.113l.09-7.013-.09-6.766c-.008-.063-.058-.113-.121-.113m.899.054c-.063 0-.114.049-.122.113l.09 6.712-.09 7.041c.008.063.059.113.122.113.063 0 .113-.05.121-.113l.113-7.041-.113-6.712c-.008-.064-.058-.113-.121-.113" fill="currentColor"/></svg>
+        <span>SoundCloud</span>
+      </a>
+      <a href="https://music.apple.com/ru/artist/mik-uz/688055656" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on Apple Music">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026C4.786.07 4.043.15 3.34.428 2.004.958 1.04 1.88.475 3.208A4.93 4.93 0 00.09 4.829c-.01.16-.013.32-.013.48v13.382c0 .16.003.32.013.48.058 1.132.38 2.167 1.01 3.07.633.91 1.474 1.52 2.508 1.872.577.2 1.178.298 1.787.327.293.013.587.02.88.02h13.233c.293 0 .587-.007.88-.02.61-.03 1.21-.127 1.787-.327 1.034-.353 1.875-.963 2.508-1.872.63-.903.952-1.938 1.01-3.07.01-.16.013-.32.013-.48V5.31c0-.16-.003-.32-.013-.48zm-8.56 10.23c0 .522-.14 1.003-.456 1.413-.428.558-.998.832-1.698.846-.58.012-1.073-.195-1.486-.57-.427-.387-.638-.877-.641-1.45-.003-.583.2-1.07.603-1.466.4-.393.888-.61 1.448-.65.375-.026.727.046 1.062.196.043.02.084.04.126.06V8.79l-5.078.97V16.1c0 .52-.148.996-.465 1.405-.425.548-.99.816-1.682.83-.58.013-1.073-.195-1.488-.567-.43-.387-.642-.877-.645-1.453-.003-.583.2-1.07.6-1.466.4-.393.89-.61 1.45-.65.374-.026.726.047 1.06.198.044.02.085.04.127.06v-8.95l7.16-1.368v7.215z" fill="currentColor"/></svg>
+        <span>Apple Music</span>
+      </a>
+    </div>
+
+    <div class="footer-content-modern">
+      <div class="footer-contacts">
+        <div class="contact-block">
+          <h4>Bookings</h4>
+          <a href="mailto:yuriimykhailovychy@gmail.com">yuriimykhailovychy@gmail.com</a>
+        </div>
+        <div class="contact-block">
+          <h4>Demos</h4>
+          <a href="mailto:demo_mik.uz.dj@gmail.com">demo_mik.uz.dj@gmail.com</a>
+        </div>
+        <div class="contact-block">
+          <h4>General Manager</h4>
+          <a href="mailto:uandw@gmail.com">uandwtrancelviv@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-nav-modern">
+        <div class="nav-column">
+          <a href="#about">About</a>
+          <a href="#music">Music</a>
+        </div>
+        <div class="nav-column">
+          <a href="contact.html">Contact</a>
+          <a href="#service">Service</a>
+        </div>
+      </div>
+    </div>
+ <!-- Copyright -->
+    <div class="footer-copyright-modern">
+      © 2026 Mik.UZ All rights reserved.
+    </div>
+  </footer>
+ <!-- End footer -->
+ 
+
+  
+
+  <!-- SCRIPTS -->
+  <script src="script.js"></script>
+  <script src="contact-script.js"></script>
+
+</body>
+</html>
