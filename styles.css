@@ -203,31 +203,46 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   display: inline-block;
   padding: 4px 0;
-}
+    transition: color 0.3s ease, background 0.3s ease;
+  }
 
-.overlay-links a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: #DCDCDC;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
+  .overlay-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      #521EFC 0%,
+      #A740FD 35%,
+      #FD62FE 65%,
+      #521EFC 100%
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
 
-.overlay-links a:hover::after {
-  transform: scaleX(1);
-}
+  .overlay-links a:hover,
+  .overlay-links a:focus-visible,
+  .overlay-links a:active {
+    background: linear-gradient(
+      90deg,
+      #521EFC 0%,
+      #A740FD 35%,
+      #FD62FE 65%,
+      #521EFC 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
+  .overlay-links a:hover::after,
+  .overlay-links a:focus-visible::after,
+  .overlay-links a:active::after {
   padding-top: 125px;
   min-height: 100vh;
 }
