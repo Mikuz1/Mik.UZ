@@ -1165,8 +1165,9 @@
   }
 }
 
-/* Активний текст Contact в хедері */
-.nav-links a[href="contact.html"] {
+/* Активний текст Contact в хедері та адаптивному меню */
+.nav-links a[href="contact.html"],
+.overlay-links a[href="contact.html"] {
   background: linear-gradient(
     90deg,
     #521EFC 0%,
