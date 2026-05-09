@@ -162,6 +162,7 @@
 /* Select Dropdown */
 .form-select-wrapper {
   position: relative;
+  z-index: 1;
 }
 
 .form-select-native {
@@ -190,7 +191,7 @@
   outline: none;
   transition: all 0.3s ease;
   background-image: none;
-} 
+}
 
 .custom-select-trigger {
   width: 100%;
@@ -267,14 +268,12 @@
   outline: none;
 }
 
-/* Hover state - dark gray background */
 .form-select:hover {
   background-color: #303030;
   color: #ffffff;
   border-color: #303030;
 }
 
-/* Focus/Active state - black background when dropdown is opened */
 .form-select:focus,
 .form-select:active {
   background-color: #000000;
@@ -282,7 +281,6 @@
   border-color: #6d6d6d;
 }
 
-/* Option styling - black background with white text for readability */
 .form-select option {
   background-color: #000000;
   color: #ffffff;
@@ -291,7 +289,6 @@
   font-size: 14px;
 }
 
-/* Option hover/selected state */
 .form-select option:hover,
 .form-select option:checked {
   background-color: #333333;
@@ -313,13 +310,11 @@
   transition: all 0.3s ease;
 }
 
-/* Icon hover state - when select is hovered (dark gray background) */
 .form-select:hover + .dropdown-icon {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
   opacity: 1;
 }
 
-/* Icon when dropdown is focused/opened - white icon on black background */
 .form-select:focus + .dropdown-icon,
 .form-select:active + .dropdown-icon {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
@@ -327,7 +322,6 @@
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* Wrapper hover state */
 .form-select-wrapper:hover .dropdown-icon {
   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
   opacity: 1;
@@ -339,18 +333,10 @@
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* Additional styling for better UX */
 .form-select-wrapper:focus-within {
   position: relative;
 }
 
-/* Ensure proper stacking context */
-.form-select-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* Fix for webkit browsers */
 .form-select::-webkit-calendar-picker-indicator {
   display: none;
 }
@@ -359,12 +345,6 @@
 .form-select::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
-}
-
-/* Additional border styling on focus */
-.form-select:focus,
-.form-select:active {
-  border-color: #6d6d6d;
 }
 
 /* Text Inputs */
@@ -443,7 +423,7 @@
   border-color: #6d6d6d;
 }
 
-/* Keep autofilled fields transparent with white text */
+/* Autofill fix */
 .form-input:-webkit-autofill,
 .form-input:-webkit-autofill:hover,
 .form-input:-webkit-autofill:focus,
@@ -500,7 +480,53 @@
   text-align: center;
 }
 
-/* Social Media Section */
+/* ==========================================================================
+   SOCIAL SIDEBAR
+   ========================================================================== */
+
+.social-sidebar {
+  position: fixed;
+  left: 16px;
+  top: auto;
+  bottom: max(20px, calc((100vh - 100%) / 2));
+  transform: none;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+}
+
+.social-sidebar a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(240, 240, 240, 0.55);
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.social-sidebar a:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+}
+
+.social-sidebar a svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   SOCIAL MEDIA SECTION
+   ========================================================================== */
+
 .contact-social-section {
   background-color: #000000;
   padding: 80px 80px 60px;
@@ -545,11 +571,10 @@
   filter: brightness(0) invert(1);
 }
 
-/* ========================================================================== 
-   FOOTER MODERN - Social Buttons Styles (з index.html)
+/* ==========================================================================
+   FOOTER MODERN
    ========================================================================== */
 
-/* Соціальні кнопки */
 .footer-social-buttons {
   display: flex;
   justify-content: center;
@@ -611,7 +636,7 @@
   height: 20px;
   flex-shrink: 0;
   transition: transform 0.3s ease;
-  filter: brightness(0);
+  filter: brightness(0) invert(1);
 }
 
 .social-btn svg {
@@ -706,10 +731,26 @@
   margin-top: 60px;
 }
 
+/* Active Contact link in nav */
+.nav-links a[href="contact.html"],
+.overlay-links a[href="contact.html"] {
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ====================================================================
    RESPONSIVE DESIGN
    ==================================================================== */
 
+/* --- 1200px --- */
 @media (max-width: 1200px) {
   .contact-hero {
     height: 600px;
@@ -741,6 +782,7 @@
   }
 }
 
+/* --- 1024px --- */
 @media (max-width: 1024px) {
   .contact-hero {
     height: 500px;
@@ -795,8 +837,19 @@
   .footer-copyright-modern {
     padding: 32px 40px;
   }
+
 }
 
+/* SVG іконки в social-btn — завжди білі */
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+  color: #ffffff;
+}
+
+/* --- 768px --- */
 @media (max-width: 768px) {
   .contact-hero {
     height: 400px;
@@ -893,8 +946,75 @@
   .footer-copyright-modern {
     padding-top: 24px;
   }
+
+  /* Nav */
+  .nav-container {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 16px;
+  }
+
+  .mobile-logo {
+    display: flex;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .burger-label {
+    display: flex;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .overlay-header {
+    display: flex;
+  }
+
+  .overlay-logo {
+    display: flex;
+  }
+
+  .overlay-close {
+    display: flex;
+  }
+
+  .overlay-links {
+    gap: 40px;
+  }
+
+  .overlay-links a {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    color: #DCDCDC;
+  }
+
+  /* Social Sidebar */
+  .social-sidebar {
+    top: 83%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
+  }
+
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-sidebar a svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
+/* --- 480px --- */
 @media (max-width: 480px) {
   .contact-hero {
     height: 320px;
@@ -951,6 +1071,10 @@
     padding: 12px 14px;
   }
 
+  .form-phone-input {
+    padding-left: 46px;
+  }
+
   .form-submit-btn {
     padding: 10px 36px;
     font-size: 14px;
@@ -970,6 +1094,15 @@
     height: 16px;
   }
 
+  .footer-social-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+  }
+
   .social-btn {
     width: 100%;
     min-width: 0;
@@ -980,15 +1113,6 @@
     border-radius: 10px;
     gap: 6px;
     justify-content: center;
-  }
-
-  .footer-social-buttons {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-    width: 100%;
-    justify-items: center;
-    align-items: center;
   }
 
   .social-btn img,
@@ -1036,8 +1160,57 @@
     font-size: 12px;
     padding-top: 20px;
   }
+
+  /* Social Sidebar */
+  .social-sidebar {
+    top: 70%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
+  }
+
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-sidebar {
+    left: 8px;
+    padding: 4px;
+    gap: 8px;
+  }
+
+  .social-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .social-btn {
+    color: #ffffff;
+  }
 }
 
+/* --- 393px --- */
+@media (max-width: 393px) {
+  .contact-main {
+    padding: 50px 16px 30px;
+  }
+
+  .contact-container,
+  .contact-content-wrapper,
+  .contact-form,
+  .form-group,
+  .form-select-wrapper,
+  .form-phone-wrapper {
+    width: 100%;
+  }
+
+  .contact-form {
+    max-width: none;
+  }
+}
+
+/* --- 360px --- */
 @media (max-width: 360px) {
   .contact-hero {
     height: 280px;
@@ -1067,115 +1240,44 @@
     padding: 0;
     font-size: 11px;
   }
-}
 
-@media (max-width: 393px) {
-  .contact-main {
-    padding: 50px 16px 30px;
-  }
-
-  .contact-container,
-  .contact-content-wrapper,
-  .contact-form,
-  .form-group,
-  .form-select-wrapper,
-  .form-phone-wrapper {
-    width: 100%;
-  }
-
-  .contact-form {
-    max-width: none;
-  }
-}
-
-@media (max-width: 1024px) {
+  /* Social Sidebar */
   .social-sidebar {
-    display: flex;
-    left: 12px;
-    padding: 8px;
-    gap: 16px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    left: 16px;
   }
 
   .social-sidebar a {
-    width: 20px;
-    height: 20px;
+    width: 32px;
+    height: 32px;
   }
 
-  .social-sidebar a svg {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-@media (max-width: 480px) {
   .social-sidebar {
     left: 8px;
-    padding: 8px;
-    gap: 16px;
+    padding: 4px;
+    gap: 8px;
   }
 }
 
-/* Fix nav-container padding on mobile */
-@media (max-width: 768px) {
-  .nav-container {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 16px;
-  }
-
-  .mobile-logo {
-    display: flex;
-    position: absolute;
+/* --- 320px --- */
+@media (max-width: 320px) {
+  .social-sidebar {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
     left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
   }
 
-  .burger-label {
-    display: flex;
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+  .social-sidebar a {
+    width: 32px;
+    height: 32px;
   }
 
-  .overlay-header {
-    display: flex;
+  .social-sidebar {
+    left: 8px;
+    padding: 4px;
+    gap: 8px;
   }
-
-  .overlay-logo {
-    display: flex;
-  }
-
-  .overlay-close {
-    display: flex;
-  }
-
-  .overlay-links {
-    gap: 40px;
-  }
-
-  .overlay-links a {
-    font-family: var(--font-family);
-    font-size: 16px;
-    font-weight: 500;
-    color: #DCDCDC;
-  }
-}
-
-/* Активний текст Contact в хедері та адаптивному меню */
-.nav-links a[href="contact.html"],
-.overlay-links a[href="contact.html"] {
-  background: linear-gradient(
-    90deg,
-    #521EFC 0%,
-    #A740FD 35%,
-    #FD62FE 65%,
-    #521EFC 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
