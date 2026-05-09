@@ -212,65 +212,170 @@
 })();
 // ========== END CONTACT CANVAS TITLE ==========
 
-// Contact Form Handling
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize EmailJS if available
-  if (window.emailjs) {
-    emailjs.init('YOUR_PUBLIC_KEY');
+
+// ========== CONTACT FORM — FORMSPREE ==========
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ---------- FORM SUBMIT via Formspree fetch ----------
+  const FORMSPREE_URL = 'https://formspree.io/f/mgernokl';
+
+  const contactForm   = document.getElementById('contactForm');
+  const formMessage   = document.getElementById('formMessage');
+  const submitBtn     = contactForm ? contactForm.querySelector('.form-submit-btn') : null;
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const name    = (document.getElementById('name')    || {}).value || '';
+      const email   = (document.getElementById('email')   || {}).value || '';
+      const phone   = (document.getElementById('phone')   || {}).value || '';
+      const role    = (document.getElementById('role')    || {}).value || '';
+      const message = (document.getElementById('message') || {}).value || '';
+
+      // --- Validation ---
+      if (!name.trim() || !email.trim()) {
+        showMessage('Будь ласка, заповніть усі обов\'язкові поля.', 'error');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.trim())) {
+        showMessage('Будь ласка, введіть правильну електронну адресу.', 'error');
+        return;
+      }
+
+      if (!message.trim()) {
+        showMessage('Будь ласка, введіть ваше повідомлення.', 'error');
+        return;
+      }
+
+      // --- UI: loading state ---
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+      showMessage('', '');
+
+      // --- Send via Formspree ---
+      try {
+        const response = await fetch(FORMSPREE_URL, {
+          method:  'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role, name, email, phone, message })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showMessage('✓ Повідомлення успішно відправлено!', 'success');
+          contactForm.reset();
+          syncRoleUI('');   // скидаємо кастомний дропдаун
+        } else {
+          const errText = data.errors
+            ? data.errors.map(err => err.message).join(', ')
+            : 'Не вдалося відправити. Спробуйте ще раз.';
+          showMessage(errText, 'error');
+        }
+      } catch (err) {
+        showMessage('Помилка мережі. Перевірте підключення та спробуйте знову.', 'error');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send';
+        }
+      }
+    });
   }
 
-  const contactForm = document.getElementById('contactForm');
-  const formMessage = document.getElementById('formMessage');
-  const roleSelect = document.getElementById('role');
+  // ---------- Animated success toast ----------
+  function createToast() {
+    const existing = document.getElementById('formSuccessToast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'formSuccessToast';
+    toast.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="toast-checkmark">
+        <circle cx="11" cy="11" r="10" stroke="#4ade80" stroke-width="2"/>
+        <polyline points="6,11 9.5,14.5 16,8" stroke="#4ade80" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Message sent successfully!</span>
+    `;
+
+    Object.assign(toast.style, {
+      display:        'inline-flex',
+      alignItems:     'center',
+      gap:            '10px',
+      marginTop:      '18px',
+      padding:        '12px 22px',
+      borderRadius:   '10px',
+      background:     'rgba(74, 222, 128, 0.10)',
+      border:         '1px solid rgba(74, 222, 128, 0.35)',
+      color:          '#4ade80',
+      fontFamily:     'Inter, sans-serif',
+      fontSize:       '15px',
+      fontWeight:     '500',
+      letterSpacing:  '0.02em',
+      opacity:        '0',
+      transform:      'translateY(10px)',
+      transition:     'opacity 0.4s ease, transform 0.4s ease',
+      pointerEvents:  'none',
+    });
+
+    if (formMessage) {
+      formMessage.textContent = '';
+      formMessage.after(toast);
+    } else {
+      contactForm.after(toast);
+    }
+
+    // Animate in
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        toast.style.opacity   = '1';
+        toast.style.transform = 'translateY(0)';
+      });
+    });
+
+    // Animate out after 4s
+    setTimeout(() => {
+      toast.style.opacity   = '0';
+      toast.style.transform = 'translateY(-8px)';
+      setTimeout(() => toast.remove(), 450);
+    }, 4000);
+  }
+
+  function showMessage(text, type) {
+    if (type === 'success') {
+      createToast();
+      return;
+    }
+    if (!formMessage) return;
+    formMessage.textContent = text;
+    formMessage.style.color = type === 'error' ? '#ff5555' : '';
+    if (type === 'error') {
+      formMessage.style.opacity   = '1';
+      formMessage.style.transform = 'none';
+    }
+  }
+
+
+  // ---------- Custom Role Select ----------
+  const roleSelect  = document.getElementById('role');
   const roleTrigger = document.getElementById('roleTrigger');
-  const roleMenu = document.getElementById('roleMenu');
-  const roleValue = roleTrigger ? roleTrigger.querySelector('.custom-select-value') : null;
-  
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form values
-      const formData = {
-        role: document.getElementById('role').value,
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        message: document.getElementById('message').value
-      };
-      
-      // Simple validation
-      if (!formData.name || !formData.email) {
-        formMessage.textContent = 'Будь ласка, заповніть усі обов\'язкові поля.';
-        formMessage.style.color = 'red';
-        return;
-      }
-      
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        formMessage.textContent = 'Будь ласка, введіть правильну електронну адресу.';
-        formMessage.style.color = 'red';
-        return;
-      }
-      
-      // Send email using EmailJS if available
-      if (window.emailjs) {
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData)
-          .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            formMessage.textContent = 'Успішно відправлено!';
-            formMessage.style.color = 'yellow';
-            contactForm.reset();
-          }, function(error) {
-            console.log('FAILED...', error);
-            formMessage.textContent = 'Не вдалося відправити. Спробуйте ще раз.';
-            formMessage.style.color = 'red';
-          });
-      } else {
-        formMessage.textContent = 'Сервіс форми не підключено.';
-        formMessage.style.color = 'red';
-      }
+  const roleMenu    = document.getElementById('roleMenu');
+  const roleValue   = roleTrigger ? roleTrigger.querySelector('.custom-select-value') : null;
+
+  function syncRoleUI(selectedValue) {
+    if (!roleMenu || !roleValue) return;
+    const roleOptions = Array.from(roleMenu.querySelectorAll('.custom-select-option'));
+    const selected = roleOptions.find(o => o.dataset.value === selectedValue) || roleOptions[0];
+    roleValue.textContent = selected ? selected.textContent : '';
+    roleOptions.forEach(o => {
+      const isSel = o === selected;
+      o.classList.toggle('is-selected', isSel);
+      o.setAttribute('aria-selected', isSel ? 'true' : 'false');
     });
   }
 
@@ -278,258 +383,180 @@ document.addEventListener('DOMContentLoaded', function() {
     const roleOptions = Array.from(roleMenu.querySelectorAll('.custom-select-option'));
     const roleWrapper = roleMenu.parentElement;
 
-    const syncRoleUI = (selectedValue) => {
-      const selectedOption = roleOptions.find(option => option.dataset.value === selectedValue) || roleOptions[0];
-      roleValue.textContent = selectedOption.textContent;
+    const openMenu  = () => { roleWrapper.classList.add('is-open');    roleTrigger.setAttribute('aria-expanded', 'true');  };
+    const closeMenu = () => { roleWrapper.classList.remove('is-open'); roleTrigger.setAttribute('aria-expanded', 'false'); };
 
-      roleOptions.forEach(option => {
-        const isSelected = option === selectedOption;
-        option.classList.toggle('is-selected', isSelected);
-        option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
-      });
-    };
-
-    const openRoleMenu = () => {
-      roleWrapper.classList.add('is-open');
-      roleTrigger.setAttribute('aria-expanded', 'true');
-    };
-
-    const closeRoleMenu = () => {
-      roleWrapper.classList.remove('is-open');
-      roleTrigger.setAttribute('aria-expanded', 'false');
-    };
-
-    roleTrigger.addEventListener('click', function () {
-      if (roleWrapper.classList.contains('is-open')) {
-        closeRoleMenu();
-      } else {
-        openRoleMenu();
-      }
-    });
+    roleTrigger.addEventListener('click', () =>
+      roleWrapper.classList.contains('is-open') ? closeMenu() : openMenu()
+    );
 
     roleOptions.forEach(option => {
-      option.addEventListener('click', function () {
+      option.addEventListener('click', () => {
         roleSelect.value = option.dataset.value;
         syncRoleUI(roleSelect.value);
-        closeRoleMenu();
+        closeMenu();
       });
     });
 
-    document.addEventListener('click', function (event) {
-      if (!roleWrapper.contains(event.target)) {
-        closeRoleMenu();
-      }
-    });
+    document.addEventListener('click', e => { if (!roleWrapper.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeRoleMenu();
-      }
-    });
-
-    contactForm.addEventListener('reset', function () {
-      window.setTimeout(function () {
-        syncRoleUI(roleSelect.value);
-        closeRoleMenu();
-      }, 0);
+    contactForm && contactForm.addEventListener('reset', () => {
+      setTimeout(() => { syncRoleUI(roleSelect.value); closeMenu(); }, 0);
     });
 
     syncRoleUI(roleSelect.value);
   }
-  
-  // Form field animations on focus
-  const formInputs = document.querySelectorAll('.form-input, .form-select, .form-textarea');
-  
-  formInputs.forEach(input => {
-    input.addEventListener('focus', function() {
-      this.parentElement.classList.add('focused');
-    });
-    
-    input.addEventListener('blur', function() {
-      this.parentElement.classList.remove('focused');
-    });
+
+
+  // ---------- Focus animations ----------
+  document.querySelectorAll('.form-input, .form-select, .form-textarea').forEach(input => {
+    input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
+    input.addEventListener('blur',  () => input.parentElement.classList.remove('focused'));
   });
-  
-  // Phone number formatting (optional)
+
+
+  // ---------- Phone flag detection ----------
   const phoneInput = document.getElementById('phone');
-  const phoneFlag = document.getElementById('phoneFlag');
+  const phoneFlag  = document.getElementById('phoneFlag');
 
   const dialCodeMap = [
     { code: '380', iso: 'ua', name: 'Ukraine' },
-    { code: '1', iso: 'us', name: 'United States / Canada' },
-    { code: '44', iso: 'gb', name: 'United Kingdom' },
-    { code: '33', iso: 'fr', name: 'France' },
-    { code: '49', iso: 'de', name: 'Germany' },
-    { code: '39', iso: 'it', name: 'Italy' },
-    { code: '34', iso: 'es', name: 'Spain' },
-    { code: '48', iso: 'pl', name: 'Poland' },
-    { code: '31', iso: 'nl', name: 'Netherlands' },
-    { code: '32', iso: 'be', name: 'Belgium' },
-    { code: '41', iso: 'ch', name: 'Switzerland' },
-    { code: '43', iso: 'at', name: 'Austria' },
-    { code: '45', iso: 'dk', name: 'Denmark' },
-    { code: '46', iso: 'se', name: 'Sweden' },
-    { code: '47', iso: 'no', name: 'Norway' },
     { code: '358', iso: 'fi', name: 'Finland' },
     { code: '420', iso: 'cz', name: 'Czech Republic' },
     { code: '421', iso: 'sk', name: 'Slovakia' },
-    { code: '36', iso: 'hu', name: 'Hungary' },
-    { code: '40', iso: 'ro', name: 'Romania' },
     { code: '373', iso: 'md', name: 'Moldova' },
-    { code: '7', iso: 'kz', name: 'Kazakhstan / Russia region' },
-    { code: '90', iso: 'tr', name: 'Turkey' },
-    { code: '30', iso: 'gr', name: 'Greece' },
     { code: '351', iso: 'pt', name: 'Portugal' },
     { code: '353', iso: 'ie', name: 'Ireland' },
-    { code: '61', iso: 'au', name: 'Australia' },
-    { code: '64', iso: 'nz', name: 'New Zealand' },
-    { code: '81', iso: 'jp', name: 'Japan' },
-    { code: '82', iso: 'kr', name: 'South Korea' },
-    { code: '86', iso: 'cn', name: 'China' },
-    { code: '91', iso: 'in', name: 'India' },
-    { code: '65', iso: 'sg', name: 'Singapore' },
-    { code: '66', iso: 'th', name: 'Thailand' },
-    { code: '84', iso: 'vn', name: 'Vietnam' },
-    { code: '52', iso: 'mx', name: 'Mexico' },
-    { code: '55', iso: 'br', name: 'Brazil' },
-    { code: '54', iso: 'ar', name: 'Argentina' },
-    { code: '56', iso: 'cl', name: 'Chile' },
-    { code: '57', iso: 'co', name: 'Colombia' },
-    { code: '20', iso: 'eg', name: 'Egypt' },
-    { code: '27', iso: 'za', name: 'South Africa' },
     { code: '971', iso: 'ae', name: 'United Arab Emirates' },
     { code: '972', iso: 'il', name: 'Israel' },
-    { code: '966', iso: 'sa', name: 'Saudi Arabia' }
+    { code: '966', iso: 'sa', name: 'Saudi Arabia' },
+    { code: '1',  iso: 'us', name: 'United States / Canada' },
+    { code: '7',  iso: 'kz', name: 'Kazakhstan' },
+    { code: '20', iso: 'eg', name: 'Egypt' },
+    { code: '27', iso: 'za', name: 'South Africa' },
+    { code: '30', iso: 'gr', name: 'Greece' },
+    { code: '31', iso: 'nl', name: 'Netherlands' },
+    { code: '32', iso: 'be', name: 'Belgium' },
+    { code: '33', iso: 'fr', name: 'France' },
+    { code: '34', iso: 'es', name: 'Spain' },
+    { code: '36', iso: 'hu', name: 'Hungary' },
+    { code: '39', iso: 'it', name: 'Italy' },
+    { code: '40', iso: 'ro', name: 'Romania' },
+    { code: '41', iso: 'ch', name: 'Switzerland' },
+    { code: '43', iso: 'at', name: 'Austria' },
+    { code: '44', iso: 'gb', name: 'United Kingdom' },
+    { code: '45', iso: 'dk', name: 'Denmark' },
+    { code: '46', iso: 'se', name: 'Sweden' },
+    { code: '47', iso: 'no', name: 'Norway' },
+    { code: '48', iso: 'pl', name: 'Poland' },
+    { code: '49', iso: 'de', name: 'Germany' },
+    { code: '52', iso: 'mx', name: 'Mexico' },
+    { code: '54', iso: 'ar', name: 'Argentina' },
+    { code: '55', iso: 'br', name: 'Brazil' },
+    { code: '56', iso: 'cl', name: 'Chile' },
+    { code: '57', iso: 'co', name: 'Colombia' },
+    { code: '61', iso: 'au', name: 'Australia' },
+    { code: '64', iso: 'nz', name: 'New Zealand' },
+    { code: '65', iso: 'sg', name: 'Singapore' },
+    { code: '66', iso: 'th', name: 'Thailand' },
+    { code: '81', iso: 'jp', name: 'Japan' },
+    { code: '82', iso: 'kr', name: 'South Korea' },
+    { code: '84', iso: 'vn', name: 'Vietnam' },
+    { code: '86', iso: 'cn', name: 'China' },
+    { code: '90', iso: 'tr', name: 'Turkey' },
+    { code: '91', iso: 'in', name: 'India' },
   ].sort((a, b) => b.code.length - a.code.length);
 
-  function getFlagImageSrc(isoCode) {
-    return `https://flagcdn.com/w40/${isoCode}.png`;
+  function detectCountry(val) {
+    const digits = val.replace(/\D/g, '');
+    if (!digits) return { code: '380', iso: 'ua', name: 'Ukraine' };
+    return dialCodeMap.find(e => digits.startsWith(e.code)) || { code: '380', iso: 'ua', name: 'Ukraine' };
   }
 
-  function detectCountryByDialCode(phoneValue) {
-    const digits = phoneValue.replace(/\D/g, '');
-    if (!digits) {
-      return { code: '380', iso: 'ua', name: 'Ukraine' };
-    }
-
-    for (const entry of dialCodeMap) {
-      if (digits.startsWith(entry.code)) {
-        return entry;
-      }
-    }
-
-    return { code: '380', iso: 'ua', name: 'Ukraine' };
-  }
-
-  function updatePhoneFlag(value) {
+  function updatePhoneFlag(val) {
     if (!phoneFlag) return;
-    const country = detectCountryByDialCode(value);
-    phoneFlag.src = getFlagImageSrc(country.iso);
-    phoneFlag.alt = `${country.name} flag`;
-    phoneFlag.title = country.name;
+    const c = detectCountry(val);
+    phoneFlag.src   = `https://flagcdn.com/w40/${c.iso}.png`;
+    phoneFlag.alt   = `${c.name} flag`;
+    phoneFlag.title = c.name;
   }
 
   if (phoneInput) {
-    updatePhoneFlag(phoneInput.value || phoneInput.placeholder || '+380');
+    updatePhoneFlag(phoneInput.value || '+380');
 
-    phoneInput.addEventListener('input', function(e) {
-      const hasPlus = e.target.value.trim().startsWith('+') || e.target.value.trim().startsWith('00');
+    phoneInput.addEventListener('input', function (e) {
+      const startsPlus = e.target.value.trim().startsWith('+') || e.target.value.trim().startsWith('00');
       let digits = e.target.value.replace(/\D/g, '');
-
-      if (!digits) {
-        e.target.value = '';
-        updatePhoneFlag('');
-        return;
-      }
-
-      if (e.target.value.trim().startsWith('00')) {
-        digits = digits.slice(2);
-      }
-
-      e.target.value = (hasPlus ? '+' : '+') + digits.slice(0, 15);
+      if (e.target.value.trim().startsWith('00')) digits = digits.slice(2);
+      if (!digits) { e.target.value = ''; updatePhoneFlag(''); return; }
+      e.target.value = '+' + digits.slice(0, 15);
       updatePhoneFlag(e.target.value);
     });
   }
 
-  // Social media buttons functionality
-  const socialButtons = document.querySelectorAll('.social-btn');
-  const socialMediaButtons = document.querySelectorAll('.social-media-btn');
-  
-  // Map for social links from index.html
+
+  // ---------- Social media links ----------
   const socialLinks = {
-    'Instagram': 'https://www.instagram.com/mikuz.dj/',
-    'Facebook': 'https://www.facebook.com/yuriy.mykhaylovych',
-    'YouTube': 'https://www.youtube.com/@yuriimykhailovychdj/videos',
-    'Spotify': 'https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf',
+    'Instagram':  'https://www.instagram.com/mikuz.dj/',
+    'Facebook':   'https://www.facebook.com/yuriy.mykhaylovych',
+    'YouTube':    'https://www.youtube.com/@yuriimykhailovychdj/videos',
+    'Spotify':    'https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf',
     'SoundCloud': 'https://soundcloud.com/yuriymykhaylovych'
   };
-  
-  // Update contact page social buttons with proper links
-  socialMediaButtons.forEach(btn => {
-    const linkText = btn.textContent.trim();
-    const socialName = linkText.charAt(0).toUpperCase() + linkText.slice(1);
-    
-    if (socialLinks[socialName]) {
-      btn.href = socialLinks[socialName];
+
+  document.querySelectorAll('.social-media-btn').forEach(btn => {
+    const name = btn.textContent.trim();
+    const key  = name.charAt(0).toUpperCase() + name.slice(1);
+    if (socialLinks[key]) {
+      btn.href   = socialLinks[key];
       btn.target = '_blank';
-      btn.rel = 'noopener noreferrer';
+      btn.rel    = 'noopener noreferrer';
     }
   });
-});
 
-// Плавний скрол для навігації
+}); // end DOMContentLoaded
+// ========== END CONTACT FORM ==========
+
+
+// ========== SMOOTH SCROLL ==========
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
-    
-    if (href === '#' || href === '#more') {
-      e.preventDefault();
-      return;
-    }
-    
+    if (href === '#' || href === '#more') { e.preventDefault(); return; }
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
-      
-      const navbarHeight = document.querySelector('.navbar').offsetHeight;
-      const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-      
-      window.scrollTo({
-        top: targetPosition,
-        behavior: 'smooth'
-      });
+      const navbarHeight = document.querySelector('.navbar') ? document.querySelector('.navbar').offsetHeight : 0;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navbarHeight, behavior: 'smooth' });
     }
   });
 });
 
-// Бургер
+
+// ========== BURGER MENU ==========
 const burgerBtn = document.getElementById('burger');
-const navLinks = document.querySelector('.nav-links');
+const navLinks  = document.querySelector('.nav-links');
 
 if (burgerBtn && navLinks) {
   const setNavVisible = (visible) => {
     if (window.innerWidth <= 1200) {
       navLinks.style.display = visible ? 'flex' : 'none';
       if (visible) {
-        navLinks.style.flexDirection = 'column';
-        navLinks.style.gap = '24px';
-        navLinks.style.position = 'absolute';
-        navLinks.style.top = '70px';
-        navLinks.style.right = '20px';
-        navLinks.style.backgroundColor = '#111';
-        navLinks.style.padding = '20px';
-        navLinks.style.borderRadius = '8px';
-        navLinks.style.zIndex = '110';
+        Object.assign(navLinks.style, {
+          flexDirection:   'column',
+          gap:             '24px',
+          position:        'absolute',
+          top:             '70px',
+          right:           '20px',
+          backgroundColor: '#111',
+          padding:         '20px',
+          borderRadius:    '8px',
+          zIndex:          '110'
+        });
       } else {
-        navLinks.style.removeProperty('flex-direction');
-        navLinks.style.removeProperty('gap');
-        navLinks.style.removeProperty('position');
-        navLinks.style.removeProperty('top');
-        navLinks.style.removeProperty('right');
-        navLinks.style.removeProperty('background-color');
-        navLinks.style.removeProperty('padding');
-        navLinks.style.removeProperty('border-radius');
-        navLinks.style.removeProperty('z-index');
+        ['flexDirection','gap','position','top','right','backgroundColor','padding','borderRadius','zIndex']
+          .forEach(p => navLinks.style.removeProperty(p));
       }
     } else {
       navLinks.style.display = '';
@@ -550,3 +577,4 @@ if (burgerBtn && navLinks) {
 
   window.addEventListener('resize', () => setNavVisible(navLinks.classList.contains('active')));
 }
+// ========== END BURGER MENU ==========
