@@ -145,6 +145,8 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: flex-start;
   align-items: center;
   padding-top: 0px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
 }
 
 .overlay-header {
@@ -899,20 +901,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1;
     text-transform: uppercase;
     letter-spacing: 4px;
-    color: transparent;
-    -webkit-text-stroke: 0px;
-    text-shadow:
-      0 0 0 rgba(207, 211, 221, 0.6),
-      1px 0 0 rgba(207, 211, 221, 0.6),
-      -1px 0 0 rgba(207, 211, 221, 0.6),
-      0 1px 0 rgba(207, 211, 221, 0.6),
-      0 -1px 0 rgba(207, 211, 221, 0.6),
-      0 0 25px rgba(220, 235, 255, 0.35),
-      0 0 60px rgba(160, 200, 255, 0.12);
+    color: #e0e3eb;
+    opacity: 0.6;
     will-change: transform;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
-  }
+}
 
 .moving-text .marquee-segment {
   display: inline-block;
@@ -1381,6 +1375,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   #nav-toggle:checked ~ .nav-overlay {
     display: flex;
+    transform: translateX(0);
   }
   .overlay-header {
     display: flex;
