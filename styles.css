@@ -893,7 +893,7 @@ h1, h2, h3, h4, h5, h6 {
 .moving-text {
   display: inline-block;
   white-space: nowrap;
-  font-family: "Arial Black", Arial, sans-serif;
+  font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 900;
   font-size: 120px;
   line-height: 1;
