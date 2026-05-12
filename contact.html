@@ -1,39 +1,116 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact - Mik.UZ Sound Producer</title>
-  <meta name="description" content=" Contact.Mik.UZ (MikUZ) — Ukrainian DJ and music producer. Trance, Progressive House, Melodic electronic music. Releases on Beatport, Spotify, Apple Music. Available for bookings worldwide.">
+
+  <!-- ===== PRIMARY SEO ===== -->
+  <title>Mik.UZ — Trance &amp; Progressive House DJ Producer | Ukraine</title>
+  <meta name="description" content="Mik.UZ (MikUZ) — Ukrainian DJ and music producer. Trance, Progressive House, Melodic electronic music. Releases on Beatport, Spotify, Apple Music. Available for bookings worldwide.">
   <meta name="keywords" content="Mik.UZ, MikUZ, mikuz, Mik UZ, DJ Mik UZ, trance DJ Ukraine, progressive house producer, melodic trance, Lviv DJ, Ukrainian DJ, Beatport trance, electronic music Ukraine, trance producer 2026">
-  
+  <meta name="author" content="Mik.UZ">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://mikuz.netlify.app/">
+
+  <!-- ===== GOOGLE SITE VERIFICATION =====
+       Зайди на https://search.google.com/search-console
+       Додай сайт → обери "HTML tag" → встав свій код замість ТВІЙ_КОД_ТУТ
+  -->
+  <!-- <meta name="google-site-verification" content="ТВІЙ_КОД_ТУТ"> -->
+
+  <!-- ===== Open Graph (Facebook, Telegram, WhatsApp) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mikuz.netlify.app/">
+  <meta property="og:title" content="Mik.UZ — Trance &amp; Progressive House DJ Producer">
+  <meta property="og:description" content="Ukrainian DJ and producer. Trance, Progressive House, Melodic electronic music. Available on Spotify, Beatport, Apple Music. Bookings open.">
+  <meta property="og:image" content="https://mikuz.netlify.app/images/yura.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Mik.UZ">
+
+  <!-- ===== Twitter / X Card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mik.UZ — Trance &amp; Progressive House DJ Producer">
+  <meta name="twitter:description" content="Ukrainian DJ and producer. Trance, Progressive House, Melodic electronic music.">
+  <meta name="twitter:image" content="https://mikuz.netlify.app/images/yura.webp">
+
+  <!-- ===== Schema.org JSON-LD (структуровані дані для Google) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Mik.UZ",
+    "alternateName": ["MikUZ", "mikuz", "Mik UZ", "DJ Mik UZ"],
+    "url": "https://mikuz.netlify.app/",
+    "description": "Ukrainian DJ and music producer specializing in Trance, Progressive House and Melodic electronic music. 15 years of experience. Releases on Beatport, Spotify, Apple Music.",
+    "genre": ["Trance", "Progressive House", "Melodic House", "Uplifting Trance"],
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Lviv, Ukraine"
+    },
+    "member": {
+      "@type": "Person",
+      "name": "Yurii Mykhailovych",
+      "alternateName": "Mik.UZ"
+    },
+    "sameAs": [
+      "https://www.instagram.com/mikuz.dj/",
+      "https://www.facebook.com/yuriy.mykhaylovych",
+      "https://www.youtube.com/@MiK.UZ.Trance.ProgressiveMusic",
+      "https://open.spotify.com/artist/2YS0wxCssIFQbIT9cFxlLf",
+      "https://soundcloud.com/yuriymykhaylovych"
+    ]
+  }
+  </script>
+
   <!-- ===== Favicon ===== -->
   <link rel="icon" type="image/x-icon" href="images/favicon.svg">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="contact-styles.css?v=2">
-  <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
-</head>
-<body class="contact-page">
 
+  <!-- ===== Fonts ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&display=swap" rel="stylesheet">
+
+  <!-- ===== Styles ===== -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- SEO hidden h1 fix -->
+  <style>
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0,0,0,0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+  </style>
+</head>
+<body>
   <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
 
   <!-- Хедер -->
   <header class="navbar">
     <div class="nav-container">
-      <nav class="nav-links">
-        <a href="index.html#video">Video</a>
-        <a href="index.html#music">Music</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#video">Video</a>
+        <a href="#music">Music</a>
         <div class="logo">
           <a href="index.html" class="logo-link">
-            <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="60" height="56">
+            <img src="images/M_DJ_2.svg" alt="Mik.UZ DJ Logo" width="60" height="56">
           </a>
         </div>
-        <a href="index.html#about">About</a>
+        <a href="#about">About</a>
         <a href="contact.html">Contact</a>
       </nav>
       <div class="mobile-logo">
         <a href="index.html" class="logo-link">
-          <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="43" height="40">
+          <img src="images/M_DJ_2.svg" alt="Mik.UZ DJ Logo" width="43" height="40">
         </a>
       </div>
       <label for="nav-toggle" class="burger burger-label" aria-label="Open menu">
@@ -44,19 +121,19 @@
     </div>
   </header>
 
-  <div class="nav-overlay" role="dialog" aria-modal="true">
+  <div class="nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
     <div class="overlay-header">
       <div class="overlay-logo">
         <a href="index.html" class="logo-link">
-          <img src="images/M_DJ_2.svg" alt="MIK.UZ Logo" width="43" height="40">
+          <img src="images/M_DJ_2.svg" alt="Mik.UZ DJ Logo" width="43" height="40">
         </a>
       </div>
       <label for="nav-toggle" class="overlay-close" aria-label="Close menu">✕</label>
     </div>
     <div class="overlay-links">
-      <label for="nav-toggle"><a href="index.html#video">Video</a></label>
-      <label for="nav-toggle"><a href="index.html#music">Music</a></label>
-      <label for="nav-toggle"><a href="index.html#about">About</a></label>
+      <label for="nav-toggle"><a href="#video">Video</a></label>
+      <label for="nav-toggle"><a href="#music">Music</a></label>
+      <label for="nav-toggle"><a href="#about">About</a></label>
       <label for="nav-toggle"><a href="contact.html">Contact</a></label>
     </div>
   </div>
@@ -70,7 +147,7 @@
       </svg>
       
     </a>
-    <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" title="Mik.UZ on YouTube" target="_blank" rel="noopener noreferrer">
+    <a href="https://www.youtube.com/@MiK.UZ.Trance.ProgressiveMusic" title="Mik.UZ on YouTube" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
       </svg>
@@ -94,127 +171,207 @@
     </a>
   </aside>
 
+  <!-- ===== HERO =====
+       H1 прихований для SEO — видимий заголовок через canvas,
+       але текст для пошуковиків залишається в DOM
+  -->
+  <main>
+    <section class="hero" aria-label="Mik.UZ — DJ and Producer">
+      <!-- Прихований H1 для SEO (не видимий, але індексується Google) -->
+      <h1 class="sr-only">Mik.UZ — Ukrainian Trance and Progressive House DJ Producer from Lviv</h1>
 
-  <!-- CONTACT HERO SECTION -->
-  <section class="contact-hero">
-    <div class="contact-hero-graphic">
-      <img src="images/Web_Site_Mik_Uz_Contact_2.webp" alt="Contact Hero">
-    </div>
-    <div class="contact-hero-overlay"></div>
-    <div class="contact-title-canvas">
-      <canvas id="contactCanvas"></canvas>
-    </div>
-  </section>
-
-  <!-- CONTACT MAIN SECTION -->
-  <main class="contact-main">
-    <div class="contact-container">
-      
-      <h2 class="contact-section-title">Get in touch</h2>
-
-      <div class="contact-content-wrapper">
-        
-        <!-- LEFT SIDE: CONTACT INFORMATION -->
-        <div class="contact-info-wrapper">
-          
-          <!-- Management -->
-          <div class="contact-info-block">
-            <h3 class="contact-info-heading">Management</h3>
-            <p class="contact-info-text">
-              Yurii<br>
-              Sadova.29<br>
-              Lviv<br>
-              Ukraine<br>
-              T: +38(097)147-21-51<br>
-              yuriimykhailovychy@gmail.com
-            </p>
-          </div>
-
-          <!-- Press & PR -->
-          <div class="contact-info-block">
-            <h3 class="contact-info-heading">Press & PR</h3>
-            <p class="contact-info-subheading">All enquiries, contact</p>
-            <p class="contact-info-text">uandwtrancelviv@gmail.com</p>
-          </div>
-
+      <div class="eq-wrapper" id="wrapper">
+        <div class="eq-circle" id="circle">
+          <canvas id="eqCanvas"></canvas>
+          <span class="scan"></span>
+          <div class="glass-overlay"></div>
+          <button class="play-btn" id="playBtn" aria-label="Play Mik.UZ music">
+            <span class="play-scan"></span>
+            <span>▶ PLAY</span>
+          </button>
         </div>
-
-        <!-- RIGHT SIDE: CONTACT FORM -->
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/mgernokl" method="POST">
-          
-          <!-- Role Dropdown -->
-          <div class="form-group">
-            <label for="role" class="form-label">I am a</label>
-            <div class="form-select-wrapper">
-              <select id="role" name="role" class="form-select form-select-native" required>
-                <option value="">Select an option</option>
-                <option value="booking-agent">Booking Agent</option>
-                <option value="promoter">Promoter</option>
-                <option value="fan">Fan</option>
-                <option value="media">Media</option>
-                <option value="other">Other</option>
-              </select>
-              <button type="button" class="custom-select-trigger" id="roleTrigger" aria-haspopup="listbox" aria-expanded="false">
-                <span class="custom-select-value">Select an option</span>
-              </button>
-              <img src="icons/dropdown-arrow.svg" alt="" class="dropdown-icon" aria-hidden="true">
-              <div class="custom-select-menu" id="roleMenu" role="listbox" aria-labelledby="roleTrigger">
-                <button type="button" class="custom-select-option is-placeholder is-selected" data-value="" role="option" aria-selected="true">Select an option</button>
-                <button type="button" class="custom-select-option" data-value="booking-agent" role="option" aria-selected="false">Booking Agent</button>
-                <button type="button" class="custom-select-option" data-value="promoter" role="option" aria-selected="false">Promoter</button>
-                <button type="button" class="custom-select-option" data-value="fan" role="option" aria-selected="false">Fan</button>
-                <button type="button" class="custom-select-option" data-value="media" role="option" aria-selected="false">Media</button>
-                <button type="button" class="custom-select-option" data-value="other" role="option" aria-selected="false">Other</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Name -->
-          <div class="form-group">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
-          </div>
-
-          <!-- Email -->
-          <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="your@email.com" required>
-          </div>
-
-          <!-- Phone -->
-          <div class="form-group">
-            <label for="phone" class="form-label">Phone</label>
-            <div class="form-phone-wrapper">
-              <img
-                src="https://flagcdn.com/w40/ua.png"
-                alt="Ukraine flag"
-                class="phone-flag"
-                id="phoneFlag"
-                width="22"
-                height="16"
-              >
-              <input type="tel" id="phone" name="phone" class="form-input form-phone-input" placeholder="+380975692579" inputmode="tel" autocomplete="tel">
-            </div>
-          </div>
-
-          <!-- Message -->
-          <div class="form-group">
-            <label for="message" class="form-label">Your Message</label>
-            <textarea id="message" name="message" class="form-textarea" placeholder="Your message here..."></textarea>
-          </div>
-
-          <!-- Submit Button -->
-          <button type="submit" class="form-submit-btn">Send</button>
-
-        </form>
-
       </div>
 
-    </div>
+      <div class="hero-title-canvas" aria-label="Mik.UZ">
+        <canvas id="mikuzCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- SCROLL ANIMATION SECTION -->
+    <section class="scroll-reveal-section" aria-label="About Mik.UZ">
+      <div class="scroll-container">
+        <div class="big-logo" id="bigLogo" aria-hidden="true">
+          <svg width="100%" height="100%" viewBox="0 0 54 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect y="0.0467529" width="10.5724" height="47.9532" fill="#DCDCDC"/>
+            <rect x="43.4224" y="0.0467529" width="10.5724" height="47.9532" fill="#DCDCDC"/>
+            <path d="M1.30621 5.19736L10.5107 0.0775125L32.9085 40.3445L23.5987 45.3569L1.30621 5.19736Z" fill="#DCDCDC"/>
+            <rect x="43.3462" width="10.5724" height="45.9939" transform="rotate(29.08 43.3462 0)" fill="#DCDCDC"/>
+            <path d="M26.997 38.938L30.2065 45.357H23.6572L26.997 38.938Z" fill="#DCDCDC"/>
+          </svg>
+        </div>
+        <div class="about-reveal" id="aboutReveal">
+          <h2 class="reveal-title">ABOUT</h2>
+          <div class="reveal-content">
+            <p class="reveal-text">
+              MIK.UZ — Ukrainian trance/progressive house producer.
+              Beatport hits: "Emotions", "Thunder", "Shot Up".
+              Streaming: Available on Spotify, Apple Music &amp; Beatport.
+              New releases: Abora Recordings, Fuzion, MoreFun Records, (2026).
+            </p>
+            <a href="#about" class="reveal-btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIDEO ===== -->
+    <section class="youtube-section" id="video" aria-label="Mik.UZ Videos">
+      <h2 class="youtube-heading">Video</h2>
+
+      <!-- YouTube Facade — завантажує iframe тільки при кліку (швидше!) -->
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/exd2_Jay9vI"
+          title="Mik.UZ — Trance DJ Set"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/yjic_9YxiXk"
+          title="Mik.UZ — Progressive House Mix"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/Ou2RQN08Q40"
+          title="Mik.UZ — Emotions"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/NaEXbvgFqTo"
+          title="Mik.UZ — Thunder"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/v79YoqK_3n0"
+          title="Mik.UZ — Original Mix"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="youtube-player">
+        <iframe src="https://www.youtube.com/embed/uJcU7mXIXsM"
+          title="Mik.UZ — Live DJ Set Ukraine"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about-section" id="about" aria-label="About Mik.UZ">
+      <h2 class="section-heading">About</h2>
+      <div class="about-container">
+        <div class="about-image">
+          <img src="images/yura.webp"
+            alt="Mik.UZ — Ukrainian DJ and music producer from Lviv, Ukraine"
+            width="880" height="631" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3 class="about-title">Mik.UZ</h3>
+          <p class="about-description">
+            DJ and producer from Ukraine. 15 years in trance and progressive house music.<br>
+            Founder of MoreFun Records — Sub Label of Coffein Music Group. Key tracks:<br>
+            A.L.Y.S., Mik.UZ - "Together" (Abora Recordings / Narratology Recordings) <br>
+            Mik.UZ - "Mavka's Heart" (MoreFun Records)<br>
+            Mik.UZ - "From Before" (Fuzion Records)<br>
+            Mik.UZ - "Emotions" (West Drift Records)<br>
+            Mik.UZ - "Two To One" (Tronic B7 Records)<br>
+            Mik.UZ - "Trust" (Dirt, Lies & Audio Recordings)<br>
+            Mik.UZ - "Split" (MoreFun Records)<br>
+            Mik.UZ - "Energetic Girl (Streyk Remix)" (MoreFun Records)<br>
+            <span style="display:block;height:8px;"></span>
+            Co-producer of Loud Dynamics — electronic trance house collective with official Beatport profile and charting releases.<br>
+            Hosted KINGS OF TRANCE on international radio Trance Energy Radio. Weekly live broadcasts featuring DJ sets, promoting own releases and international artists.<br>
+            Resident at clubs Picasso (2009–2020), Split Club, ZUZU Club. Festival performances in Lviv (Aquarium Shklo, Olesky Castle).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MUSIC ===== -->
+    <section class="music-section" id="music" aria-label="Mik.UZ Music on Spotify">
+      <h2 class="music-heading">Music</h2>
+      <div class="music-player-block">
+        <div class="spotify-player">
+          <iframe style="border-radius:12px"
+            src="https://open.spotify.com/embed/artist/2YS0wxCssIFQbIT9cFxlLf?utm_source=generator"
+            width="100%" height="352" frameborder="0" allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Mik.UZ — Artist page on Spotify"></iframe>
+          <iframe style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/2mGwSCKmvI7sLflESW8Wzk?utm_source=generator"
+            width="100%" height="352" frameborder="0" allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Mik.UZ — Track on Spotify"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SOUNDCLOUD ===== -->
+    <section class="soundcloud-section" aria-label="Mik.UZ on SoundCloud">
+      <h2 class="soundcloud-heading">Sound Cloud</h2>
+      <div class="soundcloud-player-block">
+        <div class="soundcloud-player">
+          <h3>Mik.UZ - Even in the Silence (Original Mix)</h3>
+          <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" loading="lazy"
+            src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mik-uz-even-in-the&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            title="Mik.UZ - Even in the Silence on SoundCloud"></iframe>
+        </div>
+        <div class="soundcloud-player">
+          <h3>Mik.UZ - Thunder (Radio Edit)</h3>
+          <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" loading="lazy"
+            src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mikuz-thunder-edite&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            title="Mik.UZ - Thunder Radio Edit on SoundCloud"></iframe>
+        </div>
+        <div class="soundcloud-player">
+          <h3>MIK.UZ - Energetic Girl (Streyk Remix)</h3>
+          <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" loading="lazy"
+            src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mikuz-energetic-girl-streyk-remix&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            title="Mik.UZ - Energetic Girl Streyk Remix on SoundCloud"></iframe>
+        </div>
+        <div class="soundcloud-player">
+          <h3>Loud Dynamics - Coffee Time (Preview)</h3>
+          <iframe width="100%" height="352px" scrolling="no" frameborder="no" allow="autoplay" loading="lazy"
+            src="https://w.soundcloud.com/player/?url=https://soundcloud.com/more_fun_records/preview-loud-dynamics-coffee-time&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
+            title="Loud Dynamics - Coffee Time Preview on SoundCloud"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRODUCTION SERVICES ===== -->
+    <section class="service-section" id="service" aria-label="Music Production Services by Mik.UZ">
+      <h2 class="service-heading">Productions Services</h2>
+      <div class="service-hero">
+        <div class="service-overlay"></div>
+        <div class="animated-text-container">
+          <div class="animated-text-line first-line">
+            <span class="moving-text"> ORIGINAL TRACK PRODUCTION • GHOST PRODUCTION • SOUND DESIGN • MIXING & MASTERING • VOCAL PRODUCTION • ARRANGEMENT • LABEL RELEASES </span>
+          </div>
+          <div class="animated-text-line second-line">
+            <span class="moving-text"> UPLIFTING TRANCE • MELODIC TECHNO • PROGRESSIVE HOUSE • CINEMATIC SOUND • AI MUSIC DEVELOPMENT • CUSTOM DJ EDITS • LIVE PERFORMANCE </span>
+          </div>
+        </div>
+      </div>
+      <div class="service-tickets-section">
+        <a href="contact.html" class="tickets-btn">Contact me</a>
+      </div>
+    </section>
   </main>
 
-
- <!-- ===== FOOTER ===== -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer-modern" aria-label="Footer">
     <div class="footer-social-buttons">
       <a href="https://www.instagram.com/mikuz.dj/" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on Instagram">
@@ -225,7 +382,7 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>
         <span>Facebook</span>
       </a>
-      <a href="https://www.youtube.com/@yuriimykhailovychdj/videos" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on YouTube">
+      <a href="https://www.youtube.com/@MiK.UZ.Trance.ProgressiveMusic" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="Mik.UZ on YouTube">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/></svg>
         <span>YouTube</span>
       </a>
@@ -251,7 +408,7 @@
         </div>
         <div class="contact-block">
           <h4>Demos</h4>
-          <a href="mailto:demo_mik.uz.dj@gmail.com">demo_mik.uz.dj@gmail.com</a>
+          <a href="mailto:mik.uz.dj@gmail.com">mik.uz.dj@gmail.com</a>
         </div>
         <div class="contact-block">
           <h4>General Manager</h4>
@@ -269,19 +426,36 @@
         </div>
       </div>
     </div>
- <!-- Copyright -->
+
     <div class="footer-copyright-modern">
       © 2026 Mik.UZ All rights reserved.
     </div>
   </footer>
- <!-- End footer -->
- 
 
-  
+  <!-- Hidden SoundCloud widget for play button -->
+  <iframe id="sc-widget" scrolling="no" frameborder="no" allow="autoplay"
+    style="width:1px;height:1px;opacity:0;position:absolute;left:-9999px;top:-9999px;pointer-events:none;"
+    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yuriymykhaylovych/mik-uz-mavkas-heart-coming&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+    title="SoundCloud audio player">
+  </iframe>
 
-  <!-- SCRIPTS -->
+  <!-- ===== CSS для прихованого H1 (додай в styles.css якщо ще немає) =====
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+  -->
+
+  <script src="https://w.soundcloud.com/player/api.js"></script>
   <script src="script.js"></script>
-  <script src="contact-script.js"></script>
-
+  <script src="marquee.js"></script>
+  <script src="equalizer.js"></script>
 </body>
 </html>
