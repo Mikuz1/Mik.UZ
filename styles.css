@@ -890,7 +890,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
-.moving-text {
+  .moving-text {
     display: inline-block;
     white-space: nowrap;
     font-family: 'SF UI Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -902,11 +902,11 @@ h1, h2, h3, h4, h5, h6 {
     color: transparent;
     -webkit-text-stroke: 0px;
     text-shadow:
-      0 0 0 rgba(255, 255, 255, 0.6),
-      1px 0 0 rgba(255, 255, 255, 0.6),
-      -1px 0 0 rgba(255, 255, 255, 0.6),
-      0 1px 0 rgba(255, 255, 255, 0.6),
-      0 -1px 0 rgba(255, 255, 255, 0.6),
+      0 0 0 rgba(207, 211, 221, 0.6),
+      1px 0 0 rgba(207, 211, 221, 0.6),
+      -1px 0 0 rgba(207, 211, 221, 0.6),
+      0 1px 0 rgba(207, 211, 221, 0.6),
+      0 -1px 0 rgba(207, 211, 221, 0.6),
       0 0 25px rgba(220, 235, 255, 0.35),
       0 0 60px rgba(160, 200, 255, 0.12);
     will-change: transform;
