@@ -9,9 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
   let lastKnownScrollPosition = -1;
   const desktopRevealFadeStart = 1.10;
   const desktopRevealFadeEnd = 0.78;
-  const mobileRevealFadeStart = 1.28;
-  const mobileRevealFadeEnd = 0.96;
-  const mobileScrollSpeed = 1.6;
+  const mobileRevealFadeStart = 1.35;
+  const mobileRevealFadeEnd = 1.05;
+  const mobileScrollSpeed = 2.4;
+  const mobileScrollSectionHeight = '120vh';
 
   function isMobileScrollView() {
     return window.matchMedia('(max-width: 768px)').matches;
@@ -19,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateScrollAnimation(scrollPos) {
     const isMobile = isMobileScrollView();
+    scrollSection.style.minHeight = isMobile ? mobileScrollSectionHeight : '';
+
     const sectionRect = scrollSection.getBoundingClientRect();
     const sectionTop = sectionRect.top;
     const sectionHeight = scrollSection.offsetHeight;
