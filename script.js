@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const desktopRevealFadeEnd = 0.78;
   const mobileRevealFadeStart = 1.28;
   const mobileRevealFadeEnd = 0.96;
-  const mobileScrollSpeed = 1.3;
+  const mobileScrollSpeed = 1.6;
 
   function isMobileScrollView() {
     return window.matchMedia('(max-width: 768px)').matches;
