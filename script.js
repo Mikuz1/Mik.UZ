@@ -7,12 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const youtubeSection = document.querySelector('.youtube-section');
 
   let lastKnownScrollPosition = -1;
-  const desktopRevealFadeStart = 1.10;
-  const desktopRevealFadeEnd = 0.78;
-  const mobileRevealFadeStart = 1.35;
-  const mobileRevealFadeEnd = 1.05;
-  const mobileScrollSpeed = 2.4;
-  const mobileScrollSectionHeight = '120vh';
+  const revealFadeStart = 1.10;
+  const revealFadeEnd = 0.78;
+  const mobileScrollStartDelay = 0.45;
 
   function isMobileScrollView() {
     return window.matchMedia('(max-width: 768px)').matches;
@@ -20,8 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateScrollAnimation(scrollPos) {
     const isMobile = isMobileScrollView();
-    scrollSection.style.minHeight = isMobile ? mobileScrollSectionHeight : '';
-
     const sectionRect = scrollSection.getBoundingClientRect();
     const sectionTop = sectionRect.top;
     const sectionHeight = scrollSection.offsetHeight;
@@ -31,9 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const scrollEnd = -sectionHeight + windowHeight;
     const scrollDistance = scrollStart - scrollEnd;
     const currentScroll = scrollStart - sectionTop;
-    const scrollSpeed = isMobile ? mobileScrollSpeed : 1;
+    const delayedScroll = isMobile
+      ? currentScroll - windowHeight * mobileScrollStartDelay
+      : currentScroll;
 
-    let progress = (currentScroll / scrollDistance) * scrollSpeed;
+    let progress = delayedScroll / scrollDistance;
     progress = Math.max(0, Math.min(1, progress));
 
     if (progress <= 0.4) {
@@ -74,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (youtubeSection) {
       const youtubeRect = youtubeSection.getBoundingClientRect();
       const youtubeTop = youtubeRect.top;
-      const revealFadeStart = isMobile ? mobileRevealFadeStart : desktopRevealFadeStart;
-      const revealFadeEnd = isMobile ? mobileRevealFadeEnd : desktopRevealFadeEnd;
       const fadeStart = window.innerHeight * revealFadeStart;
       const fadeEnd = window.innerHeight * revealFadeEnd;
 
