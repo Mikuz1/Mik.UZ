@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const youtubeSection = document.querySelector('.youtube-section');
 
   let lastKnownScrollPosition = -1;
+  const revealFadeStart = 1.10;
+  const revealFadeEnd = 0.78;
 
   function updateScrollAnimation(scrollPos) {
     const sectionRect = scrollSection.getBoundingClientRect();
@@ -57,17 +59,22 @@ document.addEventListener('DOMContentLoaded', function () {
       aboutReveal.style.opacity = 0;
     }
 
-    const youtubeRect = youtubeSection.getBoundingClientRect();
-    const youtubeTop = youtubeRect.top;
-    const fadeZone = window.innerHeight * 1.5;
+    if (youtubeSection) {
+      const youtubeRect = youtubeSection.getBoundingClientRect();
+      const youtubeTop = youtubeRect.top;
+      const fadeStart = window.innerHeight * revealFadeStart;
+      const fadeEnd = window.innerHeight * revealFadeEnd;
 
-    if (youtubeTop < fadeZone && youtubeTop > 0 && progress > 0.7) {
-      const fadeProgress = youtubeTop / fadeZone;
-      aboutReveal.style.opacity = Math.pow(fadeProgress, 1.5);
-      aboutReveal.style.transform = `translate(-50%, -50%) scale(${0.3 + Math.pow(fadeProgress, 1.2) * 0.7})`;
-    } else if (youtubeTop <= 0 && progress > 0.7) {
-      aboutReveal.style.opacity = 0;
-      aboutReveal.style.transform = 'translate(-50%, -50%) scale(0.3)';
+      if (youtubeTop < fadeStart && youtubeTop > fadeEnd && progress > 0.7) {
+        const fadeProgress = (youtubeTop - fadeEnd) / (fadeStart - fadeEnd);
+        const easedFade = Math.pow(Math.max(0, Math.min(1, fadeProgress)), 1.5);
+        aboutReveal.style.opacity = easedFade;
+        aboutReveal.style.transform = `translate(-50%, -50%) scale(${0.3 + easedFade * 0.7})`;
+      } else if (youtubeTop <= fadeEnd && progress > 0.7) {
+        aboutReveal.classList.remove('visible');
+        aboutReveal.style.opacity = 0;
+        aboutReveal.style.transform = 'translate(-50%, -50%) scale(0.3)';
+      }
     }
 
     const aboutOpacity = parseFloat(aboutReveal.style.opacity || '0');
