@@ -9,14 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
   let lastKnownScrollPosition = -1;
   const revealFadeStart = 1.10;
   const revealFadeEnd = 0.78;
-  const mobileScrollStartDelay = 0.45;
-
-  function isMobileScrollView() {
-    return window.matchMedia('(max-width: 768px)').matches;
-  }
 
   function updateScrollAnimation(scrollPos) {
-    const isMobile = isMobileScrollView();
     const sectionRect = scrollSection.getBoundingClientRect();
     const sectionTop = sectionRect.top;
     const sectionHeight = scrollSection.offsetHeight;
@@ -26,11 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const scrollEnd = -sectionHeight + windowHeight;
     const scrollDistance = scrollStart - scrollEnd;
     const currentScroll = scrollStart - sectionTop;
-    const delayedScroll = isMobile
-      ? currentScroll - windowHeight * mobileScrollStartDelay
-      : currentScroll;
 
-    let progress = delayedScroll / scrollDistance;
+    let progress = currentScroll / scrollDistance;
     progress = Math.max(0, Math.min(1, progress));
 
     if (progress <= 0.4) {
