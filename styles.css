@@ -30,15 +30,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar {
   position: fixed;
-  top: 0;
+  top: 16px;
   left: 0;
   right: 0;
   width: 100%;
-  padding: 12px 80px;
+  padding: 0 80px;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: transparent;
 }
 
 .nav-container {
@@ -46,11 +44,26 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   align-items: center;
   position: relative;
+  width: min(100%, 1200px);
+  min-height: 68px;
+  margin: 0 auto;
+  padding: 2px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 34px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+    rgba(9, 7, 12, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 18px 45px rgba(0, 0, 0, 0.34),
+    0 0 38px rgba(82, 30, 252, 0.07);
+  backdrop-filter: blur(8px) saturate(135%);
+  -webkit-backdrop-filter: blur(24px) saturate(135%);
 }
 
 .nav-links {
   display: flex;
-  gap: 94px;
+  gap: clamp(54px, 5vw, 88px);
   align-items: center;
 }
 
@@ -93,6 +106,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  display: block;
+  width: 48px;
+  height: 48px;
 }
 
 .logo:hover svg {
@@ -337,7 +358,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .play-btn {
   position: absolute;
-  bottom: 8%;
+  bottom: 72px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -471,123 +492,79 @@ h1, h2, h3, h4, h5, h6 {
   height: 18px;
 }
 
-/* ==========================================================================
-   SCROLL REVEAL SECTION
+/* ========================================================================== 
+   SCROLL VIDEO FEATURE
    ========================================================================== */
 
-.scroll-reveal-section {
+.scroll-video-section {
   position: relative;
-  min-height: 200vh;
-  background-color: #000;
-  overflow: hidden;
+  height: 200vh;
+  background: #000;
 }
 
-.scroll-container {
-  position: relative;
+.scroll-video-stage {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
+  padding: clamp(12px, 2vw, 32px);
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.big-logo {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.2);
-  opacity: 0;
-  z-index: 5;
-  pointer-events: none;
-  background: rgba(220, 220, 220, 0.02);
-  border-radius: 50%;
-  padding: 60px;
-  border: 1px solid rgba(220, 220, 220, 0.06);
-  box-shadow:
-    0 4px 15px 0 rgba(220, 220, 220, 0.04),
-    inset 0 0 20px rgba(255, 255, 255, 0.015);
-  will-change: transform, opacity;
-}
-
-.big-logo.visible {
+.scroll-video-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #080808;
   opacity: 1;
+  contain: layout paint;
 }
 
-.big-logo svg {
-  width: 400px;
-  height: 400px;
-  filter:
-    drop-shadow(0 0 15px rgba(220, 220, 220, 0.15))
-    drop-shadow(0 0 30px rgba(220, 220, 220, 0.08));
+.scroll-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1.06);
+  backface-visibility: hidden;
 }
 
-.big-logo svg rect,
-.big-logo svg path {
-  fill: #DCDCDC;
-  filter: brightness(1.08);
-}
-
-.about-reveal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  opacity: 0;
-  z-index: 10;
-  max-width: 800px;
-  padding: 40px;
-  transition: opacity 0.15s linear;
+.scroll-video-shade {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
-  will-change: transform, opacity;
+  z-index: 2;
+  --video-dim: 0.5;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.25) 44%, rgba(0, 0, 0, 0.67) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.38) 0%, transparent 38%, rgba(0, 0, 0, 0.26) 100%),
+    rgba(0, 0, 0, var(--video-dim));
 }
 
-.about-reveal.visible {
-  opacity: 1;
-  pointer-events: auto;
+.scroll-video-curtain {
+  position: absolute;
+  inset: -2px;
+  z-index: 4;
+  background: #000;
+  transform: scaleX(1);
+  transform-origin: left center;
+  will-change: transform;
+  pointer-events: none;
+  backface-visibility: hidden;
 }
 
-.reveal-title {
-  font-weight: 600;
-  font-size: clamp(48px, 8vw, 72px);
-  line-height: 120%;
-  color: var(--primary);
-  margin-bottom: 40px;
-  letter-spacing: 0.05em;
-}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-video-frame {
+    clip-path: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 
-.reveal-content {
-  background: rgba(13, 13, 13, 0.92);
-  border-radius: 20px;
-  padding: 60px 40px;
-  border: 1px solid rgba(220, 220, 220, 0.08);
-}
-
-.reveal-text {
-  font-weight: 300;
-  font-size: clamp(16px, 2vw, 20px);
-  line-height: 150%;
-  color: #DCDCDC;
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.reveal-btn {
-  display: inline-block;
-  padding: 16px 48px;
-  background-color: #ffffff;
-  color: #000000;
-  font-weight: 600;
-  font-size: 18px;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-}
-
-.reveal-btn:hover {
-  background-color: #DCDCDC;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
+  .scroll-video-curtain {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -1246,10 +1223,6 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 480px;
     height: auto;
   }
-  .big-logo svg {
-    width: 300px;
-    height: 300px;
-  }
   .spotify-player {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -1280,12 +1253,38 @@ h1, h2, h3, h4, h5, h6 {
    ========================================================================== */
 
 @media (max-width: 1024px) {
+  .scroll-video-section {
+    height: auto;
+  }
+
+  .scroll-video-stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    padding: 16px 0;
+    overflow: visible;
+  }
+
+  .scroll-video-frame {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    transform: none !important;
+    opacity: 1 !important;
+    border-radius: 12px;
+    will-change: auto;
+  }
+
+  .scroll-video-curtain {
+    display: none;
+  }
+
   body {
     padding-left: 40px;
     padding-right: 40px;
   }
   .navbar {
-    padding: 12px 40px;
+    padding: 0 40px;
   }
   .hero-graphic img {
     width: 350px;
@@ -1348,10 +1347,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 60px 40px;
     margin-top: 40px;
   }
-  .big-logo svg {
-    width: 250px;
-    height: 250px;
-  }
   .footer-modern {
     padding: 60px 40px 40px;
     gap: 50px;
@@ -1374,8 +1369,9 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 20px;
   }
   .navbar {
-    padding: 0 0px;
-    height: 70px;
+    top: 10px;
+    padding: 0 12px;
+    height: 60px;
   }
   .nav-links {
     display: none;
@@ -1383,14 +1379,14 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-logo {
     display: flex;
     position: absolute;
-    left: 16px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
   .burger-label {
     display: flex;
     position: absolute;
-    right: 16px;
+    right: 20px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -1419,9 +1415,12 @@ h1, h2, h3, h4, h5, h6 {
   .nav-container {
     position: relative;
     height: 100%;
+    min-height: 60px;
+    width: 100%;
     display: flex;
     align-items: center;
-    padding-top: 16px;
+    padding: 0;
+    border-radius: 30px;
   }
 
   /* SOCIAL SIDEBAR — 768px (з першого коду) */
@@ -1525,31 +1524,7 @@ h1, h2, h3, h4, h5, h6 {
   .animated-text-line { margin-bottom: 60px; }
   .tickets-btn        { width: 300px; height: 50px; font-size: 14px; }
   .service-tickets-section {
-    padding: 40px 20px;
-  }
-  .reveal-content {
-    padding: 40px 20px;
-  }
-  .about-reveal {
-    width: calc(100% - 24px);
-    max-width: none;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 16px 16px;
-    border-radius: 18px;
-  }
-  .reveal-text {
-    max-width: 100%;
-    margin: 0 auto 32px;
-  }
-  .reveal-btn {
-    width: 100%;
-    padding: 14px 18px;
-    box-sizing: border-box;
-  }
-  .big-logo svg {
-    width: 200px;
-    height: 200px;
+    padding: 24px 24px;
   }
   .footer-modern {
     padding: 50px 20px 32px;
@@ -1764,10 +1739,6 @@ h1, h2, h3, h4, h5, h6 {
   .soundcloud-player iframe {
     height: 200px;
   }
-  .big-logo svg {
-    width: 150px;
-    height: 150px;
-  }
   .footer-modern {
     padding: 40px 20px 24px;
     gap: 32px;
@@ -1905,5 +1876,501 @@ h1, h2, h3, h4, h5, h6 {
   }
   .service-tickets-section {
     padding: 24px 10px;
+  }
+}
+
+/* ==========================================================================
+   MUSIC LOGO REVEAL
+   ========================================================================== */
+
+.music-section {
+  --music-progress: 0;
+  --music-heading-progress: 0;
+  --music-content-progress: 0;
+  --soundcloud-progress: 0;
+  --soundcloud-content-progress: 0;
+  position: relative;
+  width: 100vw;
+  margin: 136px 0 0 calc(50% - 50vw);
+  padding: 0;
+  background: #EEEEEE;
+  color: #000000;
+}
+
+.music-transition {
+  position: relative;
+  height: calc(100vh + 320px);
+  background: #000000;
+}
+
+.music-transition-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #000000;
+  isolation: isolate;
+}
+
+.music-morph-panel {
+  position: absolute;
+  inset: -1px;
+  z-index: 1;
+  background: #EEEEEE;
+  clip-path: polygon(
+    34% 77%, 34% 23%, 40% 23%, 50% 58%,
+    60% 23%, 66% 23%, 66% 77%, 60% 77%,
+    60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+  );
+  will-change: clip-path;
+}
+
+.music-transition-heading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  z-index: 2;
+  width: calc(100% - 40px);
+  margin: 0;
+  color: #000000;
+  font-family: var(--font-family);
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: center;
+  opacity: var(--music-heading-progress);
+  transform: translate(-50%, -50%) translateY(calc((1 - var(--music-heading-progress)) * 24px));
+  will-change: opacity, transform;
+}
+
+.music-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  min-height: 100vh;
+  margin-top: -50vh;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 80px clamp(20px, 6vw, 112px);
+  background: #EEEEEE;
+  box-shadow: 0 -2px 0 #EEEEEE;
+  color: #000000;
+  opacity: var(--music-content-progress, 0);
+  transform: translateY(calc((1 - var(--music-content-progress, 0)) * 48px));
+  will-change: opacity, transform;
+}
+
+.music-player-block {
+  width: 100%;
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.spotify-player {
+  gap: clamp(20px, 2.5vw, 44px);
+  align-items: start;
+}
+
+.spotify-player iframe {
+  display: block;
+  min-width: 0;
+  background: #121212;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.14);
+}
+
+.music-heading {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 0 64px;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
+  color: #000000;
+  font-family: var(--font-family);
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: center;
+}
+
+.soundcloud-reveal-stage {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: #EEEEEE;
+}
+
+.soundcloud-transition {
+  position: relative;
+  height: calc(100vh + 320px);
+  background: #EEEEEE;
+}
+
+.soundcloud-transition-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #EEEEEE;
+}
+
+.soundcloud-morph-panel {
+  --soundcloud-progress: 0;
+  --soundcloud-content-progress: 0;
+  position: absolute;
+  inset: -1px;
+  z-index: 2;
+  background: #000000;
+  clip-path: polygon(
+    34% 77%, 34% 23%, 40% 23%, 50% 58%,
+    60% 23%, 66% 23%, 66% 77%, 60% 77%,
+    60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+  );
+  will-change: clip-path;
+}
+
+.soundcloud-transition-heading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-size: 72px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: center;
+  opacity: var(--soundcloud-content-progress, 0);
+  transform: translate(-50%, -50%) translateY(calc((1 - var(--soundcloud-content-progress, 0)) * 32px));
+  white-space: nowrap;
+  will-change: opacity, transform;
+}
+
+.soundcloud-section {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+}
+
+.soundcloud-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  min-height: 100vh;
+  margin-top: -50vh;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 80px clamp(24px, 5vw, 80px);
+  background: #000000;
+  box-shadow: 0 -2px 0 #000000;
+  opacity: var(--soundcloud-content-progress, 0);
+  transform: translateY(calc((1 - var(--soundcloud-content-progress, 0)) * 48px));
+  will-change: opacity, transform;
+}
+
+.soundcloud-player-block {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.soundcloud-player {
+  min-width: 0;
+}
+
+.soundcloud-player iframe {
+  display: block;
+  max-width: 100%;
+}
+
+.soundcloud-heading {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 0 64px;
+  padding: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 120%;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .music-section {
+    margin-top: 80px;
+  }
+
+  .music-transition {
+    height: calc(100vh + 100px);
+  }
+
+  .music-morph-panel {
+    clip-path: polygon(
+      34% 77%, 34% 23%, 40% 23%, 50% 58%,
+      60% 23%, 66% 23%, 66% 77%, 60% 77%,
+      60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+    );
+  }
+
+  .music-content {
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+
+  .music-player-block {
+    width: 100%;
+  }
+
+  .music-heading {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 0 48px;
+    overflow: visible;
+    clip: auto;
+    white-space: nowrap;
+    color: #000000;
+    font-family: var(--font-family);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+  }
+
+  .soundcloud-heading {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 0 48px;
+    overflow: visible;
+    clip: auto;
+    white-space: nowrap;
+    color: #ffffff;
+    font-family: var(--font-family);
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 120%;
+    text-align: center;
+    padding: 0;
+  }
+
+  .music-transition-heading,
+  .soundcloud-transition-heading {
+    display: none;
+  }
+
+  .soundcloud-morph-panel {
+    clip-path: polygon(
+      34% 77%, 34% 23%, 40% 23%, 50% 58%,
+      60% 23%, 66% 23%, 66% 77%, 60% 77%,
+      60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+    );
+  }
+
+  .soundcloud-transition {
+    height: calc(100vh + 224px);
+  }
+
+  .soundcloud-content {
+    padding: 60px 20px 56px;
+  }
+
+  .soundcloud-player-block {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .music-morph-panel,
+  .soundcloud-morph-panel {
+    clip-path: polygon(
+      34% 77%, 34% 23%, 40% 23%, 50% 58%,
+      60% 23%, 66% 23%, 66% 77%, 60% 77%,
+      60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+    );
+  }
+
+}
+
+@media (max-width: 767px) {
+  .about-section {
+    padding: 20px 0 0;
+  }
+
+  .about-container {
+    padding: 18px 14px;
+    gap: 14px;
+  }
+
+  .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .about-title {
+    margin-bottom: 14px;
+  }
+
+  .about-description {
+    line-height: 132%;
+  }
+
+  .music-section {
+    margin-top: 8px;
+  }
+
+  .music-transition,
+  .soundcloud-transition {
+    height: calc(56vh + 72px);
+  }
+
+  .music-transition-sticky,
+  .soundcloud-transition-sticky {
+    height: 56vh;
+  }
+
+  .music-morph-panel,
+  .soundcloud-morph-panel {
+    clip-path: polygon(
+      34% 77%, 34% 23%, 40% 23%, 50% 58%,
+      60% 23%, 66% 23%, 66% 77%, 60% 77%,
+      60% 48%, 53% 77%, 47% 77%, 40% 48%, 40% 77%
+    );
+  }
+
+  .music-content,
+  .soundcloud-content {
+    min-height: auto;
+    margin-top: -44vh;
+    padding: 24px 16px 40px;
+  }
+
+  .music-content,
+  .music-player-block,
+  .spotify-player {
+    background: #EEEEEE;
+  }
+
+  .spotify-player {
+    gap: 14px;
+  }
+
+  .spotify-player iframe[src*="/track/"] {
+    height: 152px;
+  }
+
+  .spotify-player iframe[src*="/artist/"] {
+    height: 352px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding-top: 16px;
+  }
+
+  .about-container {
+    padding: 16px 12px;
+    gap: 12px;
+  }
+
+  .music-section {
+    margin-top: 0;
+  }
+
+  .music-transition,
+  .soundcloud-transition {
+    height: calc(48vh + 56px);
+  }
+
+  .music-transition-sticky,
+  .soundcloud-transition-sticky {
+    height: 48vh;
+  }
+
+  .music-content,
+  .soundcloud-content {
+    margin-top: -40vh;
+    padding: 20px 16px 36px;
+  }
+
+  .spotify-player {
+    gap: 12px;
+  }
+
+  .spotify-player iframe[src*="/track/"] {
+    height: 152px;
+  }
+
+  .spotify-player iframe[src*="/artist/"] {
+    height: 300px;
+  }
+
+  .music-heading,
+  .soundcloud-heading {
+    width: auto;
+    margin: 0 0 24px;
+    padding: 0;
+    font-size: 32px;
+    line-height: 120%;
+    white-space: nowrap;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-transition {
+    height: 100vh;
+  }
+
+  .music-morph-panel {
+    clip-path: inset(0) !important;
+  }
+
+  .soundcloud-transition {
+    height: 100vh;
+  }
+
+  .soundcloud-morph-panel {
+    clip-path: inset(0) !important;
+  }
+
+  .music-content,
+  .soundcloud-content {
+    opacity: 1;
+    transform: none;
+  }
+
+  .music-transition-heading {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+
+  .soundcloud-transition-heading {
+    opacity: 1;
+    transform: translateX(-50%);
   }
 }
