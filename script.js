@@ -1,97 +1,101 @@
-// Scroll Animation
+// Scroll video animation
 document.addEventListener('DOMContentLoaded', function () {
-  if (!document.getElementById('bigLogo')) return;
-  const bigLogo = document.getElementById('bigLogo');
-  const aboutReveal = document.getElementById('aboutReveal');
-  const scrollSection = document.querySelector('.scroll-reveal-section');
-  const youtubeSection = document.querySelector('.youtube-section');
+  const scrollVideoSection = document.querySelector('.scroll-video-section');
+  const scrollVideoFrame = document.getElementById('scrollVideoFrame');
+  const scrollVideo = scrollVideoFrame?.querySelector('.scroll-video');
+  const scrollVideoShade = scrollVideoFrame?.querySelector('.scroll-video-shade');
+  const scrollVideoCurtain = scrollVideoFrame?.querySelector('.scroll-video-curtain');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const desktopScrollEffect = window.matchMedia('(min-width: 1025px)').matches;
 
-  let lastKnownScrollPosition = -1;
-  const revealFadeStart = 1.10;
-  const revealFadeEnd = 0.78;
+  if (scrollVideoSection && scrollVideo) {
+    let retryTimer;
+    let shouldBePlaying = false;
+    let refreshScrollVideo = () => {};
 
-  function updateScrollAnimation(scrollPos) {
-    const sectionRect = scrollSection.getBoundingClientRect();
-    const sectionTop = sectionRect.top;
-    const sectionHeight = scrollSection.offsetHeight;
-    const windowHeight = window.innerHeight;
-
-    const scrollStart = windowHeight;
-    const scrollEnd = -sectionHeight + windowHeight;
-    const scrollDistance = scrollStart - scrollEnd;
-    const currentScroll = scrollStart - sectionTop;
-
-    let progress = currentScroll / scrollDistance;
-    progress = Math.max(0, Math.min(1, progress));
-
-    if (progress <= 0.4) {
-      const phase1Progress = progress / 0.4;
-      bigLogo.classList.add('visible');
-      bigLogo.style.opacity = phase1Progress;
-      bigLogo.style.transform = `translate(-50%, -50%) scale(${0.2 + phase1Progress * 2.8})`;
-      aboutReveal.classList.remove('visible');
-      aboutReveal.style.opacity = 0;
-      aboutReveal.style.transform = 'translate(-50%, -50%) scale(1)';
-    } else if (progress <= 0.5) {
-      bigLogo.style.opacity = 1;
-      bigLogo.style.transform = 'translate(-50%, -50%) scale(3)';
-      aboutReveal.style.opacity = 0;
-      aboutReveal.style.transform = 'translate(-50%, -50%) scale(1)';
-    } else if (progress <= 0.7) {
-      const phase3Progress = (progress - 0.5) / 0.2;
-      bigLogo.style.opacity = 1 - phase3Progress;
-      bigLogo.style.transform = `translate(-50%, -50%) scale(${3 - phase3Progress})`;
-      aboutReveal.classList.add('visible');
-      aboutReveal.style.opacity = phase3Progress;
-      aboutReveal.style.transform = 'translate(-50%, -50%) scale(1)';
-    } else {
-      bigLogo.classList.remove('visible');
-      bigLogo.style.opacity = 0;
-      aboutReveal.classList.add('visible');
-      aboutReveal.style.opacity = 1;
-      aboutReveal.style.transform = 'translate(-50%, -50%) scale(1)';
-    }
-
-    if (progress === 0) {
-      bigLogo.classList.remove('visible');
-      aboutReveal.classList.remove('visible');
-      bigLogo.style.opacity = 0;
-      aboutReveal.style.opacity = 0;
-    }
-
-    if (youtubeSection) {
-      const youtubeRect = youtubeSection.getBoundingClientRect();
-      const youtubeTop = youtubeRect.top;
-      const fadeStart = window.innerHeight * revealFadeStart;
-      const fadeEnd = window.innerHeight * revealFadeEnd;
-
-      if (youtubeTop < fadeStart && youtubeTop > fadeEnd && progress > 0.7) {
-        const fadeProgress = (youtubeTop - fadeEnd) / (fadeStart - fadeEnd);
-        const easedFade = Math.pow(Math.max(0, Math.min(1, fadeProgress)), 1.5);
-        aboutReveal.style.opacity = easedFade;
-        aboutReveal.style.transform = `translate(-50%, -50%) scale(${0.3 + easedFade * 0.7})`;
-      } else if (youtubeTop <= fadeEnd && progress > 0.7) {
-        aboutReveal.classList.remove('visible');
-        aboutReveal.style.opacity = 0;
-        aboutReveal.style.transform = 'translate(-50%, -50%) scale(0.3)';
+    const playVideo = () => {
+      if (shouldBePlaying && !document.hidden && scrollVideo.paused) {
+        scrollVideo.play().catch(() => {
+          clearTimeout(retryTimer);
+          retryTimer = setTimeout(playVideo, 400);
+        });
       }
+    };
+
+    const setPlaybackState = (shouldPlay) => {
+      shouldBePlaying = shouldPlay;
+      clearTimeout(retryTimer);
+
+      if (shouldBePlaying && !document.hidden) {
+        playVideo();
+      } else {
+        scrollVideo.pause();
+      }
+    };
+
+    scrollVideo.addEventListener('canplay', () => {
+      clearTimeout(retryTimer);
+      playVideo();
+      refreshScrollVideo();
+    });
+    scrollVideo.addEventListener('playing', () => clearTimeout(retryTimer));
+    scrollVideo.addEventListener('waiting', () => {
+      if (shouldBePlaying) {
+        clearTimeout(retryTimer);
+        retryTimer = setTimeout(playVideo, 400);
+      }
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        scrollVideo.pause();
+      } else {
+        playVideo();
+      }
+    });
+
+    if (!desktopScrollEffect || reduceMotion || !scrollVideoFrame || !scrollVideoCurtain) {
+      const videoObserver = new IntersectionObserver(([entry]) => {
+        setPlaybackState(entry.isIntersecting);
+      }, { rootMargin: '100px 0px', threshold: 0.01 });
+
+      videoObserver.observe(scrollVideoSection);
+    } else {
+      let ticking = false;
+
+      function updateScrollVideo() {
+        const rect = scrollVideoSection.getBoundingClientRect();
+        const distance = Math.max(1, scrollVideoSection.offsetHeight - window.innerHeight);
+        const revealStart = window.innerHeight * 0.9;
+        const revealDistance = revealStart + distance;
+        const progress = Math.max(0, Math.min(1, (revealStart - rect.top) / revealDistance));
+        const eased = progress * progress * progress * (progress * (progress * 6 - 15) + 10);
+        const videoReady = scrollVideo.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA;
+        const curtainScale = videoReady ? 1 - eased : 1;
+        const dimAmount = 0.5 - eased * 0.15;
+
+        setPlaybackState(rect.top < revealStart && rect.bottom > 0);
+        scrollVideoCurtain.style.transform = `scaleX(${curtainScale})`;
+        scrollVideoCurtain.style.visibility = curtainScale < 0.001 ? 'hidden' : 'visible';
+        if (scrollVideoShade) {
+          scrollVideoShade.style.setProperty('--video-dim', dimAmount.toFixed(3));
+        }
+        ticking = false;
+      }
+
+      function requestScrollVideoUpdate() {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateScrollVideo);
+        }
+      }
+
+      refreshScrollVideo = requestScrollVideoUpdate;
+      updateScrollVideo();
+      window.addEventListener('scroll', requestScrollVideoUpdate, { passive: true });
+      window.addEventListener('resize', requestScrollVideoUpdate, { passive: true });
     }
-
-    const aboutOpacity = parseFloat(aboutReveal.style.opacity || '0');
-    aboutReveal.style.pointerEvents = aboutOpacity > 0.05 ? 'auto' : 'none';
   }
-
-  function rafLoop() {
-    const currentScroll = window.scrollY;
-    if (currentScroll !== lastKnownScrollPosition) {
-      lastKnownScrollPosition = currentScroll;
-      updateScrollAnimation(currentScroll);
-    }
-    requestAnimationFrame(rafLoop);
-  }
-  requestAnimationFrame(rafLoop);
-
-  window.addEventListener('resize', () => updateScrollAnimation(window.scrollY), { passive: true });
 
   // ФІКС: Hero spin — зупиняємо коли поза viewport
   const heroGraphicImg = document.querySelector('.hero-graphic img');
@@ -136,8 +140,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         navToggle.checked = false;
       }
       const navH = document.querySelector('.navbar').offsetHeight;
+      let targetTop = target.getBoundingClientRect().top + window.pageYOffset - navH;
+
+      // Skip the Music logo reveal when navigating from an anchor link.
+      if (href === '#music') {
+        const transition = target.querySelector('.music-transition');
+        if (transition) {
+          targetTop = target.getBoundingClientRect().top + window.pageYOffset
+            + transition.offsetHeight - window.innerHeight;
+        }
+      }
+
       window.scrollTo({
-        top: target.getBoundingClientRect().top + window.pageYOffset - navH,
+        top: targetTop,
         behavior: 'smooth'
       });
     }
@@ -341,6 +356,148 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   canvasRafId = requestAnimationFrame(render);
 
 })();
+
+// Music section: open into white, then close into the black SoundCloud section.
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.querySelector('.music-section');
+  const transition = section?.querySelector('.music-transition');
+  const panel = section?.querySelector('.music-morph-panel');
+  const soundcloudTransition = document.querySelector('.soundcloud-transition');
+  const soundcloudPanel = document.querySelector('.soundcloud-morph-panel');
+  const soundcloudStage = document.querySelector('.soundcloud-reveal-stage');
+
+  if (!section || !transition || !panel || !soundcloudTransition || !soundcloudPanel || !soundcloudStage ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const desktopStart = [
+    [34, 77], [34, 23], [40, 23], [50, 58], [60, 23], [66, 23],
+    [66, 77], [60, 77], [60, 48], [53, 77], [47, 77], [40, 48], [40, 77],
+  ];
+  const compactStart = [
+    [34, 77], [34, 23], [40, 23], [50, 58], [60, 23], [66, 23],
+    [66, 77], [60, 77], [60, 48], [53, 77], [47, 77], [40, 48], [40, 77],
+  ];
+  const mobileStart = [
+    [34, 77], [34, 23], [40, 23], [50, 58], [60, 23], [66, 23],
+    [66, 77], [60, 77], [60, 48], [53, 77], [47, 77], [40, 48], [40, 77],
+  ];
+  const narrowMobileStart = [
+    [34, 77], [34, 23], [40, 23], [50, 58], [60, 23], [66, 23],
+    [66, 77], [60, 77], [60, 48], [53, 77], [47, 77], [40, 48], [40, 77],
+  ];
+  const edgeEnd = [
+    [0, 100], [0, 0], [25, 0], [50, 0], [75, 0], [100, 0],
+    [100, 100], [100, 100], [75, 100], [50, 100], [50, 100], [25, 100], [0, 100],
+  ];
+
+  let ticking = false;
+  let displayedSoundcloudProgress = 0;
+  let displayedSoundcloudRawProgress = 0;
+
+  const clamp = value => Math.min(1, Math.max(0, value));
+  const easeInOut = value => value * value * (3 - 2 * value);
+  const DESIGN_ASPECT = 16 / 9;
+
+  function fitToDesignAspect(points) {
+    const viewportAspect = Math.max(0.1, window.innerWidth / window.innerHeight);
+
+    if (viewportAspect < DESIGN_ASPECT) {
+      const boxHeight = (viewportAspect / DESIGN_ASPECT) * 100;
+      const boxTop = (100 - boxHeight) / 2;
+      return points.map(([x, y]) => [x, boxTop + y * boxHeight / 100]);
+    }
+
+    const boxWidth = (DESIGN_ASPECT / viewportAspect) * 100;
+    const boxLeft = (100 - boxWidth) / 2;
+    return points.map(([x, y]) => [boxLeft + x * boxWidth / 100, y]);
+  }
+
+  function createPolygon(start, progress) {
+    const fittedStart = fitToDesignAspect(start);
+    const minX = Math.min(...fittedStart.map(point => point[0]));
+    const maxX = Math.max(...fittedStart.map(point => point[0]));
+    const minY = Math.min(...fittedStart.map(point => point[1]));
+    const maxY = Math.max(...fittedStart.map(point => point[1]));
+    const scaleXLimit = 50 / Math.max(1, Math.max(50 - minX, maxX - 50));
+    const scaleYLimit = 50 / Math.max(1, Math.max(50 - minY, maxY - 50));
+    const growProgress = clamp(progress / 0.72);
+    const fillProgress = easeInOut(clamp((progress - 0.42) / 0.58));
+    const scaleX = 1 + (scaleXLimit - 1) * growProgress;
+    const scaleY = 1 + (scaleYLimit - 1) * growProgress;
+
+    return fittedStart.map((point, index) => {
+      const grownX = 50 + (point[0] - 50) * scaleX;
+      const grownY = 50 + (point[1] - 50) * scaleY;
+      const x = grownX + (edgeEnd[index][0] - grownX) * fillProgress;
+      const y = grownY + (edgeEnd[index][1] - grownY) * fillProgress;
+      return `${x.toFixed(2)}% ${y.toFixed(2)}%`;
+    }).join(', ');
+  }
+
+  function renderMusicReveal() {
+    const isCompact = window.innerWidth <= 767;
+    const start = isCompact
+      ? compactStart
+      : window.innerWidth <= 600
+      ? narrowMobileStart
+      : window.innerWidth <= 900
+        ? mobileStart
+        : desktopStart;
+    const transitionRect = transition.getBoundingClientRect();
+    const transitionDistance = Math.max(1, transition.offsetHeight - window.innerHeight);
+    const compactRevealDistance = window.innerWidth <= 480 ? 0.56 : 0.68;
+    const musicProgress = isCompact
+      ? clamp((window.innerHeight - transitionRect.top) / Math.max(1, transition.offsetHeight * compactRevealDistance))
+      : clamp(-transitionRect.top / transitionDistance);
+
+    const soundcloudRect = soundcloudTransition.getBoundingClientRect();
+    const soundcloudDistance = Math.max(1, soundcloudTransition.offsetHeight - window.innerHeight);
+    const targetSoundcloudRawProgress = isCompact
+      ? clamp((window.innerHeight - soundcloudRect.top) / Math.max(1, soundcloudTransition.offsetHeight * compactRevealDistance))
+      : clamp(-soundcloudRect.top / soundcloudDistance);
+    const targetSoundcloudProgress = targetSoundcloudRawProgress;
+    displayedSoundcloudRawProgress += (targetSoundcloudRawProgress - displayedSoundcloudRawProgress) * 0.14;
+    displayedSoundcloudProgress += (targetSoundcloudProgress - displayedSoundcloudProgress) * 0.14;
+    const soundcloudRawProgress = displayedSoundcloudRawProgress;
+    const soundcloudProgress = displayedSoundcloudProgress;
+
+    panel.style.clipPath = `polygon(${createPolygon(start, easeInOut(musicProgress))})`;
+    soundcloudPanel.style.clipPath = `polygon(${createPolygon(start, easeInOut(soundcloudProgress))})`;
+    section.style.setProperty('--music-progress', musicProgress.toFixed(3));
+    const headingProgress = easeInOut(clamp((musicProgress - 0.24) / 0.26));
+    section.style.setProperty('--music-heading-progress', headingProgress.toFixed(3));
+    const contentStart = isCompact ? 0.42 : 0.72;
+    const contentRange = isCompact ? 0.18 : 0.22;
+    const musicContentProgress = easeInOut(clamp((musicProgress - contentStart) / contentRange));
+    section.style.setProperty('--music-content-progress', musicContentProgress.toFixed(3));
+    const soundcloudContentProgress = easeInOut(clamp((soundcloudProgress - contentStart) / contentRange));
+    soundcloudPanel.style.setProperty('--soundcloud-progress', soundcloudProgress.toFixed(3));
+    soundcloudStage.style.setProperty('--soundcloud-content-progress', soundcloudContentProgress.toFixed(3));
+    const stillAnimating =
+      Math.abs(targetSoundcloudProgress - displayedSoundcloudProgress) > 0.001 ||
+      Math.abs(targetSoundcloudRawProgress - displayedSoundcloudRawProgress) > 0.001;
+
+    if (stillAnimating) {
+      requestAnimationFrame(renderMusicReveal);
+    } else {
+      ticking = false;
+    }
+  }
+
+  function requestRender() {
+    if (!ticking) {
+      requestAnimationFrame(renderMusicReveal);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', requestRender, { passive: true });
+  window.addEventListener('resize', requestRender, { passive: true });
+  renderMusicReveal();
+});
+
 // ========== END MIK.UZ CANVAS TITLE ==========
 
 // ============================================================
