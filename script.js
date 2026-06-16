@@ -127,6 +127,71 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+// YouTube cards: sticky stacked scroll reveal.
+document.addEventListener('DOMContentLoaded', () => {
+  const section = document.querySelector('.youtube-section');
+  const cards = Array.from(section?.querySelectorAll('.youtube-player') || []);
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!section || cards.length < 2 || reduceMotion) {
+    return;
+  }
+
+  cards.forEach((card, index) => {
+    card.style.setProperty('--youtube-card-index', index);
+  });
+
+  let ticking = false;
+  const clamp = value => Math.min(1, Math.max(0, value));
+
+  function updateYouTubeCards() {
+    const navHeight = document.querySelector('.navbar')?.offsetHeight || 72;
+    const stickyTop = navHeight + (window.innerWidth <= 768 ? 24 : 40);
+    const stackStep = window.innerWidth <= 600 ? 8 : 12;
+    const columnCount = window.innerWidth > 1024 ? 2 : 1;
+
+    section.style.setProperty('--youtube-sticky-top', `${stickyTop}px`);
+
+    cards.forEach((card, index) => {
+      const row = Math.floor(index / columnCount);
+      const next = cards[index + columnCount];
+      let fold = 0;
+
+      card.style.zIndex = `${10 + row}`;
+      card.style.setProperty('--youtube-stack-offset', `${row * stackStep}px`);
+
+      if (next) {
+        const nextRect = next.getBoundingClientRect();
+        const cardHeight = Math.max(1, card.getBoundingClientRect().height);
+        const triggerLine = stickyTop + (row + 1) * stackStep + cardHeight * 0.24;
+        fold = clamp((triggerLine - nextRect.top) / (cardHeight * 0.56));
+      }
+
+      const compact = window.innerWidth <= 600;
+      const scale = 1 - fold * (compact ? 0.035 : 0.045);
+      const y = -fold * (compact ? 8 : 14);
+      const dim = 1 - fold * 0.18;
+
+      card.style.setProperty('--youtube-scale', scale.toFixed(3));
+      card.style.setProperty('--youtube-y', `${y.toFixed(1)}px`);
+      card.style.setProperty('--youtube-dim', dim.toFixed(3));
+    });
+
+    ticking = false;
+  }
+
+  function requestYouTubeUpdate() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateYouTubeCards);
+    }
+  }
+
+  updateYouTubeCards();
+  window.addEventListener('scroll', requestYouTubeUpdate, { passive: true });
+  window.addEventListener('resize', requestYouTubeUpdate, { passive: true });
+});
+
 // Плавний скрол
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
