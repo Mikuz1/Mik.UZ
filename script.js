@@ -137,8 +137,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  section.style.setProperty('--youtube-sticky-top', '112px');
+
   cards.forEach((card, index) => {
     card.style.setProperty('--youtube-card-index', index);
+    card.style.position = 'sticky';
+    card.style.width = '100%';
+    card.style.aspectRatio = '16 / 9';
+    card.style.height = 'auto';
+    card.style.paddingBottom = '0';
+    card.style.margin = '0';
+    card.style.overflow = 'hidden';
+    card.style.transformOrigin = 'center top';
+    card.style.willChange = 'transform, filter';
+    card.style.boxShadow = '0 24px 70px rgba(0, 0, 0, 0.34)';
   });
 
   let ticking = false;
@@ -158,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let fold = 0;
 
       card.style.zIndex = `${10 + row}`;
+      card.style.top = `${stickyTop + row * stackStep}px`;
       card.style.setProperty('--youtube-stack-offset', `${row * stackStep}px`);
 
       if (next) {
@@ -175,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.setProperty('--youtube-scale', scale.toFixed(3));
       card.style.setProperty('--youtube-y', `${y.toFixed(1)}px`);
       card.style.setProperty('--youtube-dim', dim.toFixed(3));
+      card.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${scale.toFixed(3)})`;
+      card.style.filter = `brightness(${dim.toFixed(3)})`;
     });
 
     ticking = false;
