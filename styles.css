@@ -572,6 +572,7 @@ h1, h2, h3, h4, h5, h6 {
    ========================================================================== */
 
 .youtube-section {
+  --youtube-sticky-top: 112px;
   background-color: #000000;
   padding: 64px 80px;
   margin-top: 64px;
@@ -597,15 +598,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .youtube-player {
-  position: relative;
+  --youtube-card-index: 0;
+  --youtube-stack-offset: 0px;
+  --youtube-scale: 1;
+  --youtube-y: 0px;
+  --youtube-dim: 1;
+  position: sticky;
+  top: calc(var(--youtube-sticky-top) + var(--youtube-stack-offset));
   width: 100%;
-  padding-bottom: 56.25%;
-  height: 0;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  margin: 0;
+  padding-bottom: 0;
   overflow: hidden;
   border-radius: 12px;
   background: rgba(70, 70, 70, 0.3);
   border: 1px solid rgba(13, 11, 110, 0.2);
-  transition: all 0.3s ease;
+  z-index: 10;
+  transform: translate3d(0, var(--youtube-y), 0) scale(var(--youtube-scale));
+  transform-origin: center top;
+  filter: brightness(var(--youtube-dim));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  will-change: transform, filter;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .youtube-player:hover {
@@ -623,6 +638,16 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
   border-radius: 12px;
   pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .youtube-player {
+    position: relative;
+    top: auto;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto;
+  }
 }
 
 /* ==========================================================================
@@ -1290,6 +1315,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 350px;
   }
   .youtube-section {
+    --youtube-sticky-top: 96px;
     grid-template-columns: 1fr;
     gap: 32px;
     padding: 32px 40px;
@@ -1443,6 +1469,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 250px;
   }
   .youtube-section {
+    --youtube-sticky-top: 84px;
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 24px 20px;
@@ -1571,6 +1598,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 600px) {
   .youtube-section {
+    --youtube-sticky-top: 82px;
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 16px;
@@ -1583,6 +1611,7 @@ h1, h2, h3, h4, h5, h6 {
   }
   .youtube-player {
     border-radius: 8px;
+    margin-bottom: 28px;
   }
   .youtube-player iframe {
     border-radius: 8px;
@@ -1630,12 +1659,12 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 120%;
   }
   .youtube-section {
+    --youtube-sticky-top: 78px;
     padding: 16px 0;
   }
   .youtube-player {
-    width: calc(100% + 24px);
-    margin: 0 -12px;
-    padding-bottom: 56.25%;
+    width: 100%;
+    margin: 0 auto 24px;
   }
   .youtube-player iframe {
     height: 100%;
@@ -2278,12 +2307,16 @@ h1, h2, h3, h4, h5, h6 {
     gap: 14px;
   }
 
+  .spotify-player iframe[src*="/album/"] {
+    height: 152px;
+  }
+
   .spotify-player iframe[src*="/track/"] {
     height: 152px;
   }
 
   .spotify-player iframe[src*="/artist/"] {
-    height: 352px;
+    height: 152px;
   }
 }
 
@@ -2321,12 +2354,16 @@ h1, h2, h3, h4, h5, h6 {
     gap: 12px;
   }
 
+  .spotify-player iframe[src*="/album/"] {
+    height: 152px;
+  }
+
   .spotify-player iframe[src*="/track/"] {
     height: 152px;
   }
 
   .spotify-player iframe[src*="/artist/"] {
-    height: 300px;
+    height: 152px;
   }
 
   .music-heading,
