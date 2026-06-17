@@ -404,6 +404,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 116px;
   padding: 8px 22px;
   border-radius: 25px;
   border: 1px solid rgba(0, 200, 255, 0.2);
@@ -1821,6 +1822,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .play-btn {
     bottom: 56px;
+    min-width: 100px;
     min-height: 32px;
     padding: 0 16px;
     border-radius: 18px;
@@ -2672,6 +2674,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 480px) and (hover: hover) and (pointer: fine) {
   .play-btn {
     bottom: 72px;
+    min-width: 116px;
     min-height: 0;
     padding: 8px 22px;
     border-radius: 25px;
