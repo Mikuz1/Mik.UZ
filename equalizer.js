@@ -4,13 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   const wrapper = document.getElementById('wrapper');
   const playBtn = document.getElementById('playBtn');
-  const scIframe = document.getElementById('sc-widget');
+  const heroAudio = document.getElementById('heroAudio');
 
   let W, H, cx, cy, R;
   let isPlaying = false;
   let t = 0;
-  let widget = null;
-  let widgetReady = false;
 
   function resize() {
     const rect = wrapper.getBoundingClientRect();
@@ -324,49 +322,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
   draw();
 
-  if (scIframe && window.SC && SC.Widget) {
-    widget = SC.Widget(scIframe);
+  const setPlayButtonState = (playing) => {
+    isPlaying = playing;
+    playBtn.textContent = isPlaying ? '⏸ PAUSE' : '▶ PLAY';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause Mik.UZ music' : 'Play Mik.UZ music');
+  };
 
-    playBtn.disabled = true;
-    playBtn.textContent = 'LOADING...';
+  playBtn.disabled = !heroAudio;
+  setPlayButtonState(false);
 
-    widget.bind(SC.Widget.Events.READY, function() {
-      widgetReady = true;
-      playBtn.disabled = false;
-      playBtn.textContent = '▶ PLAY';
+  if (heroAudio) {
+    heroAudio.addEventListener('play', () => setPlayButtonState(true));
+    heroAudio.addEventListener('pause', () => setPlayButtonState(false));
+    heroAudio.addEventListener('ended', () => {
+      heroAudio.currentTime = 0;
+      setPlayButtonState(false);
     });
-
-    widget.bind(SC.Widget.Events.PLAY, function() {
-      isPlaying = true;
-      playBtn.textContent = '⏸ PAUSE';
-    });
-
-    widget.bind(SC.Widget.Events.PAUSE, function() {
-      isPlaying = false;
-      playBtn.textContent = '▶ PLAY';
-    });
-
-    widget.bind(SC.Widget.Events.FINISH, function() {
-      isPlaying = false;
-      playBtn.textContent = '▶ PLAY';
-    });
-  } else {
-    playBtn.disabled = false;
-    playBtn.textContent = '▶ PLAY';
   }
 
   playBtn.addEventListener('click', () => {
-    if (widget && widgetReady) {
-      widget.isPaused(function(paused) {
-        if (paused) {
-          widget.play();
-        } else {
-          widget.pause();
-        }
-      });
+    if (!heroAudio) {
+      return;
+    }
+
+    if (heroAudio.paused) {
+      heroAudio.play().catch(() => setPlayButtonState(false));
     } else {
-      isPlaying = !isPlaying;
-      playBtn.textContent = isPlaying ? '⏸ PAUSE' : '▶ PLAY';
+      heroAudio.pause();
     }
   });
 });
