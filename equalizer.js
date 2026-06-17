@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const ctx = canvas.getContext('2d');
   const wrapper = document.getElementById('wrapper');
   const playBtn = document.getElementById('playBtn');
+  const playBtnLabel = playBtn.querySelector('.play-btn-label');
   const heroAudio = document.getElementById('heroAudio');
+  const heroTrackTitle = document.getElementById('heroTrackTitle');
 
   let W, H, cx, cy, R;
   let isPlaying = false;
@@ -324,7 +326,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const setPlayButtonState = (playing) => {
     isPlaying = playing;
-    playBtn.textContent = isPlaying ? '⏸ PAUSE' : '▶ PLAY';
+    playBtnLabel.textContent = isPlaying ? '⏸ PAUSE' : '▶ PLAY';
+    heroTrackTitle?.classList.toggle('is-visible', isPlaying);
     playBtn.setAttribute('aria-label', isPlaying ? 'Pause Mik.UZ music' : 'Play Mik.UZ music');
   };
 
