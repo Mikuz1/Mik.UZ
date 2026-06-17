@@ -74,7 +74,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@900&display=swap" rel="stylesheet">
 
   <!-- ===== Styles ===== -->
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260616-social-toggle-glass">
 
   <!-- SEO hidden h1 fix -->
   <style>
@@ -140,6 +140,7 @@
 
   <!-- Social Sidebar -->
   <aside class="social-sidebar" aria-label="Social media links">
+    <button class="social-sidebar-toggle" type="button" aria-label="Toggle social links" aria-expanded="false"></button>
     
     <a href="https://www.facebook.com/yuriy.mykhaylovych" title="Mik.UZ on Facebook" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="24" height="24">
@@ -189,6 +190,7 @@
             <span class="play-scan"></span>
             <span>▶ PLAY</span>
           </button>
+          <audio id="heroAudio" src="music/together.mp3" preload="metadata"></audio>
         </div>
       </div>
 
@@ -258,37 +260,6 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen loading="lazy"></iframe>
-      </div>
-    </section>
-
-    <!-- ===== ABOUT ===== -->
-    <section class="about-section" id="about" aria-label="About Mik.UZ">
-      <h2 class="section-heading">About</h2>
-      <div class="about-container">
-        <div class="about-image">
-          <img src="images/yura.add_logo.webp"
-            alt="Mik.UZ — Ukrainian DJ and music producer from Lviv, Ukraine"
-            width="880" height="631" loading="lazy">
-        </div>
-        <div class="about-text">
-          <h3 class="about-title">Mik.UZ</h3>
-          <p class="about-description">
-            DJ and producer from Ukraine. 15 years in trance and progressive house music.<br>
-            Founder of MoreFun Records — Sub Label of Coffein Music Group. Key tracks:<br>
-            A.L.Y.S., Mik.UZ - "Together" (Abora Recordings / Narratology Recordings) <br>
-            Mik.UZ - "Mavka's Heart" (MoreFun Records)<br>
-            Mik.UZ - "From Before" (Fuzion Records)<br>
-            Mik.UZ - "Emotions" (West Drift Records)<br>
-            Mik.UZ - "Two To One" (Tronic B7 Records)<br>
-            Mik.UZ - "Trust" (Dirt, Lies & Audio Recordings)<br>
-            Mik.UZ - "Split" (MoreFun Records)<br>
-            Mik.UZ - "Energetic Girl (Streyk Remix)" (MoreFun Records)<br>
-            <span style="display:block;height:8px;"></span>
-            Co-producer of Loud Dynamics — electronic trance house collective with official Beatport profile and charting releases.<br>
-            Hosted KINGS OF TRANCE on international radio Trance Energy Radio. Weekly live broadcasts featuring DJ sets, promoting own releases and international artists.<br>
-            Resident at clubs Picasso (2009–2020), Split Club, ZUZU Club. Festival performances in Lviv (Aquarium Shklo, Olesky Castle).
-          </p>
-        </div>
       </div>
     </section>
 
@@ -390,6 +361,37 @@
       </section>
     </div>
 
+    <!-- ===== ABOUT ===== -->
+    <section class="about-section" id="about" aria-label="About Mik.UZ">
+      <h2 class="section-heading">About</h2>
+      <div class="about-container">
+        <div class="about-image">
+          <img src="images/yura.add_logo.webp"
+            alt="Mik.UZ — Ukrainian DJ and music producer from Lviv, Ukraine"
+            width="880" height="631" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3 class="about-title">Mik.UZ</h3>
+          <p class="about-description">
+            DJ and producer from Ukraine. 15 years in trance and progressive house music.<br>
+            Founder of MoreFun Records — Sub Label of Coffein Music Group. Key tracks:<br>
+            A.L.Y.S., Mik.UZ - "Together" (Abora Recordings / Narratology Recordings) <br>
+            Mik.UZ - "Mavka's Heart" (MoreFun Records)<br>
+            Mik.UZ - "From Before" (Fuzion Records)<br>
+            Mik.UZ - "Emotions" (West Drift Records)<br>
+            Mik.UZ - "Two To One" (Tronic B7 Records)<br>
+            Mik.UZ - "Trust" (Dirt, Lies & Audio Recordings)<br>
+            Mik.UZ - "Split" (MoreFun Records)<br>
+            Mik.UZ - "Energetic Girl (Streyk Remix)" (MoreFun Records)<br>
+            <span style="display:block;height:8px;"></span>
+            Co-producer of Loud Dynamics — electronic trance house collective with official Beatport profile and charting releases.<br>
+            Hosted KINGS OF TRANCE on international radio Trance Energy Radio. Weekly live broadcasts featuring DJ sets, promoting own releases and international artists.<br>
+            Resident at clubs Picasso (2009–2020), Split Club, ZUZU Club. Festival performances in Lviv (Aquarium Shklo, Olesky Castle).
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== PRODUCTION SERVICES ===== -->
     <section class="service-section" id="service" aria-label="Music Production Services by Mik.UZ">
       <h2 class="service-heading">Productions Services</h2>
@@ -471,13 +473,6 @@
     </div>
   </footer>
 
-  <!-- Hidden SoundCloud widget for play button -->
-  <iframe id="sc-widget" scrolling="no" frameborder="no" allow="autoplay"
-    style="width:1px;height:1px;opacity:0;position:absolute;left:-9999px;top:-9999px;pointer-events:none;"
-    src="https://w.soundcloud.com/player/?url=https://soundcloud.com/yurii-mykhailovych/mik-uz-mavkas-heart-coming&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
-    title="SoundCloud audio player">
-  </iframe>
-
   <!-- ===== CSS для прихованого H1 (додай в styles.css якщо ще немає) =====
   .sr-only {
     position: absolute;
@@ -492,9 +487,8 @@
   }
   -->
 
-  <script src="https://w.soundcloud.com/player/api.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260617-nav-hero-active"></script>
   <script src="marquee.js"></script>
-  <script src="equalizer.js"></script>
+  <script src="equalizer.js?v=20260617-local-audio"></script>
 </body>
 </html>
