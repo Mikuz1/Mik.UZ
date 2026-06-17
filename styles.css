@@ -100,8 +100,25 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--primary);
 }
 
+.nav-links a.is-active {
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .nav-links a:hover::after {
   transform: scaleX(1);
+}
+
+.nav-links a.is-active::after {
+  transform: scaleX(0);
 }
 
 .logo {
@@ -164,7 +181,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 20000;
   background: rgba(0, 0, 0, 0.97);
   flex-direction: column;
   justify-content: flex-start;
@@ -284,10 +301,27 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: text;
 }
 
+.overlay-links a.is-active {
+  background: linear-gradient(
+    90deg,
+    #521EFC 0%,
+    #A740FD 35%,
+    #FD62FE 65%,
+    #521EFC 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .overlay-links a:hover::after,
 .overlay-links a:focus-visible::after,
 .overlay-links a:active::after {
   transform: scaleX(1);
+}
+
+.overlay-links a.is-active::after {
+  transform: scaleX(0);
 }
 
 /* ==========================================================================
@@ -436,6 +470,29 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
+.hero-track-title {
+  position: absolute;
+  left: 50%;
+  bottom: 138px;
+  z-index: 20;
+  width: min(82%, 360px);
+  color: var(--primary);
+  font-family: var(--font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.hero-track-title.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* ==========================================================================
    HERO TITLE CANVAS
    ========================================================================== */
@@ -494,6 +551,15 @@ h1, h2, h3, h4, h5, h6 {
 .social-sidebar a svg {
   width: 18px;
   height: 18px;
+}
+
+.social-sidebar::before,
+.social-sidebar::after {
+  display: none;
+}
+
+.social-sidebar-toggle {
+  display: none;
 }
 
 /* ========================================================================== 
@@ -661,6 +727,11 @@ h1, h2, h3, h4, h5, h6 {
 .about-section {
   background-color: #000000;
   padding: 80px 0;
+}
+
+.soundcloud-reveal-stage + .about-section,
+.about-section + .service-section {
+  margin-top: 232px;
 }
 
 .section-heading {
@@ -1011,7 +1082,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 60px;
   margin-top: 232px;
   position: relative;
-  z-index: 9999;
+  z-index: 1;
 }
 
 .footer-social-buttons {
@@ -1020,7 +1091,7 @@ h1, h2, h3, h4, h5, h6 {
   gap: 16px;
   flex-wrap: wrap;
   position: relative;
-  z-index: 10000;
+  z-index: 1;
 }
 
 .social-btn {
@@ -1403,6 +1474,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 10px;
     padding: 0 12px;
     height: 60px;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
   }
   .nav-links {
     display: none;
@@ -1424,9 +1496,38 @@ h1, h2, h3, h4, h5, h6 {
   #nav-toggle:checked ~ .nav-overlay {
     display: flex;
     transform: translateX(0);
+    visibility: visible;
+  }
+  #nav-toggle:checked ~ .navbar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-16px);
+  }
+  .nav-overlay {
+    left: 0;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: min(calc(100vw - clamp(34px, 10vw, 76px)), 620px);
+    min-height: 0;
+    height: 100vh;
+    height: 100dvh;
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 0 22px 22px 0;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015)),
+      rgba(5, 5, 8, 0.97);
+    box-shadow: 24px 0 70px rgba(0, 0, 0, 0.48);
+    transform: translateX(-100%);
+    align-items: stretch;
+    overflow-y: auto;
+    backdrop-filter: blur(22px) saturate(130%);
+    -webkit-backdrop-filter: blur(22px) saturate(130%);
   }
   .overlay-header {
     display: flex;
+    padding: 16px 16px;
   }
   .overlay-logo {
     display: flex;
@@ -1435,13 +1536,53 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
   }
   .overlay-links {
-    gap: 40px;
+    width: 100%;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 0 16px;
+    text-align: left;
+  }
+  .overlay-links label {
+    display: block;
+    width: 100%;
   }
   .overlay-links a {
+    display: inline-flex;
     font-family: var(--font-family);
     font-size: 16px;
     font-weight: 500;
     color: #DCDCDC;
+    width: auto;
+    padding: 14px 0;
+    border: 1px solid transparent;
+    border-radius: 12px;
+  }
+  .overlay-links a::after {
+    left: 0;
+    right: 0;
+    bottom: 8px;
+    width: 100%;
+  }
+  .overlay-links a:hover,
+  .overlay-links a:focus-visible,
+  .overlay-links a:active {
+    border-color: rgba(255, 255, 255, 0.10);
+    background:
+      linear-gradient(90deg, #521EFC 0%, #A740FD 35%, #FD62FE 65%, #521EFC 100%),
+      rgba(255, 255, 255, 0.05);
+    -webkit-background-clip: text, border-box;
+    -webkit-text-fill-color: transparent;
+    background-clip: text, border-box;
+  }
+  .overlay-links a.is-active {
+    border-color: transparent;
+    background: linear-gradient(90deg, #521EFC 0%, #A740FD 35%, #FD62FE 65%, #521EFC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .overlay-links a.is-active::after {
+    transform: scaleX(0);
   }
   .nav-container {
     position: relative;
@@ -1458,8 +1599,53 @@ h1, h2, h3, h4, h5, h6 {
   .social-sidebar {
     top: 83%;
     bottom: auto;
+    left: 0;
+    padding: 4px;
+    gap: 8px;
+    transform: translate(calc(-100% - 1px), -50%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .social-sidebar.is-open {
+    transform: translate(0, -50%);
+  }
+  .social-sidebar-toggle {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: -32px;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 0 16px 16px 0;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+      rgba(9, 7, 12, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-left: 0;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      8px 0 24px rgba(0, 0, 0, 0.28);
     transform: translateY(-50%);
-    left: 16px;
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .social-sidebar-toggle::before {
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid rgba(255, 255, 255, 0.86);
+    border-right: 2px solid rgba(255, 255, 255, 0.86);
+    transform: translateX(-2px) rotate(45deg);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+  }
+  .social-sidebar.is-open .social-sidebar-toggle::before {
+    transform: translateX(2px) rotate(225deg);
   }
   .social-sidebar a {
     width: 32px;
@@ -1633,17 +1819,79 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 16px;
   }
 
+  .play-btn {
+    bottom: 56px;
+    min-height: 32px;
+    padding: 0 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 1.4px;
+  }
+
+  .play-btn::after {
+    border-radius: 20px;
+  }
+
+  .hero-track-title {
+    bottom: 104px;
+    width: min(86%, 280px);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 120%;
+  }
+
   /* SOCIAL SIDEBAR — 480px (з першого коду) */
   .social-sidebar {
     top: 70%;
     bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-  .social-sidebar {
-    left: 8px;
+    left: 0;
     padding: 4px;
     gap: 8px;
+    transform: translate(calc(-100% - 1px), -50%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .social-sidebar.is-open {
+    transform: translate(0, -50%);
+  }
+  .social-sidebar-toggle {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: -32px;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 0 16px 16px 0;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.018)),
+      rgba(9, 7, 12, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-left: 0;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      8px 0 24px rgba(0, 0, 0, 0.28);
+    transform: translateY(-50%);
+    backdrop-filter: blur(24px) saturate(135%);
+    -webkit-backdrop-filter: blur(24px) saturate(135%);
+    cursor: pointer;
+    z-index: 2;
+  }
+  .social-sidebar-toggle::before {
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid rgba(255, 255, 255, 0.86);
+    border-right: 2px solid rgba(255, 255, 255, 0.86);
+    transform: translateX(-2px) rotate(45deg);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+  }
+  .social-sidebar.is-open .social-sidebar-toggle::before {
+    transform: translateX(2px) rotate(225deg);
   }
   .social-sidebar a {
     width: 32px;
@@ -1809,6 +2057,15 @@ h1, h2, h3, h4, h5, h6 {
   .social-btn span {
     font-size: 11px;
   }
+
+  .social-btn span[data-mobile-label] {
+    font-size: 0;
+  }
+
+  .social-btn span[data-mobile-label]::before {
+    content: attr(data-mobile-label);
+    font-size: 11px;
+  }
   .footer-contacts {
     gap: 20px;
   }
@@ -1833,6 +2090,38 @@ h1, h2, h3, h4, h5, h6 {
   .footer-copyright-modern {
     font-size: 12px;
     padding-top: 20px;
+  }
+}
+
+@media (max-width: 393px) {
+  .footer-social-buttons {
+    gap: 8px;
+  }
+
+  .social-btn {
+    height: 34px;
+    padding: 0 6px;
+    gap: 5px;
+    max-width: none;
+    font-size: 11px;
+  }
+
+  .social-btn svg,
+  .social-btn img {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+  }
+
+  .social-btn span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10.5px;
+  }
+
+  .social-btn span[data-mobile-label]::before {
+    font-size: 10.5px;
   }
 }
 
@@ -1861,13 +2150,10 @@ h1, h2, h3, h4, h5, h6 {
   .social-sidebar {
     top: 50%;
     bottom: auto;
-    transform: translateY(-50%);
-    left: 16px;
-  }
-  .social-sidebar {
-    left: 8px;
+    left: 0;
     padding: 4px;
     gap: 8px;
+    transform: translate(calc(-100% - 1px), -50%);
   }
   .social-sidebar a {
     width: 32px;
@@ -2381,6 +2667,29 @@ h1, h2, h3, h4, h5, h6 {
     white-space: nowrap;
   }
 
+}
+
+@media (max-width: 480px) and (hover: hover) and (pointer: fine) {
+  .play-btn {
+    bottom: 72px;
+    min-height: 0;
+    padding: 8px 22px;
+    border-radius: 25px;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: 2px;
+  }
+
+  .play-btn::after {
+    border-radius: 27px;
+  }
+
+  .hero-track-title {
+    bottom: 138px;
+    width: min(82%, 360px);
+    font-size: 16px;
+    line-height: 120%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
