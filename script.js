@@ -207,6 +207,91 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', requestYouTubeUpdate, { passive: true });
 });
 
+// Header navigation active state.
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a, .overlay-links a'));
+  const isContactPage = document.body.classList.contains('contact-page') ||
+    /\/contact\/?$|contact\.html$/i.test(window.location.pathname);
+
+  if (!navLinks.length) {
+    return;
+  }
+
+  const setActiveNav = (target) => {
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href') || '';
+      const isActive = target === 'contact'
+        ? /(^|\/)contact(\.html)?$/i.test(href) || href.includes('/contact')
+        : href === `#${target}` || href.endsWith(`#${target}`);
+
+      link.classList.toggle('is-active', isActive);
+    });
+  };
+
+  if (isContactPage) {
+    setActiveNav('contact');
+    return;
+  }
+
+  const sections = [
+    { id: 'video', element: document.getElementById('video') },
+    { id: 'music', element: document.getElementById('music') },
+    { id: 'music', element: document.querySelector('.soundcloud-reveal-stage') },
+    { id: 'about', element: document.getElementById('about') },
+    { id: 'service', element: document.getElementById('service') },
+  ].filter(section => section.element);
+
+  if (!sections.length) {
+    return;
+  }
+
+  let ticking = false;
+
+  function updateActiveNav() {
+    const navOffset = (document.querySelector('.navbar')?.offsetHeight || 0) + 80;
+    let current = '';
+
+    sections.forEach(section => {
+      const rect = section.element.getBoundingClientRect();
+      if (rect.top <= navOffset && rect.bottom > navOffset) {
+        current = section.id;
+      }
+    });
+
+    if (!current) {
+      const firstSectionTop = sections[0].element.getBoundingClientRect().top;
+
+      if (firstSectionTop > navOffset) {
+        setActiveNav('');
+        ticking = false;
+        return;
+      }
+
+      const nearest = sections
+        .map(section => ({
+          id: section.id,
+          distance: Math.abs(section.element.getBoundingClientRect().top - navOffset)
+        }))
+        .sort((a, b) => a.distance - b.distance)[0];
+      current = nearest?.id || '';
+    }
+
+    setActiveNav(current);
+    ticking = false;
+  }
+
+  function requestActiveNavUpdate() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateActiveNav);
+    }
+  }
+
+  updateActiveNav();
+  window.addEventListener('scroll', requestActiveNavUpdate, { passive: true });
+  window.addEventListener('resize', requestActiveNavUpdate, { passive: true });
+});
+
 // Плавний скрол
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
@@ -436,6 +521,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   canvasRafId = requestAnimationFrame(render);
 
 })();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.querySelector('.social-sidebar');
+  const toggle = sidebar?.querySelector('.social-sidebar-toggle');
+
+  if (!sidebar || !toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+});
 
 // Music section: open into white, then close into the black SoundCloud section.
 document.addEventListener('DOMContentLoaded', () => {
