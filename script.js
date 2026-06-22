@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const scrollVideoSection = document.querySelector('.scroll-video-section');
   const scrollVideoFrame = document.getElementById('scrollVideoFrame');
   const scrollVideo = scrollVideoFrame?.querySelector('.scroll-video');
+  const scrollVideoSource = scrollVideo?.querySelector('source');
   const scrollVideoShade = scrollVideoFrame?.querySelector('.scroll-video-shade');
   const scrollVideoCurtain = scrollVideoFrame?.querySelector('.scroll-video-curtain');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -11,10 +12,27 @@ document.addEventListener('DOMContentLoaded', function () {
   if (scrollVideoSection && scrollVideo) {
     let retryTimer;
     let shouldBePlaying = false;
+    let videoLoaded = Boolean(scrollVideo.currentSrc || scrollVideoSource?.src);
     let refreshScrollVideo = () => {};
+
+    const loadScrollVideo = () => {
+      if (videoLoaded) {
+        return;
+      }
+
+      const lazySrc = scrollVideoSource?.dataset.src;
+      if (lazySrc && scrollVideoSource) {
+        scrollVideoSource.src = lazySrc;
+        scrollVideoSource.removeAttribute('data-src');
+      }
+
+      scrollVideo.load();
+      videoLoaded = true;
+    };
 
     const playVideo = () => {
       if (shouldBePlaying && !document.hidden && scrollVideo.paused) {
+        loadScrollVideo();
         scrollVideo.play().catch(() => {
           clearTimeout(retryTimer);
           retryTimer = setTimeout(playVideo, 400);
@@ -53,6 +71,19 @@ document.addEventListener('DOMContentLoaded', function () {
         playVideo();
       }
     });
+
+    if ('IntersectionObserver' in window) {
+      const videoLoadObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          loadScrollVideo();
+          videoLoadObserver.disconnect();
+        }
+      }, { rootMargin: '700px 0px', threshold: 0.01 });
+
+      videoLoadObserver.observe(scrollVideoSection);
+    } else {
+      loadScrollVideo();
+    }
 
     if (!desktopScrollEffect || reduceMotion || !scrollVideoFrame || !scrollVideoCurtain) {
       const videoObserver = new IntersectionObserver(([entry]) => {
